@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/*!
+ * Custom CSS for Pick & Roll
+ */
+:root {
+    --main-color: #92EB58;
+    --secondary-color: #9CD278;
+    --hover-color: #96e331;
+}
+
+body {
+    font-family: Helvetica;
+}
+
+a {
+    color: var(--main-color);
+}
+
+h2 {
+    margin-left: 0.5em;
+}
+
+.logo {
+    display: block;
+    width: 500px;
+    margin: -200px auto 100px auto;
+}
+
+.background {
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: opacity (0.18);
+}
+
+.btn {
+    background-color: var(--main-color);
+    border-color:  var(--main-color);
+}
+
+.btn:hover, .btn:focus {
+    background-color: var(--hover-color);
+    border-color:  var(--hover-color);
+}
+
+.alt-color {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.alt-color:hover, .alt-color:focus {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+.bg-white {
+    background-color: rgba(255, 255, 255, 0.7) !IMPORTANT;
+}

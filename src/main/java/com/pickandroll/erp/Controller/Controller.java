@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @org.springframework.stereotype.Controller
-public class Controlador {
+public class Controller {
 
     // Raiz
     @GetMapping("/")
@@ -16,7 +16,7 @@ public class Controlador {
     @GetMapping("/login")
     public String login(Model model) {
 
-        return "main";
+        return "login";
     }
 
     @GetMapping("/register")
