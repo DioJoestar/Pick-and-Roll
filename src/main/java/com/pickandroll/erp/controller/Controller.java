@@ -1,4 +1,4 @@
-package com.pickandroll.erp.Controller;
+package com.pickandroll.erp.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +19,11 @@ public class Controller {
         return "navigationBar";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String login(Model model) {
+//
+//        return "login";
+//    }
 
     @GetMapping("/register")
     public String register(Model model) {
