@@ -6,6 +6,7 @@
     --main-color: #92EB58;
     --secondary-color: #9CD278;
     --hover-color: #96e331;
+    --red-color: red;
 }
 
 body {
@@ -36,6 +37,11 @@ h2 {
 .btn {
     background-color: var(--main-color);
     border-color:  var(--main-color);
+}
+
+.btn2 {
+    background-color: var(--red-color);
+    border-color:  var(--red-color);
 }
 
 .btn:hover, .btn:focus {

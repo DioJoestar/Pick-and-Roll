@@ -40,7 +40,7 @@ public class Controller {
     @GetMapping("/profile")
     public String profile(Model model) {
 
-        return "main";
+        return "profile";
     }
 
     @GetMapping("/cart")
