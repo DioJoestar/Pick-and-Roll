@@ -12,6 +12,12 @@ public class Controller {
 
         return "main";
     }
+    
+    @GetMapping("/navigationBar")
+    public String navigationBar(Model model) {
+
+        return "navigationBar";
+    }
 
     @GetMapping("/login")
     public String login(Model model) {
