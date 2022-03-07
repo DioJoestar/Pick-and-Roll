@@ -22,19 +22,19 @@ public class Controller {
     @GetMapping("/register")
     public String register(Model model) {
 
-        return "main";
+        return "register";
     }
 
     @GetMapping("/recoverPassword")
     public String recoverPassword(Model model) {
 
-        return "main";
+        return "recoverPassword";
     }
 
     @GetMapping("/changePassword")
     public String changePassword(Model model) {
 
-        return "main";
+        return "changePassword";
     }
 
     @GetMapping("/profile")
