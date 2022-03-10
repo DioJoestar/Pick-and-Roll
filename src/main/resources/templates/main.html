@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
     </head>
     <body>
-        <div>Main Menu ToDo</div>
+        <div>Hola <b><span sec:authentication="name"/></b>, tus roles son <span sec:authentication="principal.authorities"/></div>
+        <form method="POST" th:action="@{/logout}">
+            <button type="submit" name="logout" class="btn btn-danger">Tancar sessió</button>
+        </form>
+        <div th:insert="layouts/item :: item">...</div>
     </body>
 </html>
