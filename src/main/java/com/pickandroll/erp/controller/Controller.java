@@ -13,12 +13,17 @@ public class Controller {
         return "main";
     }
 
+    @GetMapping("/navigationBar")
+    public String navigationBar(Model model) {
+
+        return "navigationBar";
+    }
+
 //    @GetMapping("/login")
 //    public String login(Model model) {
 //
 //        return "login";
 //    }
-
     @GetMapping("/register")
     public String register(Model model) {
 
@@ -40,7 +45,7 @@ public class Controller {
     @GetMapping("/profile")
     public String profile(Model model) {
 
-        return "main";
+        return "profile";
     }
 
     @GetMapping("/cart")
@@ -60,6 +65,12 @@ public class Controller {
     public String modules(Model model) {
 
         return "main";
+    }
+
+    @GetMapping("/configModule")
+    public String configModule(Model model) {
+
+        return "configModule";
     }
 
     @GetMapping("/users")
