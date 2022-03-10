@@ -6,6 +6,7 @@
     --main-color: #92EB58;
     --secondary-color: #9CD278;
     --hover-color: #96e331;
+    --hover-color2: #cc0000;
     --red-color: red;
     --usersDiv-color: #cbe8ba;
 }
@@ -53,6 +54,11 @@ h2 {
 .btn-primary:hover, .btn-primary:focus {
     background-color: var(--hover-color);
     border-color:  var(--hover-color);
+}
+
+.btn2:hover, .btn2:focus {
+    background-color: var(--hover-color2);
+    border-color:  var(--hover-color2);
 }
 
 .alt-color {
