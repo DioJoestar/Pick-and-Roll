@@ -12,7 +12,7 @@ public class Controller {
 
         return "main";
     }
-    
+
     @GetMapping("/navigationBar")
     public String navigationBar(Model model) {
 
@@ -24,7 +24,6 @@ public class Controller {
 //
 //        return "login";
 //    }
-
     @GetMapping("/register")
     public String register(Model model) {
 
@@ -66,6 +65,12 @@ public class Controller {
     public String modules(Model model) {
 
         return "main";
+    }
+
+    @GetMapping("/configModule")
+    public String configModule(Model model) {
+
+        return "configModule";
     }
 
     @GetMapping("/users")
