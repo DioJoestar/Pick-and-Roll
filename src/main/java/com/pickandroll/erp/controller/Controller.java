@@ -76,6 +76,6 @@ public class Controller {
     @GetMapping("/users")
     public String users(Model model) {
 
-        return "main";
+        return "users";
     }
 }
