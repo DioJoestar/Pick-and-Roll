@@ -7,6 +7,7 @@
     --secondary-color: #9CD278;
     --hover-color: #96e331;
     --red-color: red;
+    --usersDiv-color: #cbe8ba;
 }
 
 body {
@@ -39,7 +40,7 @@ h2 {
     filter: opacity (0.18);
 }
 
-.btn {
+.btn-primary {
     background-color: var(--main-color);
     border-color:  var(--main-color);
 }
@@ -49,7 +50,7 @@ h2 {
     border-color:  var(--red-color);
 }
 
-.btn:hover, .btn:focus {
+.btn-primary:hover, .btn-primary:focus {
     background-color: var(--hover-color);
     border-color:  var(--hover-color);
 }
@@ -97,4 +98,14 @@ h2 {
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
+}
+
+.greenSwitch:checked {
+    background-color: #92eb58;
+    border-color:  #92eb58;
+}
+
+.usersDiv {
+    background-color: var(--usersDiv-color);
+    border-color:  var(--usersDiv-color);
 }
