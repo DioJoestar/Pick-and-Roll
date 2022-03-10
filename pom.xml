@@ -79,6 +79,12 @@
             <artifactId>jquery</artifactId>
             <version>3.6.0</version>
         </dependency>
+        <!-- Bootstrap Icons -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>bootstrap-icons</artifactId>
+            <version>1.8.1</version>
+        </dependency>
     </dependencies>
 
     <build>
