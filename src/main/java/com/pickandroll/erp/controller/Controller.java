@@ -64,7 +64,7 @@ public class Controller {
     @GetMapping("/modules")
     public String modules(Model model) {
 
-        return "main";
+        return "modules";
     }
 
     @GetMapping("/configModule")

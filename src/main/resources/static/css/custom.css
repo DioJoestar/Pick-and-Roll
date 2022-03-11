@@ -115,3 +115,14 @@ h2 {
     background-color: var(--usersDiv-color);
     border-color:  var(--usersDiv-color);
 }
+
+
+.module {
+    item-align: center;
+    transition: transform .4s;
+    color: black;
+}
+
+.module:hover{
+    transform: scale(1.2);
+}
