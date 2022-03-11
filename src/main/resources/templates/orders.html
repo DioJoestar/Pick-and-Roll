@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>[[#{common.name}]] | Comandes</title>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
+<body>
+    <div th:replace="layouts/navbar :: navbar"></div>
+    <div class="container pt-4 bg-white">
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <h1>Comandes</h1>
+            <div class="container rounded border p-3">
+                <table class="table text-center align-middle">
+                    <thead>
+                        <tr class="usersDiv">
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>Tipus</th>
+                            <th>Preu producte</th>
+                            <th>Preu total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top-0">
+                        <tr th:replace="layouts/user_list_row :: row"></tr>
+                        <tr th:replace="layouts/user_list_row :: row"></tr>
+                        <tr th:replace="layouts/user_list_row :: row"></tr>
+                        <tr th:replace="layouts/user_list_row :: row"></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -46,7 +46,7 @@ public class Controller {
     @GetMapping("/orders")
     public String orders(Model model) {
 
-        return "main";
+        return "orders";
     }
 
     // Admin URLs
