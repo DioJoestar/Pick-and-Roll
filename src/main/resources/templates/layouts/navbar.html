@@ -1,22 +1,24 @@
 <header th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="nav-link" href="/"><img class="logoNavigationbar ms-4 mt-2 mb-2" th:src="@{/img/logo_h.png}" /></a>
+        <a class="nav-link" href="/"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
         <div class="flex-row-reverse collapse navbar-collapse me-5" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item me-5">
-                    <a class="nav-link" href="/"><i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
+                    <a th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}" class="nav-link" href="/"><i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
                 </li>
                 <li class="nav-item me-5">
-                    <a class="nav-link" href="/orders"><i class="bi bi-list-ul me-2 fw-bold"></i>
-                        <!-- ESTO AUN NO FUNCIONA -->
+                    <a th:classappend="${#request.getServletPath() == '/orders' ? 'active' : ''}" class="nav-link" href="/orders"><i class="bi bi-list-ul me-2 fw-bold"></i>
                         <span th:text="@{${#authorization.expression('hasAuthority(''admin'')') ? 'Comandes' : 'Les meves comandes'}}" />
                     </a>
                 </li>
-                <li class="nav-item me-5">
-                    <a class="nav-link" href="/cart"><i class="bi bi-cart3 me-2 fw-bold"></i>El meu cistell</a>
+                <li sec:authorize="hasAuthority('customer')" class="nav-item me-5">
+                    <a th:classappend="${#request.getServletPath() == '/cart' ? 'active' : ''}" class="nav-link" href="/cart"><i class="bi bi-cart3 me-2 fw-bold"></i>El meu cistell</a>
+                </li>
+                <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
+                    <a th:classappend="${#request.getServletPath() == '/users' ? 'active' : ''}" class="nav-link" href="/users"><i class="bi bi-person-lines-fill me-2 fw-bold"></i>Usuaris</a>
                 </li>
                 <li class="nav-item me-5">
-                    <a class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
+                    <a th:classappend="${#request.getServletPath() == '/profile' ? 'active' : ''}" class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
                 </li>
             </ul>
         </div>

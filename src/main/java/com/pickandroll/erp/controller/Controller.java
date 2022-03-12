@@ -45,7 +45,6 @@ public class Controller {
 
     @GetMapping("/orders")
     public String orders(Model model) {
-
         return "main";
     }
 
@@ -60,11 +59,5 @@ public class Controller {
     public String configModule(Model model) {
 
         return "configModule";
-    }
-
-    @GetMapping("/users")
-    public String users(Model model) {
-
-        return "users";
     }
 }

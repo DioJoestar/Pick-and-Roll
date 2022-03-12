@@ -60,10 +60,16 @@
                             </tr>
                         </thead>
                         <tbody class="border-top-0">
-                            <tr th:replace="layouts/user_list_row :: row"></tr>
-                            <tr th:replace="layouts/user_list_row :: row"></tr>
-                            <tr th:replace="layouts/user_list_row :: row"></tr>
-                            <tr th:replace="layouts/user_list_row :: row"></tr>
+                            <tr th:each="user : ${users}"> 
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.dni}"></td>
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.surname}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.phone}"></td>
+                                <td> TODO </td>
+                                <td><button type="button" class="btn btn-success">Editar (TODO)</button></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
