@@ -12,12 +12,6 @@ public class Controller {
 
         return "main";
     }
-    
-    @GetMapping("/register")
-    public String register(Model model) {
-
-        return "register";
-    }
 
     @GetMapping("/recoverPassword")
     public String recoverPassword(Model model) {
