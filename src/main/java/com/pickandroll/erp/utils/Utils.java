@@ -1,5 +1,8 @@
 package com.pickandroll.erp.utils;
 
+import java.util.Locale;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Utils {
@@ -10,6 +13,7 @@ public class Utils {
         return e.encode(passwd);
     }
 
+    // Comprueba si es un DNI válido
     public boolean checkDni(String dni) {
         String dniNum = dni.substring(0, dni.length() - 1);
         if (dni.length() < 9 || !isNumeric(dniNum)) {
@@ -21,6 +25,7 @@ public class Utils {
         return dniLetra == (lletraDni.charAt(Integer.parseInt(dniNum) % 23));
     }
 
+    // Le pasa un string y comprueba si es completamente numérico
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -29,4 +34,14 @@ public class Utils {
             return false;
         }
     }
+
+    // Devuelve un String del message.properties
+    public String alert(String msgCode) {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:/messages"); // src/main/resources
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource.getMessage(msgCode, null, Locale.ENGLISH);
+    }
+    
+
 }

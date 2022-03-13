@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -31,7 +32,7 @@ public class RegisterController {
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(@Valid User user, Errors errors) {    
+    public String registerUser(@Valid User user, Errors errors, RedirectAttributes msg) {    
         // Volver si hay errores en el formulario
         if (errors.hasErrors()) {
             return "register";
@@ -40,17 +41,20 @@ public class RegisterController {
         Utils u = new Utils();
         // Email no valido
         if (!u.checkDni(user.getDni())) {
-            return "register";
+            msg.addFlashAttribute("error", u.alert("profile.error.dni"));
+            return "redirect:/register";
         }
         
         // Si la contraseñas no coinciden
         if (!user.getPassword().equals(user.getPasswordCheck())) {
-            return "register";
+            msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
+            return "redirect:/register";
         }
 
         // Si el usuario ya existe
         if (checkIfUserExist(user.getEmail())) {
-            return "register";
+            msg.addFlashAttribute("error", u.alert("profile.error.emailAlreadyTaken"));
+            return "redirect:/register";
         }
         
         // Encriptamos la contraseña antes de guardarla        
@@ -66,8 +70,7 @@ public class RegisterController {
         
         roleService.addRole(defaultRole);
         // Lo guardamos en la BBDD
-        userService.addUser(user);
-        
+        userService.addUser(user);        
 
         return "redirect:/";
     }
