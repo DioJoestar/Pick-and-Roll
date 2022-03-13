@@ -15,9 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("userDetailsService")
+@Service("UserDetailsService")
 @Slf4j
-public class UserService implements UserDetailsService, userServiceInterface {
+public class UserService implements UserDetailsService, UserServiceInterface {
 
     @Autowired
     private UserDAO userDAO;
@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService, userServiceInterface {
             roles.add(new SimpleGrantedAuthority(r.getName()));
         }
 
-        return new org.springframework.security.core.userdetails.User(u.getName(), u.getPassword(), roles);
+        return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getPassword(), roles);
     }
 
     public List<User> listUsers() {
@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService, userServiceInterface {
     }
 
     @Transactional(readOnly = true)
-    public User findUserId(User user) {
-        return this.userDAO.findById(user.getId()).orElse(null);
+    public User findUser(User user) {
+        return this.userDAO.findByEmail(user.getEmail());
     }
 }

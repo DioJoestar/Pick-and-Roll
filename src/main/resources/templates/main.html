@@ -8,8 +8,7 @@
 <body>
     <div th:replace="layouts/navbar :: navbar"></div>
     <div>Hola <b><span sec:authentication="name"/></b>, tus roles son <span sec:authentication="principal.authorities"/></div>
-    <p sec:authorize="hasRole('ROLE_admin')">Editar</p>
-    <p sec:authorize="hasRole('ROLE_customer')">Eliminar</p>
+    
     <form method="POST" th:action="@{/logout}">
         <button type="submit" name="logout" class="btn btn-danger">Tancar sessió</button>
     </form>
