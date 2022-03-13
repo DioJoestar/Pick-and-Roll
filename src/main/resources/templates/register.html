@@ -61,6 +61,7 @@
                     </div>
                     <!-- Error messages -->
                     <div class="float-right position-fixed top-0 end-0 m-3">
+                        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
