@@ -15,8 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class UserService implements UserDetailsService {
+@Service("userDetailsService")
+@Slf4j
+public class UserService implements UserDetailsService, userServiceInterface {
 
     @Autowired
     private UserDAO userDAO;
