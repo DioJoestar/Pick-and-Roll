@@ -2,6 +2,7 @@ package com.pickandroll.erp.model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -24,24 +27,35 @@ public class User implements Serializable {
     private long id;
     
     @NotEmpty
+    @Size(min = 9, max = 9)
     private String dni;
 
     @NotEmpty
+    @Size(min = 2)
     private String name;
     
+    @Size(min = 2)
     @NotEmpty
     private String surname;
     
     @NotEmpty
+    @Size(min = 5)
     private String email;
     
     @NotEmpty
+    @Size(min = 9, max = 9)
     private String phone;
 
     @NotEmpty
+    @Size(min = 4)
     private String password;
+    
+    @Transient
+    @Size(min = 4)
+    private String passwordCheck;
 
     @OneToMany 
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private List<Role> roles;
+    
 }

@@ -20,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserDetailsService, userServiceInterface {
 
     @Autowired
-    private UserDAO usuariDAO;
+    private UserDAO userDAO;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User u = usuariDAO.findByEmail(email);
+        User u = userDAO.findByEmail(email);
 
         if (u == null) {
             throw new UsernameNotFoundException(email);
@@ -40,32 +40,23 @@ public class UserService implements UserDetailsService, userServiceInterface {
 
         return new org.springframework.security.core.userdetails.User(u.getName(), u.getPassword(), roles);
     }
-    
-    @Override
-    @Transactional
-    public void afegirUsuari(User user){
-        
+
+    public List<User> listUsers() {
+        return (List<User>) userDAO.findAll();
     }
 
-    @Override
     @Transactional
-    public List<User> llistarUsuaris() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addUser(User user) {
+        this.userDAO.save(user);
     }
 
-    @Override
     @Transactional
-    public void eliminarUsuari(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteUser(User user) {
+        this.userDAO.delete(user);
     }
 
-    @Override
-    @Transactional
-    public void editarUsuari(User user) {
-        
-        this.usuariDAO.save(user);
-        
+    @Transactional(readOnly = true)
+    public User findUserId(User user) {
+        return this.userDAO.findById(user.getId()).orElse(null);
     }
-    
-    
 }

@@ -19,12 +19,6 @@ public class Controller {
 
         return "main";
     }
-    
-    @GetMapping("/register")
-    public String register(Model model) {
-
-        return "register";
-    }
 
     @GetMapping("/recoverPassword")
     public String recoverPassword(Model model) {
@@ -82,7 +76,6 @@ public class Controller {
 
     @GetMapping("/orders")
     public String orders(Model model) {
-
         return "main";
     }
 
@@ -97,11 +90,5 @@ public class Controller {
     public String configModule(Model model) {
 
         return "configModule";
-    }
-
-    @GetMapping("/users")
-    public String users(Model model) {
-
-        return "users";
     }
 }
