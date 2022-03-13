@@ -2,27 +2,16 @@ package com.pickandroll.erp.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import com.pickandroll.erp.service.UserServiceInterface;
 
 @org.springframework.stereotype.Controller
 public class Controller {
-
+    
     // Raiz
     @GetMapping("/")
     public String root(Model model) {
 
         return "main";
-    }
-
-//    @GetMapping("/login")
-//    public String login(Model model) {
-//
-//        return "login";
-//    }
-
-    @GetMapping("/register")
-    public String register(Model model) {
-
-        return "register";
     }
 
     @GetMapping("/recoverPassword")
@@ -37,21 +26,14 @@ public class Controller {
         return "changePassword";
     }
 
-    @GetMapping("/profile")
-    public String profile(Model model) {
-
-        return "main";
-    }
-
     @GetMapping("/cart")
     public String cart(Model model) {
 
-        return "main";
+        return "cart";
     }
 
     @GetMapping("/orders")
     public String orders(Model model) {
-
         return "main";
     }
 
@@ -59,12 +41,12 @@ public class Controller {
     @GetMapping("/modules")
     public String modules(Model model) {
 
-        return "main";
+        return "modules";
     }
 
-    @GetMapping("/users")
-    public String users(Model model) {
+    @GetMapping("/configModule")
+    public String configModule(Model model) {
 
-        return "main";
+        return "configModule";
     }
 }
