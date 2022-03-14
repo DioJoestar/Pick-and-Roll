@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>[[#{common.name}]] | Usuaris</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
@@ -67,7 +68,10 @@
                                 <td th:text="${user.surname}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.phone}"></td>
-                                <td> TODO </td>
+                                <td th:each="r : ${user.roles}">
+                                    <i th:if="${r.name} == 'admin'"class="bi bi-check"></i>
+                                    <i th:if="${r.name} == 'customer'" class="bi bi-x"></i>
+                                </td>
                                 <td><button type="button" class="btn btn-success">Editar (TODO)</button></td>
                             </tr>
                         </tbody>

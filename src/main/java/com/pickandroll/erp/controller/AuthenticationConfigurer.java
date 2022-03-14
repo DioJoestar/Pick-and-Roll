@@ -30,6 +30,7 @@ public class AuthenticationConfigurer extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .failureUrl("/loginError")
                 .usernameParameter("email")
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403");

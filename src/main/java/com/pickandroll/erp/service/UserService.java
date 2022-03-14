@@ -35,6 +35,7 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         var roles = new ArrayList<GrantedAuthority>();
 
         for (Role r : u.getRoles()) {
+            log.info("////////////////////// Nombre del rol: " + r.getName());
             roles.add(new SimpleGrantedAuthority(r.getName()));
         }
 
