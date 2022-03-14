@@ -7,8 +7,12 @@
     --secondary-color: #9CD278;
     --hover-color: #96e331;
     --hover-color2: #cc0000;
+    --hover-color3: #e6e6e6;
     --red-color: red;
+    --white-color: white;
     --usersDiv-color: #cbe8ba;
+    --firstOrderRow-color: #92d36e;
+    --secondOrderRow-color: #e4fbd6;
 }
 
 @media (min-width: 1200px) {
@@ -62,6 +66,11 @@ h2 {
     border-color:  var(--red-color);
 }
 
+.btn3 {
+    background-color: var(--white-color);
+    border-color:  var(--white-color);
+}
+
 .btn-primary:hover, .btn-primary:focus {
     background-color: var(--hover-color);
     border-color:  var(--hover-color);
@@ -70,6 +79,11 @@ h2 {
 .btn2:hover, .btn2:focus {
     background-color: var(--hover-color2);
     border-color:  var(--hover-color2);
+}
+
+.btn3:hover, .btn3:focus {
+    background-color: var(--hover-color3);
+    border-color:  var(--hover-color3);
 }
 
 .alt-color {
@@ -108,6 +122,16 @@ h2 {
     border-color:  var(--usersDiv-color);
 }
 
+.firstOrderRow {
+    background-color: var(--firstOrderRow-color);
+    border-color:  var(--firstOrderRow-color);
+}
+
+.secondOrderRow {
+    background-color: var(--secondOrderRow-color);
+    border-color:  var(--secondOrderRow-color);
+}
+
 .module {
     item-align: center;
     transition: transform .4s;
@@ -129,4 +153,53 @@ h2 {
 
 .mgt {
     margin-top: 10%;
+
+/* TABLE SORT */
+
+.dataTables_length,
+.dataTables_wrapper {
+  font-size: 1.6rem;
+  select,
+  input {
+    background-color: #f9f9f9;
+    border: 1px solid #999;
+    border-radius: 4px;
+    height: 3rem;
+    line-height: 2;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .dataTables_length,
+  .dataTables_filter {
+    margin-top: 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-flex;
+  }
 }
+
+.paginate_button {
+  min-width: 4rem;
+  display: inline-block;
+  text-align: center;
+  padding: 1rem 1.6rem;
+  margin-top: -1rem;
+  border: 2px solid lightblue;
+  &:not(.previous) {
+    border-left: none;
+  }
+  &.previous {
+    border-radius: 8px 0 0 8px;
+    min-width: 7rem;
+  }
+  &.next {
+    border-radius: 0 8px 8px 0;
+    min-width: 7rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #eee;
+    text-decoration: none;
+  }
