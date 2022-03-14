@@ -1,6 +1,6 @@
 <header th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="nav-link" th:href="@{${#authorization.expression('hasAuthority(''admin'')') ? '/modules' : '/'}}"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
+        <a class="nav-link" href="/"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
         <div class="flex-row-reverse collapse navbar-collapse me-5" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item me-5">
