@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>[[#{common.name}]] | Usuaris</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
@@ -10,27 +9,29 @@
     <div class="d-flex flex-row">
         <!-- Editor del admin -->
         <div class="container pt-4 w-25">
-            <form method="POST" th:action="@{/login}">
+            <form action="#" th:action="@{/saveData}" th:object="${user}" method="post" class="getInfo">
+                <input type="hidden" id="id" th:field="*{id}"/>
+                <input type="hidden" id="roles" th:field="*{roles}" />
                 <div class="container rounded border p-3 position-relative">
                     <div class="form-group p-1 mb-2">
                         <label class="sr-only" for="inlineFormInputName">Nom</label>
-                        <input name="name" type="text" class="form-control" id="inlineFormInputName">
+                        <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
                     </div>
                     <div class="form-group p-1 mb-2">
                         <label class="sr-only" for="inlineFormInputName">Cognoms</label>
-                        <input name="surname" type="text" class="form-control" id="inlineFormInputName">
+                        <input type="text" class="form-control" id="surname" th:field="*{surname}" name="surname">
                     </div>
                     <div class="form-group p-1 mb-2">
                         <label class="sr-only" for="inlineFormInputName">DNI</label>
-                        <input name="dni" type="text" class="form-control" id="inlineFormInputName">
+                        <input type="text" class="form-control" id="dni" th:field="*{dni}" name="dni">
                     </div>
                     <div class="form-group p-1 mb-2">
                         <label class="mb-2" for="email">Correu electrònic</label>
-                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" aria-describedby="emailHelp" id="email" th:field="*{email}" name="email">
                     </div>
                     <div class="form-group p-1 mb-4">
                         <label class="sr-only" for="inlineFormInputName">Telèfon</label>
-                        <input name="phone" type="text" class="form-control" id="inlineFormInputName">
+                        <input type="text" class="form-control" id="phone" th:field="*{phone}" name="phone">
                     </div>
                     <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 pb-2">
                         <input class="form-check-input custom-control-input custom-control-input greenSwitch" type="checkbox" id="darkSwitch" checked>
@@ -42,6 +43,7 @@
                 </div>
             </form>
         </div>
+
         <!-- Lista de usuarios -->
         <div class="container pt-4 bg-white w-75">
             <div class="d-flex flex-column bd-highlight mb-3">
@@ -72,12 +74,28 @@
                                     <i th:if="${r.name} == 'admin'"class="bi bi-check"></i>
                                     <i th:if="${r.name} == 'customer'" class="bi bi-x"></i>
                                 </td>
-                                <td><button type="button" class="btn btn-success">Editar (TODO)</button></td>
+                                <!--
+                                <td>
+                                <button class="btnSelect btn btn-primary">Editar</button>
+                                </td>
+                                -->
+                                <td>  
+                                    <form method="post" th:action="@{/editUser}" th:object="${user}" >
+                                        <input type="hidden" name="id" th:value="${user.id}"/>
+                                        <input type="hidden" name="dni" th:value="${user.dni}"/>
+                                        <input type="hidden" name="name"  th:value="${user.name}"/>
+                                        <input type="hidden" name="surname"th:value="${user.surname}"/>
+                                        <input type="hidden" name="email"  th:value="${user.email}"/>
+                                        <input type="hidden" name="phone"  th:value="${user.phone}"/>
+                                        <button type="submit" name="submit" value="value" class="btn btn-primary">Editar</button>
+                                    </form> 
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>

@@ -1,16 +1,13 @@
 package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.UserDAO;
-import com.pickandroll.erp.model.Role;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -35,10 +32,6 @@ public class ProfileController {
         // Crear el objeto User a partir del email (username) de la sesión actual
         User currUser = userDao.findByEmail(userDetails.getUsername());
 
-        for (Role r : currUser.getRoles()) {
-            System.out.println(r);
-        }
-
         model.addAttribute("user", currUser);
 
         return "profile";
@@ -46,11 +39,6 @@ public class ProfileController {
 
     @PostMapping("/updateUser")
     public String updateUser(@Valid User user, Errors errors, Authentication auth, RedirectAttributes msg) {
-
-        for (Role r : user.getRoles()) {
-            System.out.println(r);
-        }
-
         if (errors.hasErrors()) {
             return "/profile";
         }
