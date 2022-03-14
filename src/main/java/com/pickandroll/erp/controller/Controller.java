@@ -2,7 +2,6 @@ package com.pickandroll.erp.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.pickandroll.erp.service.UserServiceInterface;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -38,12 +37,6 @@ public class Controller {
     }
 
     // Admin URLs
-    @GetMapping("/modules")
-    public String modules(Model model) {
-
-        return "modules";
-    }
-
     @GetMapping("/configModule")
     public String configModule(Model model) {
 
