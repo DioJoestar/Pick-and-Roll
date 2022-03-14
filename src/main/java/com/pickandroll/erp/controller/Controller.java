@@ -56,12 +56,6 @@ public class Controller {
     }
 
     // Admin URLs
-    @GetMapping("/modules")
-    public String modules(Model model) {
-
-        return "modules";
-    }
-
     @GetMapping("/configModule")
     public String configModule(Model model) {
 
