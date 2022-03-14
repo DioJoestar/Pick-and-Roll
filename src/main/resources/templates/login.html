@@ -2,34 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>[[#{common.name}]] | Iniciar sessió</title>
-        <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
-    </head>
-    <body class="background">
-        <div class="vertical-center">
-            <div class="container login">
-                <img class="logo" th:src="@{/img/logo_h.png}" />
-                <h2>Iniciar sessió</h2>
-                <div class="container rounded border p-3 bg-white">
-                    <form method="POST" th:action="@{/login}">
-                        <div class="form-group p-1 mb-2">
-                            <label class="mb-2" for="email">Correu Electrònic</label>
-                            <input type="email" class="form-control" name="email" 
-                                   id="email" aria-describedby="emailHelp" placeholder="email@exemple.cat">
-                        </div>
-                        <div class="form-group p-1 mb-2">
-                            <label class="mb-2" for="password">Contrasenya</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
-                        <div class="d-grid gap-2 p-1">
-                            <button type="submit" class="btn btn-primary">Inicia la sessió</button>
-                            <a class="btn btn-primary alt-color" href="/register" role="button">Registrar-se</a>
-                        </div>
-                    </form>
-                    <div class="pt-3 p-2" style="text-align: right">
-                        <a href="/recoverPassword">Has oblidat la contrasenya?</a>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
+<body class="background">
+    <div class="vertical-center">
+        <div class="container login">
+            <img class="logo" th:src="@{/img/logo_h.png}" />
+            <h2>Iniciar sessió</h2>
+            <div class="container rounded border p-3 bg-white">
+                <form method="POST" th:action="@{/login}">
+                    <div class="form-group p-1 mb-2">
+                        <label class="mb-2" for="email">Correu Electrònic</label>
+                        <input type="email" class="form-control" name="email" 
+                               id="email" aria-describedby="emailHelp" placeholder="email@exemple.cat">
                     </div>
+                    <div class="form-group p-1 mb-2">
+                        <label class="mb-2" for="password">Contrasenya</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div class="d-grid gap-2 p-1">
+                        <button type="submit" class="btn btn-primary">Inicia la sessió</button>
+                        <a class="btn btn-primary alt-color" href="/register" role="button">Registrar-se</a>
+                    </div>
+                    <!-- Error messages -->
+                    <div class="float-right position-fixed top-0 end-0 m-3">
+                        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                    </div>
+                </form>
+                <div class="pt-3 p-2" style="text-align: right">
+                    <a href="/recoverPassword">Has oblidat la contrasenya?</a>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

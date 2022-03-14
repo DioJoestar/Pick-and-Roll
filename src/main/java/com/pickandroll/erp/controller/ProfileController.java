@@ -20,13 +20,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 public class ProfileController {
-    
+
     @Autowired
     private UserDAO userDao;
-    
+
     @Autowired
     private UserServiceInterface userService;
-    
+
     @GetMapping("/profile")
     public String profile(Model model, User user, Authentication auth) {
         // Coger los datos de la sessión
@@ -34,19 +34,27 @@ public class ProfileController {
 
         // Crear el objeto User a partir del email (username) de la sesión actual
         User currUser = userDao.findByEmail(userDetails.getUsername());
-        
+
+        for (Role r : currUser.getRoles()) {
+            System.out.println(r);
+        }
+
         model.addAttribute("user", currUser);
-        
+
         return "profile";
     }
-    
+
     @PostMapping("/updateUser")
     public String updateUser(@Valid User user, Errors errors, Authentication auth, RedirectAttributes msg) {
-        
+
+        for (Role r : user.getRoles()) {
+            System.out.println(r);
+        }
+
         if (errors.hasErrors()) {
             return "/profile";
         }
-        
+
         Utils u = new Utils();
 
         // Email no valido
@@ -66,22 +74,20 @@ public class ProfileController {
 //            msg.addFlashAttribute("error", u.alert("profile.error.emailAlreadyTaken"));
 //            return "redirect:/profile";
 //        }
-
-        // Esto va a medias...
-        var roles = auth.getAuthorities();
-        List<Role> roleList = new ArrayList<>();
-        
-        for (GrantedAuthority r : roles) {
-            Role currRole = new Role();
-            currRole.setName(r.toString());
-            roleList.add(currRole);
-        }
-        
-        user.setRoles(roleList);
-
+//        // Esto va a medias...
+//        var roles = auth.getAuthorities();
+//        List<Role> roleList = new ArrayList<>();
+//        
+//        for (GrantedAuthority r : roles) {
+//            Role currRole = new Role();
+//            currRole.setName(r.toString());
+//            roleList.add(currRole);
+//        }
+//        
+//        user.setRoles(roleList);
         // Encriptamos la contraseña antes de guardarla
         user.setPassword(u.encrypPasswd(user.getPassword()));
-        
+
         userService.addUser(user);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/profile";
@@ -91,7 +97,7 @@ public class ProfileController {
     private boolean checkIfUserExist(String email) {
         // Lista con todos los usuarios y quito el usuario actual
         List<User> userList = userService.listUsers();
-        
+
         // Buscamos todos los usuarios si el email está en uso
         for (User u : userList) {
             System.out.println(u.getEmail());
