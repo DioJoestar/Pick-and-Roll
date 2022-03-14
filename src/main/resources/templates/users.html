@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>[[#{common.name}]] | Usuaris</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
@@ -73,6 +74,46 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="d-grid gap-2 pt-2">
+                    <button type="submit" class="btn btn-primary">Guardar canvis</button>
+                </div>
+            </form>
+        </div>
+        <!-- Lista de usuarios -->
+        <div class="container pt-4 bg-white w-75">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <h1>Llista d'usuaris</h1>
+                <div class="container rounded border p-3">
+                    <table class="table text-center align-middle">
+                        <thead>
+                            <tr class="usersDiv">
+                                <th>ID</th>
+                                <th>DNI</th>
+                                <th>Nom</th>
+                                <th>Cognoms</th>
+                                <th>Correu electrònic</th>
+                                <th>Telèfon</th>
+                                <th>Admin</th>
+                                <th>Editar usuari</th>
+                            </tr>
+                        </thead>
+                        <tbody class="border-top-0">
+                            <tr th:each="user : ${users}"> 
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.dni}"></td>
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.surname}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.phone}"></td>
+                                <td th:each="r : ${user.roles}">
+                                    <i th:if="${r.name} == 'admin'"class="bi bi-check"></i>
+                                    <i th:if="${r.name} == 'customer'" class="bi bi-x"></i>
+                                </td>
+                                <td><button type="button" class="btn btn-success">Editar (TODO)</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
