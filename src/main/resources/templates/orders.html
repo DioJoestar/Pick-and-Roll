@@ -8,25 +8,34 @@
     <div th:replace="layouts/navbar :: navbar"></div>
     <div class="container pt-4 bg-white">
         <div class="d-flex flex-column bd-highlight mb-3">
-            <h1>Comandes</h1>
+            <div class="list-group list-group-horizontal">
+                <h1>Comandes</h1>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ordenar
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Tots els vehicles</a>
+                        <a class="dropdown-item" href="#">Més recents</a>
+                        <a class="dropdown-item" href="#">Més antics</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtrar
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Tots els vehicles</a>
+                        <a class="dropdown-item" href="#">Lliurat</a>
+                        <a class="dropdown-item" href="#">Retornat</a>
+                    </div>
+                </div>
+            </div>
             <div class="container rounded border p-3">
-                <table class="table text-center align-middle">
-                    <thead>
-                        <tr class="usersDiv">
-                            <th>ID</th>
-                            <th>Model</th>
-                            <th>Tipus</th>
-                            <th>Preu producte</th>
-                            <th>Preu total</th>
-                        </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                        <tr th:replace="layouts/user_list_row :: row"></tr>
-                        <tr th:replace="layouts/user_list_row :: row"></tr>
-                        <tr th:replace="layouts/user_list_row :: row"></tr>
-                        <tr th:replace="layouts/user_list_row :: row"></tr>
-                    </tbody>
-                </table>
+                <div th:replace="layouts/order_list_row :: item"></div>
+                <div th:replace="layouts/order_list_row :: item"></div>
+                <div th:replace="layouts/order_list_row :: item"></div>
+                <div th:replace="layouts/order_list_row :: item"></div>
             </div>
         </div>
     </div>

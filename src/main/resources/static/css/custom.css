@@ -9,6 +9,8 @@
     --hover-color2: #cc0000;
     --red-color: red;
     --usersDiv-color: #cbe8ba;
+    --firstOrderRow-color: #92d36e;
+    --secondOrderRow-color: #e4fbd6;
 }
 
 body {
@@ -116,6 +118,16 @@ h2 {
     border-color:  var(--usersDiv-color);
 }
 
+.firstOrderRow {
+    background-color: var(--firstOrderRow-color);
+    border-color:  var(--firstOrderRow-color);
+}
+
+.secondOrderRow {
+    background-color: var(--secondOrderRow-color);
+    border-color:  var(--secondOrderRow-color);
+}
+
 
 .module {
     item-align: center;
@@ -135,3 +147,5 @@ h2 {
     align-items: center;
     flex-flow: row wrap;
 }
+
+.navbar-nav > li > .dropdown-menu {     background-color: #ffffff;  }
