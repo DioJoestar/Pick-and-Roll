@@ -70,7 +70,7 @@ public class RegisterController {
         
         roleService.addRole(defaultRole);
         // Lo guardamos en la BBDD
-        userService.addUser(user);        
+        userService.addUser(user);
 
         return "redirect:/";
     }

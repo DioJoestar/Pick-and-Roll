@@ -15,7 +15,6 @@ public class RoleService implements RoleServiceInterface {
 
     @Transactional(readOnly = true)
     public List<Role> listRoles() {
-
         return (List<Role>) role.findAll();
     }
 

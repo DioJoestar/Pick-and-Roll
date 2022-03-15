@@ -44,7 +44,6 @@ public class ProfileController {
         }
 
         Utils u = new Utils();
-
         // Email no valido
         if (!u.checkDni(user.getDni())) {
             msg.addFlashAttribute("error", u.alert("profile.error.dni"));
@@ -56,23 +55,7 @@ public class ProfileController {
             msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
             return "redirect:/profile";
         }
-
-        // Si el email ya está en uso
-//        if (checkIfUserExist(user.getEmail())) {
-//            msg.addFlashAttribute("error", u.alert("profile.error.emailAlreadyTaken"));
-//            return "redirect:/profile";
-//        }
-//        // Esto va a medias...
-//        var roles = auth.getAuthorities();
-//        List<Role> roleList = new ArrayList<>();
-//        
-//        for (GrantedAuthority r : roles) {
-//            Role currRole = new Role();
-//            currRole.setName(r.toString());
-//            roleList.add(currRole);
-//        }
-//        
-//        user.setRoles(roleList);
+        
         // Encriptamos la contraseña antes de guardarla
         user.setPassword(u.encrypPasswd(user.getPassword()));
 

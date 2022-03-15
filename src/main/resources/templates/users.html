@@ -10,8 +10,19 @@
         <!-- Editor del admin -->
         <div class="container pt-4 w-25">
             <form action="#" th:action="@{/saveData}" th:object="${user}" method="post" class="getInfo">
-                <input type="hidden" id="id" th:field="*{id}"/>
-                <input type="hidden" id="roles" th:field="*{roles}" />
+                <!-- Messages -->
+                <div class="mt-3 mb-3 w-100">
+                    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+                    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}"/>
+                </div>
+                <input type="hidden" id="id" th:field="*{id}"/>                
+                <input type="hidden" id="password" th:field="*{password}" />
                 <div class="container rounded border p-3 position-relative">
                     <div class="form-group p-1 mb-2">
                         <label class="sr-only" for="inlineFormInputName">Nom</label>
@@ -34,9 +45,12 @@
                         <input type="text" class="form-control" id="phone" th:field="*{phone}" name="phone">
                     </div>
                     <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 pb-2">
-                        <input class="form-check-input custom-control-input custom-control-input greenSwitch" type="checkbox" id="darkSwitch" checked>
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
-                    </div>
+                        <!-- https://www.codejava.net/frameworks/spring-boot/spring-security-add-roles-to-user-examples -->
+                        <th:div th:each="role: ${listRoles}" th:remove="tag">
+                            <label class="form-check-label align-text-sub" for="flexSwitchCheckChecked" th:text="${role.name}"></label>
+                            <input type="checkbox" th:field="*{roles}"th:value="${role.id}" class="form-check-input roles greenSwitch m-2" />  
+                        </th:div>                        
+                    </div>                    
                 </div>
                 <div class="d-grid gap-2 pt-2">
                     <button type="submit" class="btn btn-primary">Guardar canvis</button>
@@ -70,15 +84,11 @@
                                 <td th:text="${user.surname}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.phone}"></td>
-                                <td th:each="r : ${user.roles}">
-                                    <i th:if="${r.name} == 'admin'"class="bi bi-check"></i>
-                                    <i th:if="${r.name} == 'customer'" class="bi bi-x"></i>
-                                </td>
-                                <!--
                                 <td>
-                                <button class="btnSelect btn btn-primary">Editar</button>
+                                    <div th:each="r : ${user.roles}" th:value="${r.name}" th:tag="remove">
+                                        <i th:if="${r.name == 'admin'}" class="bi bi-check"></i>                                        
+                                    </div>
                                 </td>
-                                -->
                                 <td>  
                                     <form method="post" th:action="@{/editUser}" th:object="${user}" >
                                         <input type="hidden" name="id" th:value="${user.id}"/>
