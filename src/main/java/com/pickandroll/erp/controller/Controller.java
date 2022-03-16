@@ -56,10 +56,4 @@ public class Controller {
         return "orders";
     }
 
-    // Admin URLs
-    @GetMapping("/configModule")
-    public String configModule(Model model) {
-
-        return "configModule";
-    }
 }

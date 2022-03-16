@@ -27,4 +27,7 @@ public class Module implements Serializable {
     
     private String icon;
 
+    private String description;
+    
+    private boolean enable;
 }

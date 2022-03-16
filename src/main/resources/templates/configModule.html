@@ -2,52 +2,44 @@
 <html>
     <head>
         <title>[[#{common.name}]] | Activar/Desactivar mòdul</title>
-        <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
-    </head>
-    <body>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
+<body>
 
-        <header th:replace="layouts/navigationBar :: capcalera"/>
+    <header th:replace="layouts/navbar :: navbar"/>
 
-        <h2 class="mt-3 ms-4">Activar i desactivar mòduls</h2> 
-        <div th:fragment="item" class="container bcontent d-inline-flex p-2 ms-3">
-        <header th:replace="layouts/navigationBar :: capcalera"/>
-        <div class="double-element">
-            <div class="card mb-3 mt-5" style="max-width: 540px;">
+    <h2 class="mt-3 ms-4">Activar i desactivar mòduls</h2> 
+    <div th:fragment="item" class="container bcontent d-inline-flex p-2 ms-3">
+        <div class="double-element"  th:each="module : ${modules}">
+            <div class="card mb-3 mt-5 me-2" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <i class="bi bi-cart3"></i>
+                        <i th:class="${module.icon}"></i>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Comandes</h5>
-                            <p class="card-text">Mòdul el qual permet visualitzar les comandes realitzades pels clients. També permet visualitzar els clients registrats a l'aplicació</p>
-                            <a href="#" class="btn btn-primary">Button</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div th:fragment="item" class="card" style="width: 520px;">
-                <div class="row no-gutters">
-                    <div class="col-sm-4 p-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-cart3 ms-4" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg>
-                    </div>
                     <div class="col-sm-8">
+
+
                         <div class="card-body">
-                            <h5 class="card-title">Comandes</h5>
-                            <p class="card-text text-justify">Mòdul el qual permet visualitzar les comandes realitzades pels clients. També permet visualitzar els clients registrats a l'aplicació</p>
-                            <div class="form-check form-switch float-end">
+                            <h5 class="card-title" th:text="${module.name}"></h5>
+                            <p class="card-text text-justify" th:text="${module.description}"></p>
+                            <div class="form-check form-switch float-end" th:if="${module.enable == true}">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Desactivar</label>
+                            </div>
+                            <div class="form-check form-switch float-end" th:if="${module.enable == false}">
                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
-                            </div>    
+                            </div>
                         </div>
+
+
                     </div>
+
+
                 </div>
             </div>
-
         </div>
-
-    </body>
+    </div>
+</body>
 </html>
