@@ -54,18 +54,16 @@ public class User implements Serializable {
     @Transient
     @Size(min = 4)
     private String passwordCheck;
-    
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roles;
-    
-    public User() {
-        roles = new ArrayList();
-        Role defaultRole = new Role("customer");
-        roles.add(defaultRole);
+    private List<Role> roles = new ArrayList();
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 }

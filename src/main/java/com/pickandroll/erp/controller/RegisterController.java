@@ -1,7 +1,8 @@
 package com.pickandroll.erp.controller;
 
+import com.pickandroll.erp.dao.RoleDAO;
+import com.pickandroll.erp.model.Role;
 import com.pickandroll.erp.model.User;
-import com.pickandroll.erp.service.RoleService;
 import com.pickandroll.erp.service.UserService;
 import com.pickandroll.erp.utils.Utils;
 import java.util.List;
@@ -20,6 +21,9 @@ public class RegisterController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private RoleDAO roleDao;
 
     @GetMapping("/register")
     public String registerForm(User user) {
@@ -56,8 +60,15 @@ public class RegisterController {
         user.setPassword(u.encrypPasswd(user.getPassword()));
 
         // Lo guardamos en la BBDD
+        
+        Role defaultRole = roleDao.findByName("customer");
+        
+        System.out.println(defaultRole.getName());
+        
+        user.addRole(defaultRole);
+        
         userService.addUser(user);
-
+        
         return "redirect:/";
     }
 

@@ -24,13 +24,6 @@ public class Role implements Serializable {
     @NotEmpty
     private String name;
     
-    public Role(){
-    }
-    
-    public Role(String name){
-        this.name = name;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 5;
