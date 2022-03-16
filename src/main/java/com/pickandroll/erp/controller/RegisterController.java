@@ -66,9 +66,6 @@ public class RegisterController {
         List<Role> newRole = new ArrayList<>();
         newRole.add(defaultRole);
         
-        user.setRoles(newRole);
-        
-        roleService.addRole(defaultRole);
         // Lo guardamos en la BBDD
         userService.addUser(user);
 
