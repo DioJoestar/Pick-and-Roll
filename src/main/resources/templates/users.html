@@ -5,74 +5,36 @@
         <title>[[#{common.name}]] | Usuaris</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
-    <body>
-        <div th:replace="layouts/navbar :: navbar"></div>
-        <div class="d-flex flex-row">
-            <!-- Editor del admin -->
-            <div class="container pt-4 w-25">
-                <form method="POST" th:action="@{/login}">
-                    <div class="container rounded border p-3 position-relative">
-                        <div class="form-group p-1 mb-2">
-                            <label class="sr-only" for="inlineFormInputName">Nom</label>
-                            <input name="name" type="text" class="form-control" id="inlineFormInputName">
-                        </div>
-                        <div class="form-group p-1 mb-2">
-                            <label class="sr-only" for="inlineFormInputName">Cognoms</label>
-                            <input name="surname" type="text" class="form-control" id="inlineFormInputName">
-                        </div>
-                        <div class="form-group p-1 mb-2">
-                            <label class="sr-only" for="inlineFormInputName">DNI</label>
-                            <input name="dni" type="text" class="form-control" id="inlineFormInputName">
-                        </div>
-                        <div class="form-group p-1 mb-2">
-                            <label class="mb-2" for="email">Correu electrònic</label>
-                            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                        </div>
-                        <div class="form-group p-1 mb-4">
-                            <label class="sr-only" for="inlineFormInputName">Telèfon</label>
-                            <input name="phone" type="text" class="form-control" id="inlineFormInputName">
-                        </div>
-                        <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 pb-2">
-                            <input class="form-check-input custom-control-input custom-control-input greenSwitch" type="checkbox" id="darkSwitch" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
-                        </div>
+<body>
+    <div th:replace="layouts/navbar :: navbar"></div>
+    <div class="d-flex flex-row">
+        <!-- Editor del admin -->
+        <div class="container pt-4 w-25">
+            <form method="POST" th:action="@{/login}">
+                <div class="container rounded border p-3 position-relative">
+                    <div class="form-group p-1 mb-2">
+                        <label class="sr-only" for="inlineFormInputName">Nom</label>
+                        <input name="name" type="text" class="form-control" id="inlineFormInputName">
                     </div>
-                    <div class="d-grid gap-2 pt-2">
-                        <button type="submit" class="btn btn-primary">Guardar canvis</button>
+                    <div class="form-group p-1 mb-2">
+                        <label class="sr-only" for="inlineFormInputName">Cognoms</label>
+                        <input name="surname" type="text" class="form-control" id="inlineFormInputName">
                     </div>
-                </form>
-            </div>
-            <!-- Lista de usuarios -->
-            <div class="container pt-4 bg-white w-75">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <h1>Llista d'usuaris</h1>
-                    <div class="container rounded border p-3">
-                        <table class="table text-center align-middle">
-                            <thead>
-                                <tr class="usersDiv">
-                                    <th>ID</th>
-                                    <th>DNI</th>
-                                    <th>Nom</th>
-                                    <th>Cognoms</th>
-                                    <th>Correu electrònic</th>
-                                    <th>Telèfon</th>
-                                    <th>Admin</th>
-                                    <th>Editar usuari</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                <tr th:each="user : ${users}"> 
-                                    <td th:text="${user.id}"></td>
-                                    <td th:text="${user.dni}"></td>
-                                    <td th:text="${user.name}"></td>
-                                    <td th:text="${user.surname}"></td>
-                                    <td th:text="${user.email}"></td>
-                                    <td th:text="${user.phone}"></td>
-                                    <td> TODO </td>
-                                    <td><button type="button" class="btn btn-success">Editar (TODO)</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="form-group p-1 mb-2">
+                        <label class="sr-only" for="inlineFormInputName">DNI</label>
+                        <input name="dni" type="text" class="form-control" id="inlineFormInputName">
+                    </div>
+                    <div class="form-group p-1 mb-2">
+                        <label class="mb-2" for="email">Correu electrònic</label>
+                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group p-1 mb-4">
+                        <label class="sr-only" for="inlineFormInputName">Telèfon</label>
+                        <input name="phone" type="text" class="form-control" id="inlineFormInputName">
+                    </div>
+                    <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 pb-2">
+                        <input class="form-check-input custom-control-input custom-control-input greenSwitch" type="checkbox" id="darkSwitch" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
                     </div>
                 </div>
                 <div class="d-grid gap-2 pt-2">
@@ -80,6 +42,7 @@
                 </div>
             </form>
         </div>
+
         <!-- Lista de usuarios -->
         <div class="container pt-4 bg-white w-75">
             <div class="d-flex flex-column bd-highlight mb-3">
@@ -117,5 +80,5 @@
                 </div>
             </div>
         </div>
-    </body>
+</body>
 </html>
