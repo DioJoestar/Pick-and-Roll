@@ -64,19 +64,4 @@ public class ProfileController {
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/profile";
     }
-
-    // Método para comprobar si el email ya existe en la DDBB
-    private boolean checkIfUserExist(String email) {
-        // Lista con todos los usuarios y quito el usuario actual
-        List<User> userList = userService.listUsers();
-
-        // Buscamos todos los usuarios si el email está en uso
-        for (User u : userList) {
-            System.out.println(u.getEmail());
-            if (u.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

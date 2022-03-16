@@ -1,6 +1,7 @@
 package com.pickandroll.erp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,4 +62,10 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> roles;
+    
+    public User() {
+        roles = new ArrayList();
+        Role defaultRole = new Role("customer");
+        roles.add(defaultRole);
+    }
 }

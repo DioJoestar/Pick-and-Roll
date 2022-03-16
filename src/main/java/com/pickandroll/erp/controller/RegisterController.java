@@ -1,11 +1,9 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.model.Role;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.RoleService;
 import com.pickandroll.erp.service.UserService;
 import com.pickandroll.erp.utils.Utils;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RegisterController {
 
     @Autowired
-    private UserService userService;    
-    
-    @Autowired
-    private RoleService roleService;
+    private UserService userService;
 
     @GetMapping("/register")
     public String registerForm(User user) {
@@ -32,19 +27,19 @@ public class RegisterController {
     }
 
     @PostMapping("/registerUser")
-    public String registerUser(@Valid User user, Errors errors, RedirectAttributes msg) {    
+    public String registerUser(@Valid User user, Errors errors, RedirectAttributes msg) {
         // Volver si hay errores en el formulario
         if (errors.hasErrors()) {
             return "register";
         }
-        
+
         Utils u = new Utils();
         // Email no valido
         if (!u.checkDni(user.getDni())) {
             msg.addFlashAttribute("error", u.alert("profile.error.dni"));
             return "redirect:/register";
         }
-        
+
         // Si la contraseñas no coinciden
         if (!user.getPassword().equals(user.getPasswordCheck())) {
             msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
@@ -56,16 +51,10 @@ public class RegisterController {
             msg.addFlashAttribute("error", u.alert("profile.error.emailAlreadyTaken"));
             return "redirect:/register";
         }
-        
+
         // Encriptamos la contraseña antes de guardarla        
         user.setPassword(u.encrypPasswd(user.getPassword()));
-        
-        // Le colocamos el rol por defecto con la ID del nuevo usuario
-        Role defaultRole = new Role();
-        defaultRole.setName("customer");
-        List<Role> newRole = new ArrayList<>();
-        newRole.add(defaultRole);
-        
+
         // Lo guardamos en la BBDD
         userService.addUser(user);
 
