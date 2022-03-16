@@ -24,7 +24,7 @@ public class Role implements Serializable {
     @NotEmpty
     private String name;
     
-        @Override
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 97 * hash + Objects.hashCode(this.name);

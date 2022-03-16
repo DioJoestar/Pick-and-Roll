@@ -15,10 +15,10 @@
                     <a th:classappend="${#request.getServletPath() == '/cart' ? 'active' : ''}" class="nav-link" href="/cart"><i class="bi bi-cart3 me-2 fw-bold"></i>El meu cistell</a>
                 </li>
                 <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
-                    <a th:classappend="${#request.getServletPath() == '/users' ? 'active' : ''}" class="nav-link" href="/users"><i class="bi bi-person-lines-fill me-2 fw-bold"></i>Usuaris</a>
+                    <a th:classappend="${(#request.getServletPath() == '/users' ? 'active' : '' + (#request.getServletPath() == '/editUser' ? 'active' : ''))}" class="nav-link" href="/users"><i class="bi bi-person-lines-fill me-2 fw-bold"></i>Usuaris</a>
                 </li>
                 <li class="nav-item me-5">
-                    <a th:classappend="${(#request.getServletPath() == '/profile' ? 'active' : '') + (#request.getServletPath() == '/updateUser' ? 'active' : '')}" class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
+                    <a th:classappend="${#request.getServletPath() == '/profile' ? 'active' : ''}" class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
                 </li>
             </ul>
         </div>
