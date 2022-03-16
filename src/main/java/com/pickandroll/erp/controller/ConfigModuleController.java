@@ -6,24 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.pickandroll.erp.model.Module;
+import com.pickandroll.erp.service.ModuleServiceInterface;
+import java.util.ArrayList;
+import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- *
- * @author santialves
- */
 @org.springframework.stereotype.Controller
 public class ConfigModuleController {
 
     @Autowired
     private ModuleDAO moduleDao;
+    
+    @Autowired
+    private ModuleServiceInterface moduleService;
 
+    List<Module> modules = new ArrayList<Module>();
+    
     @GetMapping("/configModule")
     public String modules(Model model) {
 
-        List<Module> modules = moduleDao.findAll();
+        modules = moduleDao.findAll();
 
         model.addAttribute("modules", modules);
 
         return "configModule";
     }
+
+    @PostMapping("/guardarModul")
+    public String saveModule(Model model, Module module) {
+        
+        moduleService.addModule(module); 
+        
+        return "redirect:/configModule";
+    }
+
+     @GetMapping("/editar/{id}")
+    public String editar(Module module, Model model) {
+
+        module = moduleService.findModule(module);
+
+        model.addAttribute("module", module);
+
+        return "editModule";
+    }
+    
 }

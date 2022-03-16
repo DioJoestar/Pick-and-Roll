@@ -1,9 +1,5 @@
 package com.pickandroll.erp.controller;
 
-/**
- *
- * @author santialves
- */
 import com.pickandroll.erp.dao.ModuleDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
