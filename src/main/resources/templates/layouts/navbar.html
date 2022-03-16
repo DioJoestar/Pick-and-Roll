@@ -17,6 +17,13 @@
                 <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
                     <a th:classappend="${(#request.getServletPath() == '/users' ? 'active' : '' + (#request.getServletPath() == '/editUser' ? 'active' : ''))}" class="nav-link" href="/users"><i class="bi bi-person-lines-fill me-2 fw-bold"></i>Usuaris</a>
                 </li>
+                
+                
+                <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
+                    <a th:classappend="${(#request.getServletPath() == '/users' ? 'active' : '' + (#request.getServletPath() == '/configModule' ? 'active' : ''))}" class="nav-link" href="/configModule"><i class="bi bi-gear me-2 fw-bold"></i>Configuració</a>
+                </li>
+                
+                
                 <li class="nav-item me-5">
                     <a th:classappend="${#request.getServletPath() == '/profile' ? 'active' : ''}" class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
                 </li>

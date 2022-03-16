@@ -2,51 +2,45 @@
 <html>
     <head>
         <title>[[#{common.name}]] | Editar mòdul</title>
-        <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="webjars/bootstrap-icons/1.8.1/font/bootstrap-icons.css" rel="stylesheet" >
-    <link th:href="@{/css/custom.css}" rel="stylesheet" />    
-    <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
-    
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    </head>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
     <body>
 
+        <header th:replace="layouts/navbar :: navbar"/>
+
         <h2 class="mt-3 ms-4">Editar mòdul</h2> 
-        
-      <div class="container rounded border p-3 bg-white">
-        <form th:action="@{/guardarModul}" method="post" th:object="${module}">
 
-            <input type="hidden" name="id" th:field="*{id}"/>
-            <input type="hidden" name="icon" th:field="*{icon}"/>
-            <input type="hidden" name="path" th:field="*{path}"/>
-            
-            
-            <div class="form-group p-1 mb-2">
-                <label class="mb-2" for="email">Nom</label>
-                <input type="text" name="nom" th:field="*{name}" class="form-control"/> 
-            </div>
-            
-            
-            <div class="form-group p-1 mb-2">
-                <label class="mb-2" for="description">Descripció</label>
-                <textarea name="description" th:field="*{description}" class="form-control"/> 
-            </div>
-            
-            
-            
-            <div class="form-group p-1 mb-2">
-               <label class="mb-2" for="estat">Estat</label>
-               <input type="checkbox" name="sexe" th:field="*{enable}" class="form-control"/>
-            </div>
+        <div class="container rounded border p-3 bg-white">
+            <form th:action="@{/guardarModul}" method="post" th:object="${module}">
 
-            <input type="submit" name="enviar" value="Enviar Dades"/>        
-        
-        </form>
-      </div>
+                <input type="hidden" name="id" th:field="*{id}"/>
+                <input type="hidden" name="icon" th:field="*{icon}"/>
+                <input type="hidden" name="path" th:field="*{path}"/>
+
+
+                <div class="form-group p-1 mb-2">
+                    <label class="mb-2" for="email">Nom</label>
+                    <input type="text" name="nom" th:field="*{name}" class="form-control"/> 
+                </div>
+
+
+                <div class="form-group p-1 mb-2">
+                    <label class="mb-2" for="description">Descripció</label>
+                    <textarea name="description" th:field="*{description}" class="form-control"/> 
+                </div>
+
+                <div class="form-group p-1 mb-2">
+                    <div class="form-check form-switch">
+                        <label class="mb-2" for="estat">Estat</label>
+                        <input type="checkbox" name="enable" th:field="*{enable}" class="form-check-input"/>
+                    </div>
+                </div>
+                
+                <input class="btn btn-primary alt-color" type="submit" name="enviar" value="Enviar Dades"/>        
+            </form>
+        </div>
 
     </body>
 </html>
+
 
