@@ -21,8 +21,8 @@ public class VehicleController {
     @GetMapping("/vehicles")
     public String root(Model model) {
 
-        List<Vehicle> vehicles = vehicleDao.findAll();
-        model.addAttribute("vehicles", vehicles);
+        //List<Vehicle> vehicles = vehicleDao.findAll();
+        //model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
     }

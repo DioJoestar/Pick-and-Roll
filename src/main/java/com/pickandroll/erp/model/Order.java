@@ -1,10 +1,15 @@
 package com.pickandroll.erp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -36,4 +41,12 @@ public class Order implements Serializable {
 
     @NotEmpty
     private int user_id;
+    
+    @ManyToMany
+    @JoinTable(
+            name = "orders_vehicles",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "vehicle_id")
+    )
+    private List<Vehicle> vehicles = new ArrayList();
 }

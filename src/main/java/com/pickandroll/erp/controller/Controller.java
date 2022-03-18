@@ -49,11 +49,4 @@ public class Controller {
 
         return "cart";
     }
-
-    @GetMapping("/orders")
-    public String orders(Model model) {
-
-        return "orders";
-    }
-
 }
