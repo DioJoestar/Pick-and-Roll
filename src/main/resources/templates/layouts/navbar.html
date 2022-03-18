@@ -4,7 +4,7 @@
         <div class="flex-row-reverse collapse navbar-collapse me-5" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item me-5">
-                    <a th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}" class="nav-link" href="/"><i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
+                    <a th:classappend="${#request.getServletPath() == '/vehicles' ? 'active' : ''}" class="nav-link" href="/vehicles"><i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
                 </li>
                 <li class="nav-item me-5">
                     <a th:classappend="${#request.getServletPath() == '/orders' ? 'active' : ''}" class="nav-link" href="/orders"><i class="bi bi-list-ul me-2 fw-bold"></i>

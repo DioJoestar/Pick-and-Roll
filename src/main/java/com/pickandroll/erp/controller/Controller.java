@@ -16,7 +16,7 @@ public class Controller {
     @GetMapping("/")
     public String root(Model model) {
 
-        return "main";
+        return "vehicles";
     }
 
     @GetMapping("/loginError")

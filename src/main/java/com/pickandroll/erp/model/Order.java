@@ -1,19 +1,20 @@
 package com.pickandroll.erp.model;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import lombok.Data;
 
+/**
+ *
+ * @author Xavi
+ */
 @Data
 @Entity
-@Table(name = "vehicle")
-public class Vehicle implements Serializable {
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,14 +23,17 @@ public class Vehicle implements Serializable {
     private long id;
 
     @NotEmpty
-    private String name;
+    private int rentDays;
 
     @NotEmpty
-    private String type;
+    private String startDate;
 
     @NotEmpty
-    private String pricePerHour;
+    private boolean picked;
 
-    private String image;
+    @NotEmpty
+    private boolean returned;
 
+    @NotEmpty
+    private int user_id;
 }
