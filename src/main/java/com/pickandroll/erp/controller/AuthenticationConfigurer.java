@@ -27,7 +27,7 @@ public class AuthenticationConfigurer extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/modules", "/users", "/configModule").hasAuthority("admin")
-                .antMatchers("/", "/profile", "/cart", "/orders").hasAnyAuthority("admin", "customer")
+                .antMatchers("/", "/vehicles", "/profile", "/cart", "/orders").hasAnyAuthority("admin", "customer")
                 .and()
                 .formLogin()
                 .loginPage("/login")
