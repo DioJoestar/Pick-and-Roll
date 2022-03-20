@@ -7,10 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Data;
 
-/**
- *
- * @author santialves
- */
 @Data
 @Entity
 public class Module implements Serializable {

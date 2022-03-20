@@ -2,44 +2,47 @@
 <html>
     <head>
         <title>[[#{common.name}]] | Activar/Desactivar mòdul</title>
-    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+        <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
-<body>
+    <body>
 
-    <header th:replace="layouts/navbar :: navbar"/>
+        <header th:replace="layouts/navbar :: navbar"/>
 
-    <h2 class="mt-3 ms-4">Activar i desactivar mòduls</h2> 
-    <div th:fragment="item" class="container bcontent d-inline-flex p-2 ms-3">
-        <div class="double-element"  th:each="module : ${modules}">
-            <div class="card mb-3 mt-5 me-2" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <i th:class="${module.icon}"></i>
-                    </div>
+        <h2 class="mt-3 ms-4">Activar i desactivar mòduls</h2> 
+        <div th:fragment="item" class="d-inline-flex w-100 p-2">
+            
+            <div class="double-element w-25"  th:each="module : ${modules}">
+                <div class="card mb-3 mt-5 me-2 ms-2">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <i th:class="${module.icon}"></i>
+                        </div>
 
-                    <div class="col-sm-8">
+                        <div class="col-sm-8">
 
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold" th:text="${module.name}"></h5>
+                                <p class="card-text text-justify" th:text="${module.description}"></p>
 
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${module.name}"></h5>
-                            <p class="card-text text-justify" th:text="${module.description}"></p>
-                            <div class="form-check form-switch float-end" th:if="${module.enable == true}">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Desactivar</label>
-                            </div>
-                            <div class="form-check form-switch float-end" th:if="${module.enable == false}">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
+                                    <div class="form-check form-switch position-absolute bottom-0 start-0">
+                                        <input class="form-check-input greenSwitch" type="checkbox" th:checked="${module.enable}" disabled>
+                                        <div th:if="${module.enable == false}">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
+                                        </div>
+                                         <div th:if="${module.enable == true}">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Desactivar</label>
+                                        </div>
+                                    </div>
+                         
+                                <a class="btn btn-primary alt-color position-absolute bottom-0 end-0 me-1 mb-1" th:href="@{/editar/}+${module.id}" role="button">Editar</a>
+                                
                             </div>
                         </div>
 
-
                     </div>
-
-
                 </div>
             </div>
+            
         </div>
-    </div>
-</body>
+    </body>
 </html>

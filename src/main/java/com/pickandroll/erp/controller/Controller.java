@@ -16,7 +16,7 @@ public class Controller {
     @GetMapping("/")
     public String root(Model model) {
 
-        return "main";
+        return "vehicles";
     }
 
     @GetMapping("/loginError")
@@ -49,11 +49,4 @@ public class Controller {
 
         return "cart";
     }
-
-    @GetMapping("/orders")
-    public String orders(Model model) {
-
-        return "orders";
-    }
-
 }
