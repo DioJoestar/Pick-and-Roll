@@ -175,3 +175,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
 }
+
+.mhv-85 {
+    max-height: 85vh;
+}
