@@ -58,15 +58,13 @@ public class RegisterController {
 
         // Encriptamos la contraseña antes de guardarla        
         user.setPassword(u.encrypPasswd(user.getPassword()));
-
-        // Lo guardamos en la BBDD
         
-        Role defaultRole = roleDao.findByName("customer");
-        
-        System.out.println(defaultRole.getName());
-        
+        // Creamos un rol nuevo y se lo añadimos al nuevo usuario
+        Role defaultRole = roleDao.findByName("customer");        
+        System.out.println(defaultRole.getName());        
         user.addRole(defaultRole);
         
+        // Lo guardamos en la BBDD
         userService.addUser(user);
         
         return "redirect:/";

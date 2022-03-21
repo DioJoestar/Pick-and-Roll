@@ -22,10 +22,10 @@ public class UsersController {
 
     @Autowired
     private UserDAO userDao;
-    
+
     @Autowired
     private RoleService roleService;
-    
+
     @Autowired
     private UserService userService;
 
@@ -34,8 +34,7 @@ public class UsersController {
 
         List<User> users = userDao.findAll();
         model.addAttribute("users", users);
-        
-        model.addAttribute("user", new User());
+
         return "users";
     }
 
@@ -48,20 +47,38 @@ public class UsersController {
         user = userDao.findByEmail(user.getEmail());
 
         List<Role> listRoles = roleService.listRoles();
-        
+
         model.addAttribute("user", user);
         model.addAttribute("listRoles", listRoles);
         return "users";
     }
 
     @PostMapping("/saveData")
-    public String saveData(@Valid User user, Errors errors, RedirectAttributes msg) {
+    public String saveData(@Valid User user, Errors errors, Model model, RedirectAttributes msg) {
+        if (errors.hasErrors()) {
+            List<User> users = userDao.findAll();
+            model.addAttribute("users", users);
+            return "users";
+        }
 
-        // Hay que hacer toda la pesca de validación...
         Utils u = new Utils();
-        
+        // Email no valido
+        if (!u.checkDni(user.getDni())) {
+            msg.addFlashAttribute("error", u.alert("profile.error.dni"));
+            return "redirect:/users";
+        }
+
         // Lo guardamos en la BBDD
         userService.addUser(user);
+        msg.addFlashAttribute("success", u.alert("profile.success"));
+        return "redirect:/users";
+    }
+
+    @PostMapping("/deleteUser")
+    public String deleteUser(@Valid User user, Errors errors, RedirectAttributes msg) {
+        Utils u = new Utils();
+
+        userService.deleteUser(user);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/users";
     }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ import lombok.Data;
  */
 @Data
 @Entity
+@Table(name="product_order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
