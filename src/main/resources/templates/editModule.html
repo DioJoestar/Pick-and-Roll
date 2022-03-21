@@ -4,12 +4,11 @@
         <title>[[#{common.name}]] | Editar mòdul</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
-    <body>
+<body>
 
-        <header th:replace="layouts/navbar :: navbar"/>
-
-        <h2 class="mt-3 ms-4">Editar mòdul</h2> 
-
+    <header th:replace="layouts/navbar :: navbar"/>
+    <div class="container mt-4">
+        <h2 class=" ms-4">Editar mòdul</h2> 
         <div class="container rounded border p-3 bg-white">
             <form th:action="@{/guardarModul}" method="post" th:object="${module}">
 
@@ -35,12 +34,12 @@
                         <input type="checkbox" name="enable" th:field="*{enable}" class="form-check-input greenSwitch"/>
                     </div>
                 </div>
-                
+
                 <input class="btn btn-primary alt-color" type="submit" name="enviar" value="Enviar Dades"/>        
             </form>
         </div>
-
-    </body>
+    </div>
+</body>
 </html>
 
 

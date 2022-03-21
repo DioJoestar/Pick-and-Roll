@@ -9,8 +9,9 @@ import com.pickandroll.erp.model.Module;
 import com.pickandroll.erp.service.ModuleServiceInterface;
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Controller;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class ConfigModuleController {
 
     @Autowired

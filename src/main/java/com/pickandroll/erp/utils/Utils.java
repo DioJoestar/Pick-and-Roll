@@ -1,7 +1,6 @@
 package com.pickandroll.erp.utils;
 
 import java.util.Locale;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -42,6 +41,4 @@ public class Utils {
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource.getMessage(msgCode, null, Locale.ENGLISH);
     }
-    
-
 }
