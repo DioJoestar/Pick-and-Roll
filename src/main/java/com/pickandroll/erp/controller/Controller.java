@@ -32,12 +32,6 @@ public class Controller {
         return "redirect:/login";
     }
 
-    @GetMapping("/recoverPassword")
-    public String recoverPassword(Model model) {
-
-        return "recoverPassword";
-    }
-
     @GetMapping("/changePassword")
     public String changePassword(Model model) {
 

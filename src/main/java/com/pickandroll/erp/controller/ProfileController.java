@@ -55,7 +55,7 @@ public class ProfileController {
             msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
             return "redirect:/profile";
         }
-        
+
         // Encriptamos la contraseña antes de guardarla
         user.setPassword(u.encrypPasswd(user.getPassword()));
 
@@ -63,4 +63,5 @@ public class ProfileController {
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/profile";
     }
+
 }
