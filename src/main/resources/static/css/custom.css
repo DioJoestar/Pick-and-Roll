@@ -3,6 +3,7 @@
  */
 :root {
     --main-color: #92EB58;
+    --main-color-disabled: #b5f18e;
     --secondary-color: #9CD278;
     --hover-color: #96e331;
     --hover-color2: #cc0000;
@@ -87,6 +88,14 @@ h2 {
 .btn3:hover, .btn3:focus {
     background-color: var(--hover-color3);
     border-color:  var(--hover-color3);
+}
+
+.button-disabled {
+    background-color: var(--main-color-disabled);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--main-color-disabled);
 }
 
 .alt-color {
@@ -175,3 +184,4 @@ h2 {
   justify-content: space-between;
   align-items: center;
 }
+

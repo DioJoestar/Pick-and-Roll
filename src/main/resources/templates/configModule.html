@@ -23,10 +23,10 @@
                             <div class="form-check form-switch position-absolute bottom-0 start-0 m-2">
                                 <input class="form-check-input greenSwitch" type="checkbox" th:checked="${module.enable}" disabled>
                                 <div th:if="${module.enable == false}">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Activar</label>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Desactivat</label>
                                 </div>
                                 <div th:if="${module.enable == true}">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Desactivar</label>
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Activat</label>
                                 </div>
                             </div>
                             <a class="btn btn-primary alt-color position-absolute bottom-0 end-0 m-2" th:href="@{/editar/}+${module.id}" role="button">Editar</a>
