@@ -35,7 +35,6 @@ public class UsersController {
         List<User> users = userDao.findAll();
         model.addAttribute("users", users);
 
-        model.addAttribute("user", new User());
         return "users";
     }
 
@@ -55,8 +54,19 @@ public class UsersController {
     }
 
     @PostMapping("/saveData")
-    public String saveData(@Valid User user, Errors errors, RedirectAttributes msg) {
+    public String saveData(@Valid User user, Errors errors, Model model, RedirectAttributes msg) {
+        if (errors.hasErrors()) {
+            List<User> users = userDao.findAll();
+            model.addAttribute("users", users);
+            return "users";
+        }
+
         Utils u = new Utils();
+        // Email no valido
+        if (!u.checkDni(user.getDni())) {
+            msg.addFlashAttribute("error", u.alert("profile.error.dni"));
+            return "redirect:/users";
+        }
 
         // Lo guardamos en la BBDD
         userService.addUser(user);
@@ -67,7 +77,7 @@ public class UsersController {
     @PostMapping("/deleteUser")
     public String deleteUser(@Valid User user, Errors errors, RedirectAttributes msg) {
         Utils u = new Utils();
-        
+
         userService.deleteUser(user);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/users";

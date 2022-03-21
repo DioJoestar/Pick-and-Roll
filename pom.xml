@@ -96,6 +96,12 @@
             <artifactId>popper.js</artifactId>
             <version>1.16.1</version>
         </dependency>
+        <!-- Datatables -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>1.11.4</version>
+        </dependency>
     </dependencies>
 
     <build>
