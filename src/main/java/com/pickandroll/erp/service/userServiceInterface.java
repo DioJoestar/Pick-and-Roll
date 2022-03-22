@@ -13,4 +13,6 @@ public interface UserServiceInterface {
 
     public User findUser(User user);
 
+    public User findByResetPasswordToken(String token);
+
 }
