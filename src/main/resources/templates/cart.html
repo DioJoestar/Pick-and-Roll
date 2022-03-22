@@ -12,15 +12,12 @@
             <form method="POST" th:action="@{/login}">
                 <div class="container rounded border p-3 position-relative">
                     <div class="d-flex form-group p-1 mb-2">
-
                         <div>
                             <label>Preu unitats:</label>
                         </div>
                         <div class="ms-auto">
                             <label th:text="${preuUnitat}"></label>
                         </div>
-
-
                     </div>
                     <div class="d-flex form-group p-1 mb-2">
 
@@ -30,8 +27,6 @@
                         <div class="ms-auto">
                             <label th:text="${days}"></label>
                         </div>
-
-
                     </div>
                     <div class="d-flex form-group p-1 mb-2">
                         <div>
@@ -62,8 +57,6 @@
                     <div class="pe-2">
                         <label>Dies:</label>
                     </div>
-
-
                     <div class="d-flex rounded border">
                         <div class="rounded border">
                             <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/minus_day'|">-</button>
@@ -75,8 +68,6 @@
                             <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/plus_day'|">+</button>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="d-grid gap-2 pt-2">
                     <button type="submit" class="btn btn-primary">Finalitzar compra</button>
@@ -87,29 +78,31 @@
             <div class="d-flex flex-column bd-highlight mb-3">
                 <h2>Cistell</h2>
                 <div class="container rounded border pt-4 pe-3 ps-3 pb-0">
- 
-                            <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
 
-                                <div class="card w-50 float-left">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <img th:src="@{/img/rockriderst120.png}" height="150px" class="item-img float-right"/>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="card-body">
-                                                <div class="d-flex flex-row">
-                                                    <h5 class="card-title" th:text="${vehicle.name}"></h5>
-                                                </div>
-                                                <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
-                                                <hr class="m-1" />
-                                                <p class="card-text" th:text="${vehicle.description}"></p>
-                                                <a th:href="@{/}" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0"><i class="bi bi-s bi-cart-plus"></i><b th:text="${vehicle.price_per_hour}"></b><b> / dia</b></a>
+                    <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
+
+                        <div th:fragment="item" class="card" style="width: auto;">
+                            <div class="row no-gutters">
+                                <div class="col-sm-4">
+                                    <img th:src="@{/img/rockriderst120.png}" height="240" class="item-img float-right"/>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-row">
+                                            <h5 class="card-title" th:text="${vehicle.name}"></h5>
+                                            <div class="position-absolute end-0 me-4 pb-2">
+                                                <p th:text="${vehicle.price}+€"></p>
                                             </div>
                                         </div>
+                                        <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
+                                        <hr class="m-1" />
+                                        <p class="card-text" th:text="${vehicle.description}"></p>
+                                        <a th:onclick="|window.location.href='/removeVehicle/${vehicle.id}'|" href="#" class="btn btn-danger mb-2 m-3 position-absolute bottom-0 end-0"><b>El·liminar</b></a>                
                                     </div>
                                 </div>
                             </div>
- 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@ public class ConfigModuleController {
         return "redirect:/configModule";
     }
 
-     @GetMapping("/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String editar(Module module, Model model) {
 
         module = moduleService.findModule(module);

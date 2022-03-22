@@ -2,7 +2,9 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.VehicleDAO;
 import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.ModuleServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
+import com.pickandroll.erp.service.VehicleServiceInterface;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CartController {
-
+    
     private List<Vehicle> vehicles = new ArrayList<Vehicle>();
     private int days = 1;
     private double priceU = 0;
@@ -32,14 +34,13 @@ public class CartController {
             Vehicle e = new Vehicle();
             e.setName("aaa");
             e.setDescription("ddd");
-            e.setPrice_per_hour(10d);
+            e.setPrice(10d);
             e.setType("Bicicleta");
-            e.setImage("aaa");
 
             vehicles.add(e);
 
             for (int i = 0; i < vehicles.size(); i++) {
-                priceU += vehicles.get(i).getPrice_per_hour();
+                priceU += vehicles.get(i).getPrice();
             }
             first = false;
         }
@@ -72,4 +73,18 @@ public class CartController {
         days++;
         return "redirect:/cart";
     }
+    
+    @RequestMapping(value = "/removeVehicle/{id}")
+    public String removeVehicle(Vehicle v) {
+        
+        for(int i = 0;i<vehicles.size();i++){
+            Vehicle v2 = vehicles.get(i);
+            if(v2.getId() == v.getId()){
+                vehicles.remove(i);
+                priceU = 0;       
+            }
+        }        
+        return "redirect:/cart";
+    }
+    
 }
