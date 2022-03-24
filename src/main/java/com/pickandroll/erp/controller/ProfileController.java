@@ -2,7 +2,7 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.User;
-import com.pickandroll.erp.service.UserServiceInterface;
+import com.pickandroll.erp.temp.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
