@@ -24,7 +24,7 @@ public class Vehicle implements Serializable {
     @NotEmpty
     private String name;
 
-    @NotEmpty
+    //@NotEmpty
     private String type;
     
     @NotEmpty
@@ -32,5 +32,8 @@ public class Vehicle implements Serializable {
 
     @NotEmpty
     private Double price;
+    
+    //@NotEmpty
+    private String image_path;
 
 }
