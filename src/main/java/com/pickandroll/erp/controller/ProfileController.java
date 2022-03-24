@@ -1,6 +1,5 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;

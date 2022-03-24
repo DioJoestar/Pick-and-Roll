@@ -1,6 +1,5 @@
 package com.pickandroll.erp.model;
 
-import com.pickandroll.erp.utils.Utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
