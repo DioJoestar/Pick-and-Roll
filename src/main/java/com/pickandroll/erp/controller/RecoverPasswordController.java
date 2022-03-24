@@ -4,6 +4,7 @@ import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,24 +56,40 @@ public class RecoverPasswordController {
 
     @GetMapping("/changePassword")
     public String changePasswordForm(Model model, @RequestParam String token) {
-        User u = null;
+        User user = null;
 
         // Retorna un User a partir del token
-        u = userService.findByResetPasswordToken(token);
+        user = userService.findByResetPasswordToken(token);
 
         // Si el token está vacío o no encuentra el usuario mostraremos la página de error 400 (Bad request)
-        if (token.equals("") || token == null || u == null) {
+        if (token.equals("") || token == null || user == null) {
             return "error/400";
         }
 
+        model.addAttribute("user", user);
+        
         return "changePassword";
     }
 
     @PostMapping("/changePassword")
-    public String changePassword(Model model, @RequestParam String token) {
-
-
-        return "changePassword";
+    public String changePassword(User user, Errors errors, RedirectAttributes msg) {
+        User currUser = userService.findByEmail(user.getEmail());
+        
+        if (errors.hasErrors()) {
+            return "changePassword";
+        }
+        
+        Utils u = new Utils();
+        if (!user.getPassword().equals(user.getPasswordCheck())) {
+            msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
+            return "redirect:/changePassword?token=" + user.getResetPasswordToken();
+        }
+        
+        currUser.setPassword(u.encrypPasswd(user.getPassword()));
+        currUser.setResetPasswordToken(null);
+        userService.addUser(currUser);
+        
+        return "login";
     }
 
     public void sendMail(String to, String token) {
