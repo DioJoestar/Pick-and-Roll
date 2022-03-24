@@ -62,4 +62,16 @@ public class Controller {
 
         return "changePassword";
     }
+    
+    @GetMapping("/terms")
+    public String terms(Model model) {
+
+        return "terms";
+    }
+    
+    @GetMapping("/privacy")
+    public String privacy(Model model) {
+
+        return "privacy";
+    }
 }
