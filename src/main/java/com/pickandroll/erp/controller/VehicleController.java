@@ -1,6 +1,5 @@
-package com.pickandroll.erp.temp;
+package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.VehicleDAO;
 import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.Utils;
@@ -19,15 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class VehicleController {
 
     @Autowired
-    private VehicleDAO vehicleDao;
-
-    @Autowired
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
     public String users(Vehicle vehicle, Model model) {
 
-        List<Vehicle> vehicles = vehicleDao.findAll();
+        List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
@@ -35,10 +31,10 @@ public class VehicleController {
 
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
-        List<Vehicle> vehicles = vehicleDao.findAll();
+        List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
-        vehicle = vehicleDao.findByName(vehicle.getName());
+        vehicle = vehicleService.findbyName(vehicle.getName());
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
     }
@@ -48,7 +44,7 @@ public class VehicleController {
         Utils u = new Utils();
         
         if (errors.hasErrors()) {
-            List<Vehicle> vehicles = vehicleDao.findAll();
+            List<Vehicle> vehicles = vehicleService.listVehicles();
             model.addAttribute("vehicles", vehicles);
             return "vehicles";
         }

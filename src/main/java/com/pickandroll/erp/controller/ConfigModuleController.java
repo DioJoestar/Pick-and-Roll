@@ -13,9 +13,6 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class ConfigModuleController {
-
-    @Autowired
-    private ModuleDAO moduleDao;
     
     @Autowired
     private ModuleServiceInterface moduleService;
@@ -25,7 +22,7 @@ public class ConfigModuleController {
     @GetMapping("/configModule")
     public String modules(Model model) {
 
-        modules = moduleDao.findAll();
+        modules = moduleService.listModules();
 
         model.addAttribute("modules", modules);
 
