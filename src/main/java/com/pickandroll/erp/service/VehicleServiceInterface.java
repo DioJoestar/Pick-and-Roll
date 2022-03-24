@@ -15,6 +15,6 @@ public interface VehicleServiceInterface {
 
     public void deleteVehicle(Vehicle vehicle);
 
-    public Vehicle findVehicle(Vehicle vehicle);
+    public Vehicle findbyName(String name);
 
 }

@@ -3,6 +3,7 @@ package com.pickandroll.erp.service;
 import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.Role;
 import com.pickandroll.erp.model.User;
+import com.pickandroll.erp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,30 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     }
 
     @Transactional(readOnly = true)
-    public User findUser(User user) {
-        return this.userDAO.findByEmail(user.getEmail());
+    public User findByEmail(String email) {
+        return this.userDAO.findByEmail(email);
+    }
+
+    public void updateResetPasswordToken(String token, String email) {
+        User user = userDAO.findByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userDAO.save(user);
+        } else {
+            System.out.println("Could not find any customer with the email " + email);
+        }
+    }
+
+    public User findByResetPasswordToken(String token) {
+        return userDAO.findByResetPasswordToken(token);
+    }
+
+    public void updatePassword(User user, String newPassword) {
+        Utils u = new Utils();
+        String encodedPassword = u.encrypPasswd(newPassword);
+        user.setPassword(encodedPassword);
+
+        user.setResetPasswordToken(null);
+        userDAO.save(user);
     }
 }

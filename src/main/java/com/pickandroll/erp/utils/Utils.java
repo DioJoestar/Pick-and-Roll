@@ -1,6 +1,7 @@
 package com.pickandroll.erp.utils;
 
 import java.util.Locale;
+import java.util.Random;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -40,5 +41,23 @@ public class Utils {
         messageSource.setBasenames("classpath:/messages"); // src/main/resources
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource.getMessage(msgCode, null, Locale.ENGLISH);
+    }
+
+    // Genera un token de 30 caracteres
+    public String genToken() {
+        String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lower = upper.toLowerCase();
+        String nums = "1234567890";
+
+        char[] alphanum = (upper + lower + nums).toCharArray();
+
+        String token = "";
+        Random random = new Random();
+        
+        for (int i = 0; i < 30; i++) {
+            token += alphanum[random.nextInt(alphanum.length)];
+        }
+        
+        return token;
     }
 }

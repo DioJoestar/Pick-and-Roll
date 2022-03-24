@@ -1,4 +1,4 @@
-package com.pickandroll.erp.Controller;
+package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.OrderDAO;
 import com.pickandroll.erp.model.Order;
@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class OrderController {
 
     @Autowired
-    private OrderDAO orderDao;
-
-    @Autowired
     private OrderService orderService;
 
     List<Order> orders = new ArrayList<>();
@@ -29,7 +26,7 @@ public class OrderController {
     @GetMapping("/orders")
     public String orders(Model model) {
 
-        orders = orderDao.findAll();
+        orders = orderService.listOrders();
         model.addAttribute("orders", orders);
 
         return "orders";

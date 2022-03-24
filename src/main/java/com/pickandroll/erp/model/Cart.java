@@ -14,10 +14,11 @@ import lombok.Data;
 public class Cart {
 
     private double priceU = 0;
-    private double subPrice = 0;
+    private String subPrice = "";
     private double IVA = 21;
     private double totalPrice = 0;
     private int days = 1;
+    NumberFormat formatter = new DecimalFormat("#0.00");
 
     public void setPriceU(List<Vehicle> vehicles) {
         double priceU = 0;
@@ -31,10 +32,10 @@ public class Cart {
     public void setSubPrice() {
 
         double subPrice = 0;
-
         subPrice = (priceU * days) * (1d - (IVA / 100));
 
-        this.subPrice = subPrice;
+        
+        this.subPrice = String.format("%.2f", subPrice);
     }
 
     public void setTotalPrice() {

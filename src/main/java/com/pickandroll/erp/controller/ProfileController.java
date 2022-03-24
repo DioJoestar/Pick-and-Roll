@@ -1,6 +1,5 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;
@@ -19,9 +18,6 @@ import org.springframework.stereotype.Controller;
 public class ProfileController {
 
     @Autowired
-    private UserDAO userDao;
-
-    @Autowired
     private UserServiceInterface userService;
 
     @GetMapping("/profile")
@@ -30,7 +26,7 @@ public class ProfileController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
         // Crear el objeto User a partir del email (username) de la sesión actual
-        User currUser = userDao.findByEmail(userDetails.getUsername());
+        User currUser = userService.findByEmail(userDetails.getUsername());
 
         model.addAttribute("user", currUser);
 
@@ -55,7 +51,7 @@ public class ProfileController {
             msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
             return "redirect:/profile";
         }
-        
+
         // Encriptamos la contraseña antes de guardarla
         user.setPassword(u.encrypPasswd(user.getPassword()));
 
@@ -63,4 +59,5 @@ public class ProfileController {
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/profile";
     }
+
 }

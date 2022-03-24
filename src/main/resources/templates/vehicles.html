@@ -117,7 +117,7 @@
                                     <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
                                     <hr class="m-1" />
                                     <p class="card-text" th:text="${vehicle.description}"></p>
-                                    <a href="#" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
+                                    <a th:onclick="|window.location.href='/addVehicle/${vehicle.id}'|" href="#" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                     <a sec:authorize="hasAuthority('admin')" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0 button-disabled" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                 </div>
                             </div>
