@@ -21,9 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsersController {
 
     @Autowired
-    private UserDAO userDao;
-
-    @Autowired
     private RoleService roleService;
 
     @Autowired
@@ -32,7 +29,7 @@ public class UsersController {
     @GetMapping("/users")
     public String users(User user, Model model) {
 
-        List<User> users = userDao.findAll();
+        List<User> users = userService.listUsers();
         model.addAttribute("users", users);
 
         return "users";
@@ -40,11 +37,11 @@ public class UsersController {
 
     @PostMapping("/editUser")
     public String editUser(@ModelAttribute User user, Model model) {
-        List<User> users = userDao.findAll();
+        List<User> users = userService.listUsers();
         model.addAttribute("users", users);
 
         // Sobreescribimos el usuario para recuperar los roles
-        user = userDao.findByEmail(user.getEmail());
+        user = userService.findByEmail(user.getEmail());
 
         List<Role> listRoles = roleService.listRoles();
 
@@ -56,7 +53,7 @@ public class UsersController {
     @PostMapping("/saveData")
     public String saveData(@Valid User user, Errors errors, Model model, RedirectAttributes msg) {
         if (errors.hasErrors()) {
-            List<User> users = userDao.findAll();
+            List<User> users = userService.listUsers();
             model.addAttribute("users", users);
             return "users";
         }

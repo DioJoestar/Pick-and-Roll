@@ -19,9 +19,6 @@ import org.springframework.stereotype.Controller;
 public class ProfileController {
 
     @Autowired
-    private UserDAO userDao;
-
-    @Autowired
     private UserServiceInterface userService;
 
     @GetMapping("/profile")
@@ -30,7 +27,7 @@ public class ProfileController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
         // Crear el objeto User a partir del email (username) de la sesión actual
-        User currUser = userDao.findByEmail(userDetails.getUsername());
+        User currUser = userService.findByEmail(userDetails.getUsername());
 
         model.addAttribute("user", currUser);
 
