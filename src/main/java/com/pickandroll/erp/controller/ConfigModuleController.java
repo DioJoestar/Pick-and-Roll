@@ -20,7 +20,7 @@ public class ConfigModuleController {
     @Autowired
     private ModuleServiceInterface moduleService;
 
-    List<Module> modules = new ArrayList<Module>();
+    List<Module> modules = new ArrayList<>();
     
     @GetMapping("/configModule")
     public String modules(Model model) {
