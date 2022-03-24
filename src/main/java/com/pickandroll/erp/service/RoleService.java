@@ -34,7 +34,7 @@ public class RoleService implements RoleServiceInterface {
 
     @Override
     @Transactional(readOnly = true)
-    public Role findRole(Role role) {
-        return this.roleDao.findById(role.getId()).orElse(null);
+    public Role findByName(String name) {
+        return this.roleDao.findByName(name);
     }
 }

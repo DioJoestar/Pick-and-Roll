@@ -11,6 +11,6 @@ public interface RoleServiceInterface {
 
     public void deleteRole(Role role);
 
-    public Role findRole(Role role);
+    public Role findByName(String name);
 
 }

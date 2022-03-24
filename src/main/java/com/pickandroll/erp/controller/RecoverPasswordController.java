@@ -2,6 +2,7 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.User;
+import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class RecoverPasswordController {
     private JavaMailSender javaMailSender;
 
     @Autowired
-    private UserDAO userDao;
+    private UserServiceInterface userService;
 
     @GetMapping("/recoverPassword")
     public String recoverPassword(Model model) {
@@ -34,7 +35,7 @@ public class RecoverPasswordController {
     @PostMapping("/recoverPassword")
     public String emailSent(Model model, @RequestParam String email, RedirectAttributes msg) {
         Utils u = new Utils();
-        User user = userDao.findByEmail(email);
+        User user = userService.findByEmail(email);
 
         msg.addFlashAttribute("info", u.alert("recover.info.emailSent"));
         // Email not found
@@ -44,18 +45,30 @@ public class RecoverPasswordController {
 
         // Guardar el token al usuari
         user.setResetPasswordToken(u.genToken());
-        userDao.save(user);
+        //userDao.save(user);
+        userService.addUser(user);
         sendMail(user.getEmail(), user.getResetPasswordToken());
         return "redirect:/recoverPassword";
     }
 
     @GetMapping("/changePassword")
-    public String changePassword(Model model, @RequestParam String token) {
-        
-        // Si el token está vacío mostraremos la página de error 400 (Bad request)
-        if (token.equals("") || token == null) {
+    public String changePasswordForm(Model model, @RequestParam String token) {
+        User u = null;
+
+        // Retorna un User a partir del token
+        u = userService.findByResetPasswordToken(token);
+
+        // Si el token está vacío o no encuentra el usuario mostraremos la página de error 400 (Bad request)
+        if (token.equals("") || token == null || u == null) {
             return "error/400";
         }
+
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(Model model, @RequestParam String token) {
+
 
         return "changePassword";
     }

@@ -57,8 +57,8 @@ public class UserService implements UserDetailsService, UserServiceInterface {
     }
 
     @Transactional(readOnly = true)
-    public User findUser(User user) {
-        return this.userDAO.findByEmail(user.getEmail());
+    public User findByEmail(String email) {
+        return this.userDAO.findByEmail(email);
     }
 
     public void updateResetPasswordToken(String token, String email) {

@@ -11,7 +11,7 @@ public interface UserServiceInterface {
 
     public void deleteUser(User user);
 
-    public User findUser(User user);
+    public User findByEmail(String email);
 
     public User findByResetPasswordToken(String token);
 
