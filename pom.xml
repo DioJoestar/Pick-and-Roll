@@ -91,6 +91,22 @@
             <artifactId>bootstrap-icons</artifactId>
             <version>1.8.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>popper.js</artifactId>
+            <version>1.16.1</version>
+        </dependency>
+        <!-- Datatables -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>1.11.4</version>
+        </dependency>
+        <!-- Email sender -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

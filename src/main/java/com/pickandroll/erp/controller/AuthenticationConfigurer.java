@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,11 +27,18 @@ public class AuthenticationConfigurer extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/modules", "/users", "/configModule").hasAuthority("admin")
-                .antMatchers("/", "/profile", "/cart", "/orders").hasAnyAuthority("admin", "customer")
+                .antMatchers("/vehicles", "/profile", "/cart", "/orders").hasAnyAuthority("admin", "customer")
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .failureUrl("/loginError")
                 .usernameParameter("email")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true) // set invalidation state when logout
+                .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403");
     }

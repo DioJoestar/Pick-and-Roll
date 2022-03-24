@@ -2,11 +2,13 @@
 <html>
     <head>
         <title>[[#{common.name}]] | ERROR 404 - Pàgina no trobada</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <h1>ERROR 404</h1>
-        <div>Pàgina no trobada</div>
-    </body>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">ERROR 404</h1>
+        <p class="text-center">Pàgina no trobada</p>
+        <img class="mx-auto d-block" th:src="@{/img/404.gif}" />
+    </div>
+</body>
 </html>
