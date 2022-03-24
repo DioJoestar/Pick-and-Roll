@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface VehicleDAO extends JpaRepository<Vehicle, Long> {
 
-    //Vehicle findByName(String name);
+    Vehicle findByName(String name);
 }

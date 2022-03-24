@@ -1,13 +1,14 @@
 <header th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="nav-link" href="/"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
+        <a sec:authorize="hasAuthority('admin')" class="nav-link" href="/modules"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
+        <a sec:authorize="hasAuthority('customer')" class="nav-link" href="/vehicles"><img class="logoNavigationbar m-1" th:src="@{/img/logo_h.png}" /></a>
         <div class="flex-row-reverse collapse navbar-collapse me-5" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
-                    <a th:classappend="${(#request.getServletPath() == '/modules' ? 'active' : '' + (#request.getServletPath() == '/modules' ? 'active' : ''))}" class="nav-link" href="/modules"><i class="bi bi-grid me-2 fw-bold"></i>Mòduls</a>
+                    <a th:classappend="${(#request.getServletPath() == '/modules' ? 'active' : '' + (#request.getServletPath() == '/modules' ? 'active' : ''))}" class="nav-link" href="/modules"><i class="bi bi-grid-fill me-2 fw-bold"></i>Mòduls</a>
                 </li>             
                 <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
-                    <a th:classappend="${(#request.getServletPath() == '/configModule' ? 'active' : '' + (#request.getServletPath() == '/configModule' ? 'active' : ''))}" class="nav-link" href="/configModule"><i class="bi bi-gear me-2 fw-bold"></i>Configuració</a>
+                    <a th:classappend="${(#request.getServletPath() == '/configModule' ? 'active' : '' + (#request.getServletPath() == '/configModule' ? 'active' : ''))}" class="nav-link" href="/configModule"><i class="bi bi-gear-fill me-2 fw-bold"></i>Configuració</a>
                 </li>
                 <li class="nav-item me-5">
                     <a th:classappend="${#request.getServletPath() == '/vehicles' ? 'active' : ''}" class="nav-link" href="/vehicles"><i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
@@ -23,7 +24,6 @@
                 <li sec:authorize="hasAuthority('admin')" class="nav-item me-5">
                     <a th:classappend="${(#request.getServletPath() == '/users' ? 'active' : '' + (#request.getServletPath() == '/editUser' ? 'active' : ''))}" class="nav-link" href="/users"><i class="bi bi-person-lines-fill me-2 fw-bold"></i>Usuaris</a>
                 </li>
-
                 <li class="nav-item me-5">
                     <a th:classappend="${#request.getServletPath() == '/profile' ? 'active' : ''}" class="nav-link" href="/profile"><i class="bi bi-person-circle me-2 fw-bold"></i>El meu compte</a>
                 </li>
@@ -31,4 +31,3 @@
         </div>
     </nav>
 </header>
-

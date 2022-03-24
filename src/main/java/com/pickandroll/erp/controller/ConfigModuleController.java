@@ -9,8 +9,9 @@ import com.pickandroll.erp.model.Module;
 import com.pickandroll.erp.service.ModuleServiceInterface;
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Controller;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class ConfigModuleController {
 
     @Autowired
@@ -19,7 +20,7 @@ public class ConfigModuleController {
     @Autowired
     private ModuleServiceInterface moduleService;
 
-    List<Module> modules = new ArrayList<Module>();
+    List<Module> modules = new ArrayList<>();
     
     @GetMapping("/configModule")
     public String modules(Model model) {
@@ -39,7 +40,7 @@ public class ConfigModuleController {
         return "redirect:/configModule";
     }
 
-     @GetMapping("/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String editar(Module module, Model model) {
 
         module = moduleService.findModule(module);

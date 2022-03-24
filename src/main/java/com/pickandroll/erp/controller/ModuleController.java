@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.pickandroll.erp.model.Module;
+import org.springframework.stereotype.Controller;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class ModuleController {
 
     @Autowired
@@ -22,5 +23,4 @@ public class ModuleController {
         
         return "modules";
     }
-
 }

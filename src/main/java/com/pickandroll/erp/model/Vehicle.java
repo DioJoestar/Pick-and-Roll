@@ -24,12 +24,16 @@ public class Vehicle implements Serializable {
     @NotEmpty
     private String name;
 
-    @NotEmpty
+    //@NotEmpty
     private String type;
+    
+    @NotEmpty
+    private String description;
 
     @NotEmpty
-    private String pricePerHour;
-
-    private String image;
+    private Double price;
+    
+    //@NotEmpty
+    private String image_path;
 
 }

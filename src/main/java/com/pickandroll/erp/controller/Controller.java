@@ -1,22 +1,41 @@
 package com.pickandroll.erp.controller;
 
+import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.ModuleServiceInterface;
 import com.pickandroll.erp.utils.Utils;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @org.springframework.stereotype.Controller
 public class Controller {
 
+    @Autowired
+    private ModuleServiceInterface moduleService;
+
+    private List<Vehicle> vehicles;
+    
     // Raiz
     @GetMapping("/")
     public String root(Model model) {
 
-        return "vehicles";
+        return "profile";
+    }
+
+    @PostMapping("/{id}")
+    public String addVehicle(Model model, Vehicle vechicle) {
+
+        vehicles.add(vechicle);
+
+        return "main";
     }
 
     @GetMapping("/loginError")
@@ -30,6 +49,17 @@ public class Controller {
             }
         }
         return "redirect:/login";
+    }
+    
+    @GetMapping("/terms")
+    public String terms(Model model) {
+
+        return "terms";
+    }
+    
+    @GetMapping("/privacy")
+    public String privacy(Model model) {
+        return "privacy";
     }
 
     @GetMapping("/cart")
