@@ -19,7 +19,7 @@
                                 <label>Preu unitats:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.priceU}"></label>
+                                <label th:text="${cart.priceU} + €"></label>
                             </div>
                         </div>
                         <div class="d-flex form-group p-1 mb-2">
@@ -36,7 +36,7 @@
                                 <label>Subtotal:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.subPrice}"></label>
+                                <label th:text="${cart.subPrice} + €"></label>
                             </div>
                         </div>
                         <div class="d-flex form-group p-1 mb-2">
@@ -52,7 +52,7 @@
                                 <label>Preu total:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.totalPrice}"></label>
+                                <label th:text="${cart.totalPrice} + €"></label>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <div th:fragment="item" class="card" style="width: auto;">
                                 <div class="row no-gutters">
                                     <div class="col-sm-4">
-                                        <img th:src="@{/img/rockriderst120.png}" height="240" class="item-img float-right"/>
+                                        <img th:src="@{${vehicle.image_path}}" height="240" class="item-img float-right"/>
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="card-body">
