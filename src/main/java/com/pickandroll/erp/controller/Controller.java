@@ -50,18 +50,6 @@ public class Controller {
         }
         return "redirect:/login";
     }
-
-    @GetMapping("/recoverPassword")
-    public String recoverPassword(Model model) {
-
-        return "recoverPassword";
-    }
-
-    @GetMapping("/changePassword")
-    public String changePassword(Model model) {
-
-        return "changePassword";
-    }
     
     @GetMapping("/terms")
     public String terms(Model model) {
@@ -71,7 +59,12 @@ public class Controller {
     
     @GetMapping("/privacy")
     public String privacy(Model model) {
-
         return "privacy";
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model) {
+
+        return "cart";
     }
 }
