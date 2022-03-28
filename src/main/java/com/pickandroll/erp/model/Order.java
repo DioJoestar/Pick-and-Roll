@@ -30,10 +30,10 @@ public class Order implements Serializable {
     private long id;
 
     @NotEmpty
-    private int rentDays;
+    private int rent_days;
 
     @NotEmpty
-    private String startDate;
+    private String start_date;
 
     @NotEmpty
     private boolean picked;

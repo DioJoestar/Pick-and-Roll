@@ -15,7 +15,7 @@ public class Cart {
 
     private double priceU = 0;
     private double subPrice = 0;
-    private double IVA = 21;
+    private int IVA = 21;
     private double totalPrice = 0;
     private int days = 1;
 
@@ -32,7 +32,7 @@ public class Cart {
 
         double subPrice = 0;
 
-        subPrice = (priceU * days) * (1d - (IVA / 100));
+        subPrice = (priceU * days) * (1d - ( ((double)IVA) / 100));
 
         this.subPrice = subPrice;
     }

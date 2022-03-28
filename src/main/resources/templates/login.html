@@ -5,11 +5,15 @@
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
 <body class="background">
-    <div class="vertical-center">
-        <div class="container login">
+    <div class="vertical-center d-flex flex-column justify-content-center">
+        <div>
             <img class="logo" th:src="@{/img/logo_h.png}" />
-            <h2>Iniciar sessió</h2>
-            <div class="container rounded border p-3 bg-white">
+        </div>
+        <div class="container login">
+            <div class="flex-fill">
+                <h2>Iniciar sessió</h2>
+            </div>
+            <div class="container flex-fill rounded border p-3 bg-white">
                 <form method="POST" th:action="@{/login}">
                     <div class="form-group p-1 mb-2">
                         <label class="mb-2" for="email">Correu Electrònic</label>
@@ -35,5 +39,6 @@
             </div>
         </div>
     </div>
+    <div th:replace="layouts/footer :: footer"></div>
 </body>
 </html>
