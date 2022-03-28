@@ -35,8 +35,9 @@
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Tipus</label>
 
+                            
+                            
                             <select class="form-select" aria-label="Default select example" th:field="*{type}">
-
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'bicicleta'" th:remove="tag">
                                     <option th:value="Bicicleta" selected>Bicicleta</option>
                                 </div>
@@ -49,12 +50,12 @@
                                     <option th:value="patinet" selected>Patinet</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="null" selected>Selecciona</option>
                                     <option th:value="patinet">Patinet</option>
                                 </div>
-
                             </select>
 
+                            
+                            
                         </div>
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Preu</label>
