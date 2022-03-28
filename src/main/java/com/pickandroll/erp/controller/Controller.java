@@ -15,6 +15,7 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
@@ -39,10 +40,11 @@ public class Controller {
         return "login";
     }
 
-    @PostMapping("/{id}")
-    public String addVehicle(Model model, Vehicle vechicle) {
+    @PostMapping("/")
+    public String addVehicle(Model model, Vehicle vechicle, @RequestParam long token) {
 
-        vehicles.add(vechicle);
+        Vehicle v = vehicleService.findById(token);
+        vehicles.add(v);
 
         return "main";
     }

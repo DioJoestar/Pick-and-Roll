@@ -24,7 +24,7 @@ public class Vehicle implements Serializable {
     @NotEmpty
     private String name;
 
-    //@NotEmpty
+    @NotEmpty
     private String type;
     
     @NotEmpty
