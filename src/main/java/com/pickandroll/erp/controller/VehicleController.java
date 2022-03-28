@@ -54,7 +54,7 @@ public class VehicleController {
     }
 
     @PostMapping("/saveVehicle")
-    public String saveData(@Valid Vehicle vehicle, Errors errors, Model model, RedirectAttributes msg, @RequestParam("image_path") MultipartFile multipartFile) throws IOException {
+    public String saveData(@Valid Vehicle vehicle, Errors errors, Model model, RedirectAttributes msg, @RequestParam("image_path") MultipartFile multipartFile) throws IOException, InterruptedException {
         Utils u = new Utils();
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -72,6 +72,8 @@ public class VehicleController {
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
          
         msg.addFlashAttribute("success", u.alert("profile.success"));
+        
+        Thread.sleep(3000);
         return "redirect:/vehicles";
     }
 

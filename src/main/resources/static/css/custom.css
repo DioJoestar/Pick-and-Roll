@@ -273,3 +273,7 @@ table.dataTable.no-footer {
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     background: var(--secondary-color) !IMPORTANT;
 }
+
+.img-thumbnail{
+    border: 0px solid #555;
+} 
