@@ -30,7 +30,7 @@ public class Vehicle implements Serializable {
     @NotEmpty
     private String description;
 
-    @NotEmpty
+    //@NotEmpty
     private Double price;
     
     //@NotEmpty

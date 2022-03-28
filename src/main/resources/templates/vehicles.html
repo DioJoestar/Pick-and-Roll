@@ -12,7 +12,7 @@
 
 
 
-            <form action="#" method="post" th:action="@{/saveVehicle}" th:object="${vehicle}" class="getInfo">
+            <form action="#" method="post" th:action="@{/saveVehicle}" th:object="${vehicle}" class="getInfo" enctype="multipart/form-data">
                 <input type="hidden" id="id" th:field="*{id}" value="0"/>
 
                 <!-- Messages -->
@@ -29,17 +29,16 @@
                 <div class="container rounded border p-3 position-relative">
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Nom</label>
-                        <input type="text" id="name" class="form-control" th:field="*{name}" name="name">
+                        <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
                     </div>
                     <div class="d-flex flex-row">
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Tipus</label>
 
-                            
-                            
-                            <select class="form-select" aria-label="Default select example" th:field="*{type}">
+                            <select class="form-select" th:field="*{type}">
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'bicicleta'" th:remove="tag">
-                                    <option th:value="Bicicleta" selected>Bicicleta</option>
+                                    <option th:value="bicicleta" selected>Bicicleta</option>
+                                    <option th:value="patinet">Patinet</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
                                     <option th:value="null" selected>Selecciona</option>
@@ -48,14 +47,15 @@
 
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'patinet'" th:remove="tag">
                                     <option th:value="patinet" selected>Patinet</option>
+                                    <option th:value="bicicleta">Bicicleta</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
                                     <option th:value="patinet">Patinet</option>
                                 </div>
                             </select>
 
-                            
-                            
+
+
                         </div>
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Preu</label>
@@ -68,8 +68,7 @@
                     </div>
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="customFile">Imatge</label>
-                        <input type="text" id="image_path" class="form-control" th:field="*{image_path}" name="image_path">
-                        <!--<input type="file" class="form-control" id="image_path" th:field="*{image_path}" name="image_path" />-->
+                        <input type="file" class="form-control" id="image_path" th:field="*{image_path}" name="image_path" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
                 <div class="d-grid gap-2 pt-2">
@@ -82,7 +81,7 @@
                 </div>
             </form>
 
-
+            </script>
 
         </div>
         <div class="container pt-4 bg-white w-75">
