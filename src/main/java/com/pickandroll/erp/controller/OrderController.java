@@ -35,7 +35,7 @@ public class OrderController {
         List<Order> orders = orderService.listOrders();
         model.addAttribute("orders", orders);
 
-        //order = orderService.findOrder(order.getId());
+        order = orderService.findOrder(order.getId());
         model.addAttribute("order", order);
         return "orders";
     }
