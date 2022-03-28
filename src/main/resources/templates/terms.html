@@ -1,58 +1,116 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Condicions d'ús</title>
-    </head>
-    <body>
-        <div>
-            <h1>Termes del servei</h1>
-        </div>
-        <div>
-            <h2>Acord d'usuari i termes del servei</h2>
-            <p>Aquest contracte estableix els termes i condicions d'ús legalment vinculants la utilització dels serveis proporcionats per Pick & Roll. 
-                El propòsit del contracte és regular els Serveis prestats per Pick & Roll, que es basen en la posada a la teva disposició de patinets 
-                i/o bicicletes una vegada t'hagis registrat a la pàgina web de Pick & Roll.</p>
-        </div>
-        <div>
-            <h2>1. General</h2>
-        </div>
-        <div>
-            <h3>1.1 Parts del contracte</h3>
-            <p>Vostè i Pick & Roll són les úniques parts del contracte. Vostè és l'únic usuari dels serveis i no ha de permetre que altres utilitzin els vehicles llogats.</p>
-        </div>
-        <div>
-            <h3>1.2 Registre de compte</h3>
-            <p>Per poder utilitzar els serveis, heu de registrar un compte a la pàgina web Pick & Roll. Heu de seguir les instruccions donades durant el procediment de registre
-                i proporcionar informació correcta. Si no us registreu correctament, no heu d'utilitzar els serveis. Només podreu registrar un compte per a vostè i només
-                podreu fer un registre. Si teniu coneixement del risc que una altra persona utilitzi El vostre registre o el pugui utilitzar, per exemple, perquè us hagin
-                robat l'ordinador o el dispositiu
-                mòbil amb què podeu accedir al Vehicle, haureu d'informar a Voi el més aviat possible de conformitat amb la secció 8 .Si permet que un tercer utilitzi
-                El seu registre o un Vehicle,</p>
-        </div>
-        <div>
-            <h3>1.3 Serveis de Pick & Roll</h3>
-            <p>Pick & Roll us proporcionarà l'oportunitat d'utilitzar la pàgina web per llogar vehicles. Donat el nombre limitat de vehicles que operen, 
-                Pick & Roll no promet ni garanteix que sempre trobareu vehicle disponible per a vostè.</p>
-        </div>
-        <div>
-            <h3>1.3 Serveis de Pick & Roll</h3>
-            <p>Pick & Roll us proporcionarà l'oportunitat d'utilitzar la pàgina web per llogar vehicles. Donat el nombre limitat de vehicles que operen, 
-                Pick & Roll no promet ni garanteix que sempre trobareu vehicle disponible per a vostè.</p>
-        </div>
-        <div>
-            <h3>1.4 Les seves responsabilitats i requisits per a l'ús dels serveis</h3>
-            <p>Heu de tenir almenys 18 anys d'edat per utilitzar els Serveis. El maneig o ús de qualsevol vehicle per part d'un menor està expressament prohibit. 
-                Si permeteu que un menor utilitzi un vehicle, per exemple, activant-lo a través del vostre compte, vostè serà responsable de tot ús i/o mal ús.</p>
-        </div>
-        <div>
-            <h3>1.4 Les seves responsabilitats i requisits per a l'ús dels serveis</h3>
-            <p>Heu de tenir almenys 18 anys d'edat per utilitzar els Serveis. El maneig o ús de qualsevol vehicle per part d'un menor està expressament prohibit. 
-                Si permeteu que un menor utilitzi un vehicle, per exemple, activant-lo a través del vostre compte, vostè serà responsable de tot ús i/o mal ús.</p>
-        </div>
-        <div>
-            <h3>1.5 Vehicle perdut o robat</h3>
-            <p>Heu de tenir almenys 18 anys d'edat per utilitzar els Serveis. El maneig o ús de qualsevol vehicle per part d'un menor està expressament prohibit. 
-                Si permeteu que un menor utilitzi un vehicle, per exemple, activant-lo a través del vostre compte, vostè serà responsable de tot ús i/o mal ús.</p>
-        </div>
-    </body>
+        <title>[[#{common.name}]] | Condicions d'ús</title>
+    <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
+</head>
+<body class="background">
+    <div class="container mt-5">
+        <a class="nav-link auto" href="/login"><img class="logoNavigationbar ms-0" th:src="@{/img/logo_h.png}"/></a>
+        <h2>Termes del servei</h2>
+    </div>
+    <div class="bottom-0 m-3 position-fixed end-0"><a href="#"><i class="bi bi-chevron-double-up"></i></a></div>
+    <div class="container flex-fill rounded border p-3 bg-white mb-5">
+        <h4 class="mt-4">Acord d'usuari i termes del servei</h4>
+        <p>Aquest contracte estableix els termes i condicions d'ús legalment vinculants la utilització dels serveis
+            proporcionats per Pick & Roll. El propòsit del contracte és regular els Serveis prestats per Pick & Roll,
+            que es basen en la posada a la teva disposició de patinetsi/o bicicletes una vegada t'hagis registrat 
+            a la pàgina web de Pick & Roll.</p>
+        <h4 class="mt-4">1. General</h4>
+        <h5 class="mt-3">1.1 Parts del contracte</h5>
+        <p>Vostè i Pick & Roll són les úniques parts del contracte. Vostè és l'únic usuari dels serveis i no ha de
+            permetre que altres utilitzin els vehicles llogats.</p>
+        <h5 class="mt-5">1.2 Registre de compte</h5>
+        <p>Per poder utilitzar els serveis, heu de registrar un compte a la pàgina web Pick & Roll. Heu de seguir
+            les instruccions donades durant el procediment de registre i proporcionar informació correcta. Si no 
+            us registreu correctament, no heu d'utilitzar els serveis. Només podreu registrar un compte per a vostè 
+            i només podreu fer un registre.</p>
+        <h5 class="mt-5">1.3 serveis de Pick & Roll</h5>
+        <p>Pick & Roll us proporcionarà l'oportunitat d'utilitzar la pàgina web per llogar vehicles. Donat el nombre
+            limitat de vehicles que operen, Pick & Roll no promet ni garanteix que sempre trobareu vehicle disponible
+            per a vostè.</p>
+        <h5 class="mt-5">1.4 Les seves responsabilitats i requisits per a l'ús dels serveis</h5>
+        <p>Heu de tenir almenys 18 anys d'edat per utilitzar els serveis. El maneig o ús de qualsevol vehicle per part
+            d'un menor està expressament prohibit. Si permeteu que un menor utilitzi un vehicle, per exemple, 
+            activant-lo a través del vostre compte, vostè serà responsable de tot ús i/o mal ús.</p>
+        <h5 class="mt-5">1.5 vehicle perdut o robat</h5>
+        <p>Pick & Roll té dret a cobrar 25 EUR en cas que el vehicle es consideri abandonat, és a dir, que s'hagi superat
+            el període màxim de lloguer. Aquest import representa els nostres costos, pèrdues i despeses estimades
+            per recuperar el vehicle.</p>
+        <p>Si Pick & Roll considera raonablement que un vehicle s'ha perdut o ha estat robat, Pick & Roll estarà
+            facultada per emprendre totes les accions necessàries per recuperar el vehicle o, si això és impossible,
+            per rebre una compensació per la pèrdua del vehicle. Això inclou, sense limitació, involucrar la policia
+            local, requerir informació a vostè o, si vostè és culpable de la pèrdua, fer-li responsable dels danys
+            incorreguts a causa de la pèrdua.</p>
+        <h5 class="mt-5">1.6 Accidents i altres incidents</h5>
+        <p>Heu d'informar a Pick & Roll de qualsevol accident, xoc, dany, lesió personal, robatori o pèrdua del 
+            vehicle o altres incidents similars tan aviat com sigui possible. En cas d'accident, Pick & Roll agrairà
+            que intenteu reunir proves, si és possible, per exemple, fent fotografies o identificant possibles 
+            testimonis, amb subjecció a la legislació local aplicable.</p>
+        <p>Si un incident implica lesions personals de tercers, danys a la propietat o qualsevol altre dany a tercers,
+            heu d'informar de l'incident a la policia local tan aviat com sigui possible. Això també s'aplica si el
+            vehicle és robat. A petició de Pick & Roll, i subjecte a la legislació local aplicable, proporcionarà a
+            Pick & Roll qualsevol document produït per la policia local i cooperarà amb Pick & Roll.</p>
+        <h5 class="mt-5">1.7 Compliment de les lleis i reglaments locals</h5>
+        <p>A més del que s'ha exposat anteriorment, vostè es compromet a utilitzar els serveis en tot moment de conformitat 
+            amb les lleis, reglaments i normes aplicables a nivell local. Vostè enten que és l'únic responsable de qualsevol
+            violació de les lleis, reglaments i normes en relació amb el seu ús dels serveis.</p>
+        <h4 class="mt-5">2. Pagaments i crèdits</h4>
+        <h5 class="mt-3">2.1 Preus i tarifes</h5>
+        <p>En cada cas, els preus, les taxes i altres possibles càrrecs poden estar subjectes als impostos aplicables
+            i a altres càrrecs del govern local, que poden ser cobrats i recaptats per Pick & Roll. En qualsevol cas,
+            haureu de comprovar els preus, les taxes i altres possibles càrrecs a la pàgina web Pick & Roll.</p>
+        <p>Tots els preus i tots els valors monetaris establerts en aquest Contracte són a EUR.</p>
+        <h5 class="mt-5">2.2 Formes de pagament i disputes</h5>
+        <p>Heu de proporcionar a Pick & Roll la informació i els detalls d'una targeta de crèdit o dèbit vàlida o un
+            altre mètode de pagament per registrar-vos per utilitzar els serveis a la pàgina web Pick & Roll. Vostè
+            confirma que està autoritzat a utilitzar qualsevol targeta de crèdit o dèbit o informació de pagament que
+            proporcioneu. Us autoritzeu a carregar a la targeta de crèdit o dèbit proporcionada.</p>
+        <p>Us comprometeu a informar Pick & Roll sense cap demora indeguda de tots els canvis relacionats amb la targeta
+            de crèdit o la targeta de dèbit que hagi proporcionat a Pick & Roll.</p>
+        <h5 class="mt-5">2.3 Desactivació de comptes</h5>
+        <p>Pick & Roll es reserva en tot moment el dret a desactivar el vostre compte quan no hagi pagat o hagi incomplert
+            de qualsevol altra manera aquesta secció 2.</p>
+        <h4 class="mt-5">3. Drets de propietat intel·lectual i industrial</h4>
+        <h5 class="mt-3">3.1 Drets de Pick & Roll</h5>
+        <p>Tots els textos, imatges, fotografies, drets d'autor, marques comercials, noms comercials, logotips i altres
+            drets de propietat intel·lectual o industrial posseïts o utilitzats per Pick & Roll, així com els presents
+            a la pàgina web Pick & Roll (inclosos els títols, gràfics, icones, scripts, codis font, etc.) són propietat
+            de Pick & Roll o dels seus tercers llicenciants i no han de ser reproduïts, distribuïts, retransmesos,
+            emesos, venuts, utilitzats, modificats, copiats, limitats o utilitzats (totalment o parcialment) sense
+            autorització prèvia per escrit.</p>
+        <h5 class="mt-5">3.2 Respecte a la propietat de Pick & Roll</h5>
+        <p>No heu de manipular, intentar obtenir accés no autoritzat, modificar, hackejar, reparar o ajustar qualsevol
+            material o maquinari de Pick & Roll, codis font, informació, incloent la pàgina web Pick & Roll i el vehicle,
+            per a qualsevol propòsit. La pàgina web i els vehicles només es poden utilitzar per als fins previstos en
+            aquest acord.</p>
+        <h5 class="mt-5">3.3 Respecte a la propietat intel·lectual i industrial de Pick & Roll</h5>
+        <p>Vostè accepta que els serveis i la resta d'informació, inclosos tots els drets de propietat intel·lectual
+            i/o industrial associats, proporcionats i posats a disposició per Pick & Roll, en tot moment, segueixen
+            sent propietat exclusiva de Pick & Roll i vostè no podrà utilitzar de cap manera la propietat exclusiva
+            de Pick & Roll per a fins comercials o de qualsevol altre tipus sense el consentiment previ per escrit
+            de Pick & Roll.</p>
+        <h4 class="mt-5">4. Vigència i terminació</h4>
+        <p>Aquest contracte entrarà en vigor entre vostè i Pick & Roll des de la primera vegada que utilitzi els
+            serveis proporcionats per Pick & Roll i romandrà en vigor mentre ni vostè ni Pick & Roll acaben el 
+            contracte.</p>
+        <p>Tant vostè com Pick & Roll podran acabar aquest contracte en qualsevol moment, però qualsevol lloguer que
+            seguiu en curs es durà a terme d'acord amb aquest contracte. Les obligacions derivades de qualsevol
+            incompliment del contracte durant la vigència del present contracte no es veuran afectades per la seva
+            terminació.</p>
+        <h4 class="mt-5">5. Contacte</h4>
+        <p>Aquest contracte entrarà en vigor entre vostè i Pick & Roll des de la primera vegada que utilitzi els
+            serveis proporcionats per Pick & Roll i romandrà en vigor mentre ni vostè ni Pick & Roll acaben el 
+            contracte.</p>
+        <h4 class="mt-5">6. Llei i jurisdicció aplicable</h4>
+        <p>Aquest contracte es regeix i s'interpreta d'acord amb les lleis d'Espanya.</p>
+        <p>Totes i cada una de les disputes, reclamacions i causes d'acció que sorgeixin del present contracte o
+            dels serveis, o que hi estiguin relacionades, seran ressoltes exclusivament pel tribunal situat al
+            lloc on resideix o té el seu domicili.</p>
+        <h4 class="mt-5">7. Contracte íntegre</h4>
+        <p>Aquest contracte conté el contracte íntegre, complet i exclusiu entre les parts respecte del seu
+            objecte. Aquest contracte substitueix tots els altres acords anteriors, escrit o orals, 
+            relacionats amb l'objecte del mateix.</p>
+    </div>
+</body>
 </html>
