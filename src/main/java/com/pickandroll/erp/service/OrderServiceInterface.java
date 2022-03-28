@@ -19,5 +19,5 @@ public interface OrderServiceInterface {
 
     public void deleteOrder(Order order);
 
-    public Order findOrder(Long id);
+    //public Order findOrder(Long id);
 }
