@@ -12,14 +12,12 @@
                 <form method="POST" th:action="@{/login}">
                     <div class="container rounded border p-3 position-relative">
                         
-                        
-                        
                         <div class="d-flex form-group p-1 mb-2">
                             <div>
                                 <label>Preu unitats:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.priceU} + €"></label>
+                                <label th:text="${#numbers.formatDecimal(cart.priceU, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
                             </div>
                         </div>
                         <div class="d-flex form-group p-1 mb-2">
@@ -36,7 +34,7 @@
                                 <label>Subtotal:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.subPrice} + €"></label>
+                                <label th:text="${#numbers.formatDecimal(cart.subPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
                             </div>
                         </div>
                         <div class="d-flex form-group p-1 mb-2">
@@ -44,7 +42,7 @@
                                 <label>IVA:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.IVA}"></label>
+                                <label th:text="${cart.IVA} + '%'"></label>
                             </div>
                         </div>
                         <div class="d-flex form-group p-1 mb-2">
@@ -52,12 +50,11 @@
                                 <label>Preu total:</label>
                             </div>
                             <div class="ms-auto">
-                                <label th:text="${cart.totalPrice} + €"></label>
+                                <label th:text="${#numbers.formatDecimal(cart.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
                             </div>
                         </div>
                     </div>
-                    
-                    
+       
                     
                     <div class="d-flex gap-2 pt-2 mt-4 mb-4">
                         <div class="pe-2">
@@ -97,7 +94,7 @@
                                             <div class="d-flex flex-row">
                                                 <h5 class="card-title" th:text="${vehicle.name}"></h5>
                                                 <div class="position-absolute end-0 me-4 pb-2">
-                                                    <p th:text="${vehicle.price}+€"></p>
+                                                    <p th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></p>
                                                 </div>
                                             </div>
                                             <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>

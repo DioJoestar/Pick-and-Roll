@@ -1,18 +1,18 @@
-package com.pickandroll.erp.controller;
-
-import com.pickandroll.erp.model.Cart;
-import com.pickandroll.erp.model.Vehicle;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
-public class CartController {
-
-//    public List<Vehicle> vehicles = new ArrayList<Vehicle>();
+//package com.pickandroll.erp.controller;
+//
+//import com.pickandroll.erp.model.Cart;
+//import com.pickandroll.erp.model.Vehicle;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import java.util.ArrayList;
+//import java.util.List;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//
+//@Controller
+//public class CartController {
+//
+//    private List<Vehicle> vehicles = new ArrayList<Vehicle>();
 //
 //    private boolean first = true;
 //
@@ -58,4 +58,4 @@ public class CartController {
 //       cart.removeVehicles(v, cart, vehicles);
 //        return "redirect:/cart";
 //    }
-}
+//}
