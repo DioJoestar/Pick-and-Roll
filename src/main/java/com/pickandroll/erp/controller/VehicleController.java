@@ -24,15 +24,13 @@ public class VehicleController {
     public List<Vehicle> vehicles = new ArrayList<Vehicle>();
 
     @Autowired
-    private VehicleDAO vehicleDao;
-
-    @Autowired
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
     public String users(Vehicle vehicle, Model model) {
 
-        List<Vehicle> vehicles = vehicleDao.findAll();
+        //List<Vehicle> vehicles = vehicleDao.findAll();
+        List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
@@ -40,10 +38,11 @@ public class VehicleController {
 
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
-        List<Vehicle> vehicles = vehicleDao.findAll();
+        List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
-        vehicle = vehicleDao.findByName(vehicle.getName());
+        //vehicle = vehicleDao.findByName(vehicle.getName());
+        vehicle = vehicleService.findbyName(vehicle.getName());
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
     }
@@ -53,7 +52,7 @@ public class VehicleController {
         Utils u = new Utils();
 
         if (errors.hasErrors()) {
-            List<Vehicle> vehicles = vehicleDao.findAll();
+            List<Vehicle> vehicles = vehicleService.listVehicles();
             model.addAttribute("vehicles", vehicles);
             return "vehicles";
         }
@@ -75,8 +74,8 @@ public class VehicleController {
     @RequestMapping(value = "/addVehicle/{id}")
     public String addVehicle(Vehicle v) {
         v = vehicleService.findVehicle(v);
-        if(!vehicles.contains(v)){
-           vehicles.add(v);
+        if (!vehicles.contains(v)) {
+            vehicles.add(v);
         }
 
         return "redirect:/vehicles";
