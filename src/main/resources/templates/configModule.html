@@ -5,9 +5,7 @@
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
 <body>
-
-    <header th:replace="layouts/navbar :: navbar"/>
-
+    <header th:replace="layouts/navbar_admin :: navbar_admin"></header>
     <h2 class="mt-3 ms-4">Activar i desactivar mòduls</h2> 
     <div th:fragment="item" class="d-inline-flex w-100 p-2">
         <div class="double-element w-25"  th:each="module : ${modules}">

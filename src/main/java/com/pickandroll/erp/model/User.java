@@ -75,4 +75,10 @@ public class User implements Serializable {
     public void addRole(Role role) {
         this.roles.add(role);
     }
+    
+    public boolean isAdmin(){
+        Role r = new Role();
+        r.setName("admin");
+        return this.roles.contains(r);
+    }
 }
