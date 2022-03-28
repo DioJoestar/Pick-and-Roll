@@ -29,7 +29,7 @@ public class OrderController {
         return "orders";
     }
 
-    @PostMapping("/editOrder")
+    /*@PostMapping("/editOrder")
     public String editOrder(@ModelAttribute Order order, Model model) {
         
         List<Order> orders = orderService.listOrders();
@@ -54,5 +54,5 @@ public class OrderController {
         orderService.addOrder(order);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/orders";
-    }
+    }*/
 }

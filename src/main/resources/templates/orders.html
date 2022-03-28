@@ -39,7 +39,7 @@
             </div>
             <!-- Llista de comandes -->
             <div class="container rounded border p-3">
-                <div th:each="order : ${orders}" th:fragment="item" class="mb-5">
+                <div class="mb-5"> <!<!-- TH:EACH -->
                     <div class="firstOrderRow p-2">
                         <div class="list-group list-group-horizontal">
                             <label class="ms-3 me-5"><b>Realitzat: </b><span></span></label>
@@ -50,7 +50,7 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input greenSwitch" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input greenSwitch" type="checkbox" value="" id="flexCheckDefault2">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Retornat
                                 </label>
@@ -77,12 +77,12 @@
                                 </tr>
                             </thead>
                             <tbody class="border-top-0">
-                                <tr th:fragment="row">
-                                    <th th:text="${order.id}"></th>
-                                    <td th:text="${order.name}">Rockrider ST 120</td>
-                                    <td th:text="${order.type}"></td>
-                                    <td th:text="${order.price_per_hour}"></td>
-                                    <td th:text="${orders_vehicles.total_price}"></td>
+                                <tr>
+                                    <th>1</th>
+                                    <td>Rockrider ST 120</td>
+                                    <td>Bici</td>
+                                    <td>10</td>
+                                    <td>40</td>
                                 </tr>
                         </table>
                     </div>
