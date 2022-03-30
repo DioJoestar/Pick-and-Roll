@@ -3,6 +3,7 @@ package com.pickandroll.erp.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +35,7 @@ public class Vehicle implements Serializable {
     private Double price;
     
     //@NotEmpty
+    @Column(name = "image_path")
     private String image_path;
 
 }

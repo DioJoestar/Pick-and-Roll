@@ -3,6 +3,7 @@ package com.pickandroll.erp.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="product_order")
+@Table(name = "product_order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,20 +31,25 @@ public class Order implements Serializable {
     private long id;
 
     @NotEmpty
-    private int rent_days;
+    @Column(name = "rent_days")
+    private int rentDays;
 
     @NotEmpty
-    private String start_date;
+    @Column(name = "start_date")
+    private String startDate;
 
     @NotEmpty
-    private boolean picked;
-
-    @NotEmpty
-    private boolean returned;
-
-    @NotEmpty
-    private int user_id;
+    @Column(name = "picked_date")
+    private String pickedDate;
     
+    @NotEmpty
+    @Column(name = "returned_date")
+    private String returnedDate;
+
+    @NotEmpty
+    @Column(name = "user_id")
+    private int userId;
+
     @ManyToMany
     @JoinTable(
             name = "orders_vehicles",

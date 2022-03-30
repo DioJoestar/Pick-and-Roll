@@ -29,13 +29,13 @@ public class OrderController {
         return "orders";
     }
 
-    /*@PostMapping("/editOrder")
+    @PostMapping("/editOrder")
     public String editOrder(@ModelAttribute Order order, Model model) {
         
         List<Order> orders = orderService.listOrders();
         model.addAttribute("orders", orders);
 
-        //order = orderService.findOrder(order.getId());
+        order = orderService.findById(order.getId());
         model.addAttribute("order", order);
         return "orders";
     }
@@ -54,5 +54,5 @@ public class OrderController {
         orderService.addOrder(order);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/orders";
-    }*/
+    }
 }

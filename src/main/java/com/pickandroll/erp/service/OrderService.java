@@ -34,10 +34,10 @@ public class OrderService implements OrderServiceInterface {
     public void deleteOrder(Order order) {
         this.orderDao.delete(order);
     }
-    
-    /*@Override
+
+    @Override
     @Transactional(readOnly = true)
-    public Order findOrder(Long id) {
-        return this.orderDao.findOrder(id);
-    }*/
+    public Order findById(Long id) {
+        return this.orderDao.findById(id).orElse(null);
+    }
 }

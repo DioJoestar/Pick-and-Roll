@@ -7,84 +7,109 @@
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
+    <script src="datepicker.js"></script>
     <div th:replace="layouts/navbar :: navbar"></div>
-    <div class="container pt-4 bg-white">
-        <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="list-group list-group-horizontal">
-                <div class="flex-grow-1">
-                    <h2>Comandes</h2>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" 
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Ordenar
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Tots els vehicles</a>
-                        <a class="dropdown-item" href="#">Més recents</a>
-                        <a class="dropdown-item" href="#">Més antics</a>
+    <div class="d-flex flex-row">
+        <!-- Editor del admin -->
+        <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
+            <form action="#" method="post" th:action="@{/saveOrder}" th:object="${order}" class="getInfo" enctype="multipart/form-data">
+                <input type="hidden" id="id" th:field="*{id}"/>
+                <div class="container rounded border p-3 position-relative">
+                    <div class="form-group p-1 mb-2">
+                        <label class="form-label" for="inlineFormInputName">Data de recollida</label>
+                        <input type="text" class="form-control" id="pickedDate" th:field="*{pickedDate}" name="pickedDate">
+                    </div>
+                    <div class="form-group p-1 mb-2">
+                        <label class="form-label" for="inlineFormInputName">Data de retorn</label>
+                        <input type="text" class="form-control" id="returnedDate" th:field="*{returnedDate}" name="returnedDate">
                     </div>
                 </div>
-                <div class="dropdown ms-4">
-                    <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" 
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Filtrar
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Tots els vehicles</a>
-                        <a class="dropdown-item" href="#">Lliurat</a>
-                        <a class="dropdown-item" href="#">Retornat</a>
+                <div class="d-grid gap-2 pt-2">
+                    <div th:remove="tag">
+                        <button type="submit" class="btn btn-primary">Guardar canvis</button>
                     </div>
+                    <!--<div th:unless="${vehicle.id}" th:remove="tag">
+                            <button type="submit" class="btn btn-secondary disabled">Guardar canvis</button>
+                        </div>-->
                 </div>
-            </div>
-            <!-- Llista de comandes -->
-            <div class="container rounded border p-3">
-                <div class="mb-5"> <!<!-- TH:EACH -->
-                    <div class="firstOrderRow p-2">
-                        <div class="list-group list-group-horizontal">
-                            <label class="ms-3 me-5"><b>Realitzat: </b><span></span></label>
-                            <div class="form-check me-5">
-                                <input class="form-check-input greenSwitch" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lliurat
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input greenSwitch" type="checkbox" value="" id="flexCheckDefault2">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Retornat
-                                </label>
-                            </div>
+            </form>
+        </div>
+        <!-- Llista de comandes -->
+        <div class="container pt-4 bg-white">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <div class="list-group list-group-horizontal">
+                    <div class="flex-grow-1">
+                        <h2>Comandes</h2>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" 
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ordenar
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Tots els vehicles</a>
+                            <a class="dropdown-item" href="#">Més recents</a>
+                            <a class="dropdown-item" href="#">Més antics</a>
                         </div>
                     </div>
-                    <div class="secondOrderRow p-2">
-                        <div class="list-group list-group-horizontal">
-                            <label class="ms-3 me-5"><b>Dies: </b><span></span></label>
-                            <label class="me-5"><b>Data recollida: </b> 25/02/2022</label>
-                            <label><b>Data entrega: </b> 29/02/2022</label>
+                    <div class="dropdown ms-4">
+                        <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" 
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filtrar
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Tots els vehicles</a>
+                            <a class="dropdown-item" href="#">Lliurat</a>
+                            <a class="dropdown-item" href="#">Retornat</a>
                         </div>
                     </div>
-                    <!-- PART 2 -->
-                    <div>
-                        <table id="example" class="table text-center align-middle" cellspacing="0" width="100%">
-                            <thead>
-                                <tr class="usersDiv">
-                                    <th>ID</th>
-                                    <th>Model</th>
-                                    <th>Tipus</th>
-                                    <th>Preu producte</th>
-                                    <th>Preu total</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                <tr>
-                                    <th>1</th>
-                                    <td>Rockrider ST 120</td>
-                                    <td>Bici</td>
-                                    <td>10</td>
-                                    <td>40</td>
-                                </tr>
-                        </table>
+                </div>
+                <!-- Llista de comandes -->
+                <div class="container rounded border p-3">
+                    <div class="mb-5" th:each="order : ${orders}">
+                        <div class="firstOrderRow p-2 d-flex flex-row">
+                            <div class="list-group list-group-horizontal">
+                                <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                            </div>
+                            <div class="mb-2 m-3 ">
+                                <div sec:authorize="hasAuthority('admin')">
+                                    <form method="post" th:action="@{/editOrder}" th:object="${order}" >
+                                        <input type="hidden" name="pickedDate" th:value="${order.pickedDate}"/>
+                                        <input type="hidden" name="returnedDate" th:value="${order.returnedDate}"/>
+                                        <button class="bi bi-pencil-fill fas fa-xs shadow-none btn-edit"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="secondOrderRow p-2">
+                            <div class="list-group list-group-horizontal">
+                                <label class="ms-3 me-5"><b>Dies: </b><span th:text="${order.rentDays}"></span></label>
+                                <label class="me-5"><b>Data recollida: </b><span th:text="${order.pickedDate}"></span></label>
+                                <label><b>Data entrega: </b><span th:text="${order.returnedDate}"></span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <table id="example" class="table text-center align-middle" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="usersDiv">
+                                        <th>ID</th>
+                                        <th>Model</th>
+                                        <th>Tipus</th>
+                                        <th>Preu producte</th>
+                                        <th>Preu total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="border-top-0">
+                                    <tr>
+                                        <th>1</th>
+                                        <td>Rockrider ST 120</td>
+                                        <td>Bici</td>
+                                        <td>10</td>
+                                        <td>40</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
