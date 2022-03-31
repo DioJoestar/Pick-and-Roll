@@ -56,12 +56,6 @@ public class RegisterController {
             return "redirect:/register";
         }
 
-        // Si el checkbox està inactiu
-        if (checkIfUserExist(user.getEmail())) {
-            msg.addFlashAttribute("error", u.alert("profile.error.emailAlreadyTaken"));
-            return "redirect:/register";
-        }
-
         // Encriptamos la contraseña antes de guardarla        
         user.setPassword(u.encrypPasswd(user.getPassword()));
 
