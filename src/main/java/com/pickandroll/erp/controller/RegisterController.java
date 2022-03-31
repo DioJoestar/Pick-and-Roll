@@ -21,7 +21,7 @@ public class RegisterController {
 
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private RoleService roleService;
 
@@ -58,14 +58,14 @@ public class RegisterController {
 
         // Encriptamos la contraseña antes de guardarla        
         user.setPassword(u.encrypPasswd(user.getPassword()));
-        
+
         // Creamos un rol nuevo y se lo añadimos al nuevo usuario
         Role defaultRole = roleService.findByName("customer");
         user.addRole(defaultRole);
-        
+
         // Lo guardamos en la BBDD
         userService.addUser(user);
-        
+
         return "redirect:/";
     }
 
@@ -79,4 +79,9 @@ public class RegisterController {
         }
         return false;
     }
+
+    // Mètode per comporovar si el checkbox no està activat
+    /*private boolean checkIfCheckboxIsNotActive() {
+
+    }*/
 }

@@ -1,52 +1,58 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.OrderDAO;
 import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.service.OrderService;
-import java.util.ArrayList;
+import com.pickandroll.erp.utils.Utils;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- *
- * @author Xavi
- */
 @Controller
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    List<Order> orders = new ArrayList<>();
-
     @GetMapping("/orders")
-    public String orders(Model model) {
+    public String users(Order order, Model model) {
 
-        orders = orderService.listOrders();
+        List<Order> orders = orderService.listOrders();
         model.addAttribute("orders", orders);
 
         return "orders";
     }
 
-    @GetMapping("/editOrder")
-    public String editOrder(Order order, Model model) {
+    /*@PostMapping("/editOrder")
+    public String editOrder(@ModelAttribute Order order, Model model) {
+        
+        List<Order> orders = orderService.listOrders();
+        model.addAttribute("orders", orders);
 
-        order = orderService.findOrder(order);
-
+        //order = orderService.findOrder(order.getId());
         model.addAttribute("order", order);
-
-        return "editOrder";
+        return "orders";
     }
 
     @PostMapping("/saveOrder")
-    public String saveOrder(Model model, Order order) {
+    public String saveData(@Valid Order order, Errors errors, Model model, RedirectAttributes msg) {
+        
+        Utils u = new Utils();
+        
+        if (errors.hasErrors()) {
+            List<Order> orders = orderService.listOrders();
+            model.addAttribute("orders", orders);
+            return "orders";
+        }
 
         orderService.addOrder(order);
-
+        msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/orders";
-    }
+    }*/
 }

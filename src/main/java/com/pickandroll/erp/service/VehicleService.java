@@ -40,4 +40,16 @@ public class VehicleService implements VehicleServiceInterface {
     public Vehicle findbyName(String name) {
         return this.vehicleDao.findByName(name);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Vehicle findVehicle(Vehicle vehicle) {
+        return this.vehicleDao.findById(vehicle.getId()).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Vehicle findById(long id){
+        return this.vehicleDao.findById(id).orElse(null);
+    }
 }

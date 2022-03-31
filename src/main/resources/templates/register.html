@@ -1,29 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>[[#{common.name}]] | Canviar contrasenya</title>
+        <title>[[#{common.name}]] | Registrar-se</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
-</style>
 </head>
-<body class="background">        
-    <div class="vertical-center">
-        <div class="container login">
-            <img class="logo" th:src="@{/img/logo_h.png}" />
-            <h2>Canviar contrasenya</h2>
-            <div class="container rounded border p-3 bg-white">
-                <form th:action="@{/changePassword}" method="post" th:object="${user}">
-                    <div class="form-group p-1 mb-2">
-                        <label class="mb-2" for="exampleInputEmail1">Nova contrasenya</label>
-                        <input type="password" class="form-control" name="password" th:value="${password}">
+<body class="background">
+    <div class="vertical-center d-flex flex-column justify-content-center">
+        <div >
+            <div>
+                <img class="logo" th:src="@{/img/logo_h.png}" />
+            </div>
+            <h2>Registrar-se</h2>
+            <div class="container flex-fill rounded border p-3 bg-white">
+                <form th:action="@{/registerUser}" method="post" th:object="${user}">
+                    <input type="hidden" name="id" th:field="*{id}"/>
+                    <div class="double-element">
+                        <!-- Nom -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="sr-only" for="inlineFormInputName">Nom</label>
+                            <input type="text" class="form-control" id="inlineFormInputName" th:field="*{name}" name="name">
+                        </div>
+                        <!-- Cognom -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="sr-only" for="inlineFormInputName">Cognoms</label>
+                            <input type="text" class="form-control" id="inlineFormInputName" name="surname" th:field="*{surname}">
+                        </div>
                     </div>
+                    <!-- Email -->
                     <div class="form-group p-1 mb-2">
-                        <label class="mb-2" for="exampleInputPassword1">Repetir contrasenya</label>
-                        <input type="password" class="form-control" name="passwordCheck" th:value="${passwordCheck}">
+                        <label class="mb-2" for="exampleInputEmail1">Correu Electrònic</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" 
+                               aria-describedby="emailHelp" placeholder="email@exemple.cat" name="email" th:field="*{email}">
                     </div>
+                    <div class="double-element">
+                        <!-- DNI -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="sr-only" for="inlineFormInputName">DNI</label>
+                            <input type="text" class="form-control" id="inlineFormInputName" name="dni" th:field="*{dni}">
+                        </div>
+                        <!-- Telèfon -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="sr-only" for="inlineFormInputName">Telèfon</label>
+                            <input type="text" class="form-control" id="inlineFormInputName" name="phone" th:field="*{phone}">
+                        </div>
+                    </div>
+                    <div class="double-element">
+                        <!-- Contrasenya -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="mb-2" for="exampleInputPassword1">Contrasenya</label>
+                            <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+                        </div>                        
+                        <!-- Contrasenya verificació -->
+                        <div class="form-group col-md-6 p-1 mb-2">
+                            <label class="mb-2" for="exampleInputPasswordConfirm">Confirmar contrasenya</label>
+                            <input type="password" class="form-control" id="passwordCheck" name="passwordCheck" th:field="*{passwordCheck}">
+                        </div>
+                    </div>
+                    <!-- Checkbox termes -->
+                    <div class="form-group p-1 mb-2">
+                        <!--<input class="form-check-input greenSwitch" type="checkbox" name="checkedTerms" id="checkedTerms" th:field="*{checkedTerms}">-->
+                        <input type="checkbox" class="greenSwitch form-check-input" onChange="document.getElementById('registerButton').disabled = !this.checked;"/>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Accepto els  <a href="/terms">termes del servei</a>
+                        </label>
+                    </div>
+                    <!-- Submit -->
                     <div class="d-grid gap-2 p-1">
-                        <button type="submit" class="btn btn-primary">Canviar contrasenya</button>
+                        <button type="submit" class="btn btn-primary" id="registerButton" disabled>Registar-se</button>
+                        <a class="btn btn-primary alt-color" href="/login" role="button">Enrere</a>
                     </div>
-                    <!-- Error messages -->
+                    <!-- Missatges error -->
                     <div class="float-right position-fixed top-0 end-0 m-3">
                         <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
                         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
@@ -38,5 +84,6 @@
             </div>
         </div>
     </div>
+    <div th:replace="layouts/footer :: footer"></div>
 </body>
 </html>

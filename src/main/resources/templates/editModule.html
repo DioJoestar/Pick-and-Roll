@@ -5,8 +5,7 @@
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
 <body>
-
-    <header th:replace="layouts/navbar :: navbar"/>
+    <header th:replace="layouts/navbar_admin :: navbar_admin"></header>
     <div class="container mt-4">
         <h2 class=" ms-4">Editar mòdul</h2> 
         <div class="container rounded border p-3 bg-white">
@@ -35,7 +34,7 @@
                     </div>
                 </div>
 
-                <input class="btn btn-primary alt-color" type="submit" name="enviar" value="Enviar Dades"/>        
+                <input class="btn btn-primary" type="submit" name="enviar" value="Enviar Dades"/>        
             </form>
         </div>
     </div>

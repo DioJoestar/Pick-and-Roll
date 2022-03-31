@@ -61,26 +61,29 @@ public class UserService implements UserDetailsService, UserServiceInterface {
         return this.userDAO.findByEmail(email);
     }
 
+    @Transactional
     public void updateResetPasswordToken(String token, String email) {
         User user = userDAO.findByEmail(email);
         if (user != null) {
             user.setResetPasswordToken(token);
-            userDAO.save(user);
+            this.userDAO.save(user);
         } else {
             System.out.println("Could not find any customer with the email " + email);
         }
     }
 
+    @Transactional(readOnly = true)
     public User findByResetPasswordToken(String token) {
         return userDAO.findByResetPasswordToken(token);
     }
 
+    @Transactional
     public void updatePassword(User user, String newPassword) {
         Utils u = new Utils();
         String encodedPassword = u.encrypPasswd(newPassword);
         user.setPassword(encodedPassword);
 
         user.setResetPasswordToken(null);
-        userDAO.save(user);
+        this.userDAO.save(user);
     }
 }

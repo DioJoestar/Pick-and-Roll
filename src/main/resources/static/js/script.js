@@ -18,8 +18,8 @@ $(document).ready(function () {
                 "previous": "Anterior"
             },
             "aria": {
-                "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                "sortAscending": ": Activar per ordenar la columna de manera ascendent",
+                "sortDescending": ": Activar per ordenar la columna de manera descendent"
             }
         }
     });

@@ -1,6 +1,8 @@
 package com.pickandroll.erp.controller;
 
+import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.Utils;
 import java.util.List;
@@ -11,38 +13,52 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 public class Controller {
     
     @Autowired
+    private UserServiceInterface userService;
+
+    @Autowired
     private VehicleService vehicleService;
-    
+
     private List<Vehicle> vehicles;
 
     // Raiz
     @GetMapping("/")
-    public String root(Vehicle vehicle, Model model) {
+    public String root(Vehicle vehicle, Model model, Authentication auth) {
 
         if (isAuthenticated()) {
-            List<Vehicle> vehicles = vehicleService.listVehicles();
-            model.addAttribute("vehicles", vehicles);
+
+            // Coger los datos de la sessión
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            // Crear el objeto User a partir del email (username) de la sesión actual
+            User currUser = userService.findByEmail(userDetails.getUsername());
             
-            return "vehicles";
+            // Si el usuario es admin redirigir a Modules
+            if (currUser.isAdmin()) {
+                return "redirect:/modules";
+            }
+
+            return "redirect:/vehicles";
         }
 
         return "login";
     }
 
-    @PostMapping("/{id}")
-    public String addVehicle(Model model, Vehicle vechicle) {
+    @PostMapping("/")
+    public String addVehicle(Model model, Vehicle vechicle, @RequestParam long token) {
 
-        vehicles.add(vechicle);
+        Vehicle v = vehicleService.findById(token);
+        vehicles.add(v);
 
         return "main";
     }
