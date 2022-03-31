@@ -38,4 +38,6 @@ public class Vehicle implements Serializable {
     @Column(name = "image_path")
     private String image_path;
 
+    
+    
 }

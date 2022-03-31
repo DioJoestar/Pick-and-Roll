@@ -18,7 +18,8 @@ public class Cart {
     private int IVA = 21;
     private double totalPrice = 0;
     private int days = 1;
-
+    private User u;
+    
     public void setPriceU(List<Vehicle> vehicles) {
         double priceU = 0;
         for (int i = 0; i < vehicles.size(); i++) {
