@@ -9,6 +9,8 @@
     <div class="d-flex flex-row">
         <!-- Editor del admin -->
         <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
+
+            <!-- Formulari editar vehicle -->
             <form action="#" method="post" th:action="@{/saveVehicle}" th:object="${vehicle}" class="getInfo" enctype="multipart/form-data">
                 <input type="hidden" id="id" th:field="*{id}"/>
 
@@ -21,15 +23,22 @@
                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
                 </div>
+
+                <!-- Contenidor del formulari -->
                 <div class="container rounded border p-3 position-relative">
+                    <!-- Input del nom del vehicle -->
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Nom</label>
                         <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
                     </div>
+
+                    <!-- Contenidor per posar dos inputs un al costat de l'altre -->
                     <div class="d-flex flex-row">
                         <div class="form-group p-1 mb-2 w-50">
+                            <!-- Modificar el tipus del vehicle -->
                             <label class="form-label" for="inlineFormInputName">Tipus</label>
 
+                            <!-- Select del tipus de vehicle -->
                             <select class="form-select" th:field="*{type}">
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'bicicleta'" th:remove="tag">
                                     <option th:value="bicicleta" selected>Bicicleta</option>
@@ -39,7 +48,6 @@
                                     <option th:value="null" selected>Selecciona</option>
                                     <option th:value="bicicleta">Bicicleta</option>
                                 </div>
-
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'patinet'" th:remove="tag">
                                     <option th:value="patinet" selected>Patinet</option>
                                     <option th:value="bicicleta">Bicicleta</option>
@@ -49,38 +57,40 @@
                                 </div>
                             </select>
                         </div>
+
+                        <!-- Preu del vehicle -->
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Preu</label>
                             <input type="number" class="form-control" id="price" th:field="*{price}" name="price" min="1">
                         </div>
                     </div>
+                    <!-- Descipció del vehicle -->
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Descripció</label>
                         <textarea class="form-control" rows="4" id="description" th:field="*{description}" name="description"></textarea>
                     </div>
+                    <!-- Imatge del vehicle -->
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="customFile">Imatge</label>
                         <input type="file" class="form-control" id="image_path" th:field="*{image_path}" name="image_path" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
+
+                <!-- Guardar canvis del forumlari -->
                 <div class="d-grid gap-2 pt-2">
-                    <!--<div th:if="${vehicle.id}" th:remove="tag">
-                        <button type="submit" class="btn btn-primary">Guardar canvis</button>
-                    </div>
-                    <div th:unless="${vehicle.id}" th:remove="tag">
-                        <button type="submit" class="btn btn-secondary disabled">Guardar canvis</button>
-                    </div>-->
                     <button type="submit" class="btn btn-primary">Guardar canvis</button>
                 </div>
             </form>
-            </script>
         </div>
+
+        <!-- Contenidor dels vehicles -->
         <div class="container pt-4 bg-white w-75">
             <div class="d-flex flex-column bd-highlight mb-4">
                 <div class="list-group list-group-horizontal">
                     <div class="flex-grow-1">
                         <h2>Productes</h2>
                     </div>
+                    <!-- Desplegable per endreçar productes -->
                     <div class="dropdown">
                         <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Ordenar
@@ -91,6 +101,7 @@
                             <a class="dropdown-item" href="#">Més antics</a>
                         </div>
                     </div>
+                    <!-- Desplegable per mostrar els productes filtrats -->
                     <div class="dropdown ms-4 me-2">
                         <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Filtrar
@@ -102,16 +113,22 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Tarjetes dels vehicles -->
                 <div class="d-flex flex-wrap container rounded border p-2 w-100">
                     <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container bcontent card w-50"> <!-- TO DO: POSAR MARGIN ENTRE PRODUCTES -->
                         <div class="row">
+                            <!-- Mostrar imatge del producte -->
                             <div class="col-sm-4 pb-2">
                                 <img th:src="@{${vehicle.image_path}}" height="200px" class="item-img float-right mt-3 img-thumbnail"/>
                             </div>
+                            <!-- Contenidor del costat de l'imatge -->
                             <div class="col-sm-7">
                                 <div class="card-body">
                                     <div class="d-flex flex-row">
+                                        <!-- Nom del vehicle -->
                                         <h5 class="card-title" th:text="${vehicle.name}"></h5>
+                                        <!-- Botó per editar el producte -->
                                         <div class="mb-2 m-3 position-absolute top-0 end-0">
                                             <div sec:authorize="hasAuthority('admin')">
                                                 <form method="post" th:action="@{/editVehicle}" th:object="${vehicle}" >
@@ -125,10 +142,15 @@
                                                 </form>
                                             </div>
                                         </div>
+                                        
                                     </div>
+                                    <!-- Id del vehicle -->
                                     <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
+                                    <!-- Linia -->
                                     <hr class="m-1" />
+                                    <!-- Descripció del vehicle -->
                                     <p class="card-text mb-5" th:text="${vehicle.description}"></p>
+                                    <!-- Botó per afegir al cistell -->
                                     <a th:onclick="|window.location.href='/addVehicle/${vehicle.id}'|" href="#" class="btn btn-primary mt-2 mb-2 m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                     <a sec:authorize="hasAuthority('admin')" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0 button-disabled" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                 </div>
@@ -136,6 +158,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

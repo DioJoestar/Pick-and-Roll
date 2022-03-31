@@ -33,20 +33,31 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
-    public String users(Vehicle vehicle, Model model) {
+    public String vehicles(Vehicle vehicle, Model model) {
 
+        //Llistar tots els vehicles
         List<Vehicle> vehicles = vehicleDao.findAll();
+
+        //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
     }
 
+    //Métode per editar vehicle
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
+
+        //Llistar tots els vehicles
         List<Vehicle> vehicles = vehicleDao.findAll();
+
+        //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
+        //Cercar el vehicle a editar
         vehicle = vehicleDao.findByName(vehicle.getName());
+        
+        //Afegir el vehicle per recollir les dades al formualari
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
     }
@@ -60,7 +71,6 @@ public class VehicleController {
 //            model.addAttribute("vehicles", vehicles);
 //            return "vehicles";
 //        }
-
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         vehicle.setImage_path("/img/" + fileName);
 
@@ -80,7 +90,6 @@ public class VehicleController {
         Thread.sleep(3000);
         return "redirect:/vehicles";
     }
-
 
     public boolean isCorrect(Vehicle vehicle) {
         String[] image = vehicle.getImage_path().split("/");

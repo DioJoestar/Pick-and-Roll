@@ -97,6 +97,12 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @RequestMapping(value = "/close_order")
+    public String closeOrder() {
+        //ToDo
+        return "";
+    }
+
 //    @RequestMapping(value = "/removeVehicle/{id}")
 //    public String removeVehicle(Vehicle v) {
 //        cart.removeVehicles(v, cart, vehicles);
