@@ -276,4 +276,16 @@ table.dataTable.no-footer {
 
 .img-thumbnail{
     border: 0px solid #555;
-} 
+}
+
+.grayscale {
+    filter: grayscale(1);
+}
+
+.hidden {
+    background-color: #adb5bd;
+}
+
+img.hidden {
+    background-color: #6c757d;
+}
