@@ -3,6 +3,7 @@ package com.pickandroll.erp.service;
 import com.pickandroll.erp.dao.UserDAO;
 import com.pickandroll.erp.model.Role;
 import com.pickandroll.erp.model.User;
+import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;

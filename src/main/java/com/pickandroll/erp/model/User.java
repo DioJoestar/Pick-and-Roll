@@ -56,10 +56,10 @@ public class User implements Serializable {
     @Transient
     @Size(min = 4)
     private String passwordCheck;
-    
+
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
-    
+
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Order> orders;
@@ -72,11 +72,33 @@ public class User implements Serializable {
     )
     private List<Role> roles = new ArrayList();
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_cart",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "vehicle_id")
+    )
+    private List<Vehicle> vehicles = new ArrayList();
+
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicles.add(vehicle);
+    }
+
+    public void deleteVehicle(Vehicle vehicle) {
+
+        for (int i = 0; i < vehicles.size(); i++) {
+            Vehicle v2 = vehicles.get(i);
+            if (v2.getId() == vehicle.getId()) {
+                this.vehicles.remove(i);
+            }
+        }
+    }
+
     public void addRole(Role role) {
         this.roles.add(role);
     }
-    
-    public boolean isAdmin(){
+
+    public boolean isAdmin() {
         Role r = new Role();
         r.setName("admin");
         return this.roles.contains(r);
