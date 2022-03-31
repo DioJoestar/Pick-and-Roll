@@ -9,7 +9,7 @@
 <i class="bi bi-grid-fill me-2 fw-bold"></i>Mòduls</a>
                 </li>-->
                 <li class="nav-item me-5">
-                    <a th:classappend="${#request.getServletPath() == '/vehicles' ? 'active' : ''}" class="nav-link" href="/vehicles">
+                    <a th:classappend="${(#request.getServletPath() == '/vehicles' ? 'active' : '' + (#request.getServletPath() == '/editVehicle' ? 'active' : ''))}" class="nav-link" href="/vehicles">
                         <i class="bi bi-bicycle me-2 fw-bold"></i>Productes</a>
                 </li>
                 <li class="nav-item me-5">
