@@ -9,9 +9,6 @@
     <div class="d-flex flex-row">
         <!-- Editor del admin -->
         <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
-
-
-
             <form action="#" method="post" th:action="@{/saveVehicle}" th:object="${vehicle}" class="getInfo" enctype="multipart/form-data">
                 <input type="hidden" id="id" th:field="*{id}"/>
 
@@ -105,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap container rounded border p-2">
+                <div class="d-flex flex-wrap container rounded border p-2 w-100">
                     <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container bcontent card w-50"> <!-- TO DO: POSAR MARGIN ENTRE PRODUCTES -->
                         <div class="row">
                             <div class="col-sm-4 pb-2">
@@ -139,9 +136,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>

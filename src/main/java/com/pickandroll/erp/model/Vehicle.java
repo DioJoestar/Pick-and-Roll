@@ -36,4 +36,6 @@ public class Vehicle implements Serializable {
     //@NotEmpty
     private String image_path;
 
+    
+    
 }
