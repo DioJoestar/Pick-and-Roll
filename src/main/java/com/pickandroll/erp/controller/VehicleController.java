@@ -1,10 +1,6 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.VehicleDAO;
-import com.pickandroll.erp.model.Cart;
-import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.Vehicle;
-import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.FileUploadUtil;
 import com.pickandroll.erp.utils.Utils;
@@ -33,7 +29,7 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
-    public String users(Vehicle vehicle, Model model) {
+    public String vehicles(Vehicle vehicle, Model model) {
 
         //List<Vehicle> vehicles = vehicleDao.findAll();
         List<Vehicle> vehicles = vehicleService.listVehicles();
@@ -85,69 +81,4 @@ public class VehicleController {
 
         return "redirect:/vehicles";
     }
-
-//    @PostMapping("/deleteVehicle")
-//    public String deleteVehicle(@Valid Vehicle vehicle, Errors errors, RedirectAttributes msg) {        
-//        
-//        Utils u = new Utils();
-//        
-//        vehicle = vehicleService.findById(vehicle.getId());
-//        
-//       vehicle.setEnabled(false);
-//        
-//        msg.addFlashAttribute("success", u.alert("profile.success"));
-//        return "redirect:/vehicles";
-//    }
-    @RequestMapping(value = "/addVehicle/{id}")
-    public String addVehicle(Vehicle v) {
-        v = vehicleService.findVehicle(v);
-        if (!vehicles.contains(v)) {
-            vehicles.add(v);
-        }
-
-        return "redirect:/vehicles";
-    }
-
-    private Cart cart = new Cart();
-
-    @GetMapping("/cart")
-    public String cart(Model model) {
-
-        cart.setPriceU(vehicles);
-
-        cart.setSubPrice();
-        cart.setTotalPrice();
-
-        model.addAttribute("cart", cart);
-        model.addAttribute("vehicles", vehicles);
-        return "cart";
-    }
-
-    @RequestMapping(value = "/minus_day")
-    public String minusDay() {
-        cart.setDays(cart.getDays() - 1);
-        return "redirect:/cart";
-    }
-
-    @RequestMapping(value = "/plus_day")
-    public String plusDay() {
-        cart.setDays(cart.getDays() + 1);
-        return "redirect:/cart";
-    }
-
-    @RequestMapping(value = "/removeVehicle/{id}")
-    public String removeVehicle(Vehicle v) {
-        cart.removeVehicles(v, cart, vehicles);
-        return "redirect:/cart";
-    }
-
-//    static boolean isCorrect(Vehicle vehicle) {
-//
-//        String[] image = vehicle.getImage_path().split("/");
-//
-//        if (vehicle.getDescription().isBlank() || vehicle.getName().isBlank() || vehicle.getPrice() < 0 || vehicle.getType().isBlank() || image.length < 3) {
-//            return false;
-//        }
-//        return true;
-//    }
 }
