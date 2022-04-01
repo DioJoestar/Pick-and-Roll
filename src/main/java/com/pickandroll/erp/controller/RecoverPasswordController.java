@@ -42,9 +42,11 @@ public class RecoverPasswordController {
 
         // Guardar el token al usuari
         user.setResetPasswordToken(u.genToken());
-        //userDao.save(user);
         userService.addUser(user);
+        
+        // ENviar email
         sendMail(user.getEmail(), user.getResetPasswordToken());
+        
         return "redirect:/recoverPassword";
     }
 

@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -33,9 +35,9 @@ public class Vehicle implements Serializable {
     //@NotEmpty
     private Double price;
     
-    //@NotEmpty
-    private String image_path;
+    @Transient
+    private String image;
 
-    
-    
+    @NotNull
+    private boolean enabled;
 }
