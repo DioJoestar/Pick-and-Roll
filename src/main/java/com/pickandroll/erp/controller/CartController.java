@@ -1,18 +1,24 @@
 package com.pickandroll.erp.controller;
 
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 import com.pickandroll.erp.model.Cart;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
+import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -97,10 +103,30 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
     @RequestMapping(value = "/close_order")
-    public String closeOrder() {
-        //ToDo
-        return "";
+    public String closeOrder(Authentication auth) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+
+        //Obtenir l'usuari actual
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        User currUser = userService.findByEmail(userDetails.getUsername());
+
+        entityManager.joinTransaction();
+
+        entityManager.createNativeQuery("INSERT INTO pickandroll.product_order (rent_days, start_date, user_id) VALUES (?,?,?)")
+                .setParameter(1, cart.getDays())
+                .setParameter(2, formatter.format(date))
+                .setParameter(3, currUser.getId())
+                .executeUpdate();
+
+        currUser.deleteAllVehicles();
+
+        return "/"; //TODO Pantalla pagar o no se
     }
 
 //    @RequestMapping(value = "/removeVehicle/{id}")
