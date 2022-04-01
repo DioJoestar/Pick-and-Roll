@@ -11,22 +11,25 @@
         <div class="container rounded border p-3 bg-white">
             <form th:action="@{/guardarModul}" method="post" th:object="${module}">
 
+                <!-- Dades que no es poden modificar -->
                 <input type="hidden" name="id" th:field="*{id}"/>
                 <input type="hidden" name="icon" th:field="*{icon}"/>
                 <input type="hidden" name="path" th:field="*{path}"/>
 
 
+                <!-- Editar el nom del mòdul -->
                 <div class="form-group p-1 mb-2">
                     <label class="mb-2" for="email">Nom</label>
                     <input type="text" name="nom" th:field="*{name}" class="form-control"/> 
                 </div>
 
-
+                <!-- Editar la descripció del mòdul -->
                 <div class="form-group p-1 mb-2">
                     <label class="mb-2" for="description">Descripció</label>
                     <textarea name="description" th:field="*{description}" class="form-control"/> 
                 </div>
 
+                <!-- Veure si està activat o no i canviar l'estat -->
                 <div class="form-group p-1 mb-2">
                     <div class="form-check form-switch">
                         <label class="mb-2" for="estat">Estat</label>
@@ -34,7 +37,9 @@
                     </div>
                 </div>
 
-                <input class="btn btn-primary alt-color" type="submit" name="enviar" value="Enviar Dades"/>        
+                <!-- Botó per guardar els canvis -->
+                <input class="btn btn-primary" type="submit" name="enviar" value="Enviar Dades"/>        
+
             </form>
         </div>
     </div>

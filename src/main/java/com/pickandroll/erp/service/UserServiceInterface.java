@@ -12,7 +12,11 @@ public interface UserServiceInterface {
     public void deleteUser(User user);
 
     public User findByEmail(String email);
+    
+    public void updateResetPasswordToken(String token, String email);
 
     public User findByResetPasswordToken(String token);
+    
+    public void updatePassword(User user, String newPassword);
 
 }

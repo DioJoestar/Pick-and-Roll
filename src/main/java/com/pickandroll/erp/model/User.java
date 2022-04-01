@@ -90,11 +90,8 @@ public class User implements Serializable {
             Vehicle v2 = vehicles.get(i);
             if (v2.getId() == vehicle.getId()) {
                 this.vehicles.remove(i);
-                //cart.setPriceU(vehicles);
             }
         }
-
-        this.vehicles.remove(vehicle);
     }
 
     public void addRole(Role role) {

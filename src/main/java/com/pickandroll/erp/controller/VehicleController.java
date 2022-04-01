@@ -2,9 +2,9 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.dao.VehicleDAO;
 import com.pickandroll.erp.model.Cart;
-import com.pickandroll.erp.model.User;
+import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.Vehicle;
-import com.pickandroll.erp.service.UserServiceInterface;
+import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.FileUploadUtil;
 import com.pickandroll.erp.utils.Utils;
@@ -30,67 +30,65 @@ public class VehicleController {
     public List<Vehicle> vehicles = new ArrayList<Vehicle>();
 
     @Autowired
-    private VehicleDAO vehicleDao;
-
-    @Autowired
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
-    public String users(Vehicle vehicle, Model model) {
+    public String vehicles(Vehicle vehicle, Model model) {
 
-        List<Vehicle> vehicles = vehicleDao.findAll();
+        //Llistar tots els vehicles
+        //List<Vehicle> vehicles = vehicleDao.findAll();
+        List<Vehicle> vehicles = vehicleService.listVehicles();
+
+        //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
     }
 
+    //Métode per editar vehicle
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
-        List<Vehicle> vehicles = vehicleDao.findAll();
+
+        List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
-        vehicle = vehicleDao.findByName(vehicle.getName());
+        // Cargar el vehiculo seleccionado en el formulario
+        vehicle = vehicleService.findbyName(vehicle.getName());
+
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
     }
 
     @PostMapping("/saveVehicle")
-    public String saveData(@Valid Vehicle vehicle, Errors errors, Model model, RedirectAttributes msg, @RequestParam("image_path") MultipartFile multipartFile) throws IOException, InterruptedException {
-        Utils u = new Utils();
+    public String saveData(@Valid Vehicle vehicle, Errors errors, Model model, RedirectAttributes msg, @RequestParam("image") MultipartFile file) throws IOException, InterruptedException {
 
+        // Control de errores
+        // MultipartFile siempre da error aunque fundione
 //        if (errors.hasErrors()) {
-//            List<Vehicle> vehicles = vehicleDao.findAll();
+//            List<Vehicle> vehicles = vehicleService.listVehicles();
 //            model.addAttribute("vehicles", vehicles);
 //            return "vehicles";
 //        }
+        
+        // Subir la imagen al servidor si el input no está vacío
+        if (!file.getOriginalFilename().isBlank()) {
+            String fileName = StringUtils.cleanPath(vehicle.getId() + "_thumbnail.png");   
+            try {
+                String uploadDir = "src/main/resources/static/img/vehicles";
+                FileUploadUtil.saveFile(uploadDir, fileName, file);
+                Thread.sleep(3000); // Delay para que le de tiempo a subir la imagen
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
 
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        vehicle.setImage_path("/img/" + fileName);
-
-        if (!isCorrect(vehicle)) {
-            List<Vehicle> vehicles = vehicleDao.findAll();
-            model.addAttribute("vehicles", vehicles);
-            return "vehicles";
         }
 
+        // Guardar los cambios en la DDBB
         vehicleService.addVehicle(vehicle);
 
-        String uploadDir = "src\\main\\resources\\static\\img";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
+        Utils u = new Utils();
         msg.addFlashAttribute("success", u.alert("profile.success"));
 
-        Thread.sleep(3000);
         return "redirect:/vehicles";
-    }
-
-
-    public boolean isCorrect(Vehicle vehicle) {
-        String[] image = vehicle.getImage_path().split("/");
-
-        if (vehicle.getDescription().isBlank() || vehicle.getName().isBlank() || vehicle.getPrice() < 0 || vehicle.getType().isBlank() || image.length < 3) {
-            return false;
-        }
-        return true;
     }
 }
