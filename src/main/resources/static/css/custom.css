@@ -276,4 +276,8 @@ table.dataTable.no-footer {
 
 .img-thumbnail{
     border: 0px solid #555;
-} 
+}
+
+mySelect {
+    border-radius: 0;
+}

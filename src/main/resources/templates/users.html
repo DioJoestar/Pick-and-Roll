@@ -68,7 +68,6 @@
                 <div th:if="${user.id}" th:remove="tag"><button type="submit" name="submit" value="value" class="btn btn-danger w-50" >Eliminar usuari</button></div>    
             </form>  
         </div>
-
         <!-- Lista de usuarios -->
         <div class="container pt-4 w-75">
             <div class="d-flex flex-column bd-highlight h-100 mb-3">
@@ -89,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody class="border-top-0">
-                            <tr th:each="user : ${users}"> 
+                            <tr th:each="user : ${users}">
                                 <td th:text="${user.id}"></td>
                                 <td th:text="${user.dni}"></td>
                                 <td th:text="${user.name}"></td>
