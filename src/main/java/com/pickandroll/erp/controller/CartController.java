@@ -106,9 +106,12 @@ public class CartController {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //Finalitzar la comanda
     @Transactional
     @RequestMapping(value = "/close_order")
     public String closeOrder(Authentication auth) {
+        
+        //Agafar la data actual
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
 
@@ -118,20 +121,31 @@ public class CartController {
 
         entityManager.joinTransaction();
 
+        //Insertar valors de la comanda
         entityManager.createNativeQuery("INSERT INTO pickandroll.product_order (rent_days, start_date, user_id) VALUES (?,?,?)")
                 .setParameter(1, cart.getDays())
                 .setParameter(2, formatter.format(date))
                 .setParameter(3, currUser.getId())
                 .executeUpdate();
 
+        //Obtenir l'id de l'ultima comanda
+        var order_id = entityManager.createNativeQuery(
+        "SELECT MAX(id) FROM pickandroll.product_order")
+        .getResultList().get(0);
+
+        //Inserir valors
+        for (int i = 0; i < currUser.getVehicles().size(); i++) {
+            entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id, total_price) VALUES (?,?,?)")
+                    .setParameter(1, (int)order_id)
+                    .setParameter(2, currUser.getVehicles().get(i))
+                    .setParameter(3, currUser.getVehicles().get(i).getPrice())
+                    .executeUpdate();
+        }
+
+        //Esborrar el cistell
         currUser.deleteAllVehicles();
 
-        return "/"; //TODO Pantalla pagar o no se
+        return "redirect:/cart"; //TODO Pantalla pagar o no se
     }
-
-//    @RequestMapping(value = "/removeVehicle/{id}")
-//    public String removeVehicle(Vehicle v) {
-//        cart.removeVehicles(v, cart, vehicles);
-//        return "redirect:/cart";
-//    }
+    
 }
