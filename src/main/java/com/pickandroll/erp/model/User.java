@@ -94,6 +94,9 @@ public class User implements Serializable {
         }
     }
 
+    public void deleteAllVehicles(){
+     this.vehicles.clear();
+    }
     public void addRole(Role role) {
         this.roles.add(role);
     }
