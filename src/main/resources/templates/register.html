@@ -15,12 +15,12 @@
                 <form th:action="@{/registerUser}" method="post" th:object="${user}">
                     <input type="hidden" name="id" th:field="*{id}"/>
                     <div class="double-element">
-                        <!-- Nom -->
+                        <!-- Nombre -->
                         <div class="form-group col-md-6 p-1 mb-2">
                             <label class="sr-only" for="inlineFormInputName">Nom</label>
                             <input type="text" class="form-control" id="inlineFormInputName" th:field="*{name}" name="name">
                         </div>
-                        <!-- Cognom -->
+                        <!-- Apellido -->
                         <div class="form-group col-md-6 p-1 mb-2">
                             <label class="sr-only" for="inlineFormInputName">Cognoms</label>
                             <input type="text" class="form-control" id="inlineFormInputName" name="surname" th:field="*{surname}">
@@ -38,19 +38,19 @@
                             <label class="sr-only" for="inlineFormInputName">DNI</label>
                             <input type="text" class="form-control" id="inlineFormInputName" name="dni" th:field="*{dni}">
                         </div>
-                        <!-- Telèfon -->
+                        <!-- Teléfono -->
                         <div class="form-group col-md-6 p-1 mb-2">
                             <label class="sr-only" for="inlineFormInputName">Telèfon</label>
                             <input type="text" class="form-control" id="inlineFormInputName" name="phone" th:field="*{phone}">
                         </div>
                     </div>
                     <div class="double-element">
-                        <!-- Contrasenya -->
+                        <!-- Contraseña -->
                         <div class="form-group col-md-6 p-1 mb-2">
                             <label class="mb-2" for="exampleInputPassword1">Contrasenya</label>
                             <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
                         </div>                        
-                        <!-- Contrasenya verificació -->
+                        <!-- Contraseña verificación -->
                         <div class="form-group col-md-6 p-1 mb-2">
                             <label class="mb-2" for="exampleInputPasswordConfirm">Confirmar contrasenya</label>
                             <input type="password" class="form-control" id="passwordCheck" name="passwordCheck" th:field="*{passwordCheck}">

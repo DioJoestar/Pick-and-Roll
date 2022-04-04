@@ -289,3 +289,7 @@ table.dataTable.no-footer {
 img.hidden {
     background-color: #6c757d;
 }
+
+mySelect {
+    border: none;
+}
