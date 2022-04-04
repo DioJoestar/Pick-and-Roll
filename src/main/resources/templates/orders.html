@@ -13,6 +13,9 @@
         <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
             <form action="#" method="post" th:action="@{/saveOrder}" th:object="${order}" class="getInfo">
                 <input type="hidden" id="id" th:field="*{id}"/>
+                <!--                <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
+                                <input type="hidden" id="startDate" th:field="*{startDate}"/>
+                                <input type="hidden" id="userId" th:field="*{userId}"/>-->
                 <div class="container rounded border p-3 position-relative">
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Data de recollida</label>

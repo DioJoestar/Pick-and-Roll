@@ -38,11 +38,9 @@ public class Order implements Serializable {
     @Column(name = "start_date")
     private String startDate;
 
-    @NotEmpty
     @Column(name = "picked_date")
     private String pickedDate;
     
-    @NotEmpty
     @Column(name = "returned_date")
     private String returnedDate;
 

@@ -49,8 +49,8 @@
                         <th:div th:each="role: ${listRoles}" th:remove="tag">
                             <label class="form-check-label align-text-sub" for="flexSwitchCheckChecked" th:text="${role.name}"></label>
                             <input type="checkbox" th:field="*{roles}" th:value="${role.id}" class="form-check-input roles greenSwitch m-2" />  
-                        </th:div>                        
-                    </div>                    
+                        </th:div>
+                    </div>
                 </div>
                 <div>
                     <div th:if="${user.id}" th:remove="tag"><button type="submit" class="btn btn-primary w-50 float-end">Guardar canvis</button></div>
