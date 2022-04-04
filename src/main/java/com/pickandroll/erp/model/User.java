@@ -98,6 +98,7 @@ public class User implements Serializable {
         this.roles.add(role);
     }
 
+    // Comprueba si el usuario tiene el rol de administrador
     public boolean isAdmin() {
         Role r = new Role();
         r.setName("admin");
