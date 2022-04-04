@@ -37,8 +37,8 @@ public class CartController {
     @Autowired
     private UserServiceInterface userService;
 
-//    @Autowired
-//    private OrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/cart")
     public String cart(Model model, Authentication auth) {
@@ -125,21 +125,21 @@ public class CartController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         User currUser = userService.findByEmail(userDetails.getUsername());
         
-//        Order order = new Order();
-//        order.setRent_days(cart.getDays());
-//        order.setStart_date(formatter.format(date));
-//        order.setUser_id((int)currUser.getId());
-//        
-//        orderService.addOrder(order);
+        //Insertar valors de la comanda
+        Order order = new Order();
+        order.setRentDays(cart.getDays());
+        order.setStartDate(formatter.format(date));
+        order.setUserId((int)currUser.getId());
+        orderService.addOrder(order);
         
         entityManager.joinTransaction();
 
-        //Insertar valors de la comanda
-        entityManager.createNativeQuery("INSERT INTO pickandroll.product_order (rent_days, start_date, user_id) VALUES (?,?,?)")
-                .setParameter(1, cart.getDays())
-                .setParameter(2, formatter.format(date))
-                .setParameter(3, currUser.getId())
-                .executeUpdate();
+//        //Insertar valors de la comanda
+//        entityManager.createNativeQuery("INSERT INTO pickandroll.product_order (rent_days, start_date, user_id) VALUES (?,?,?)")
+//                .setParameter(1, cart.getDays())
+//                .setParameter(2, formatter.format(date))
+//                .setParameter(3, currUser.getId())
+//                .executeUpdate();
 
         //Obtenir l'id de l'ultima comanda
         var order_id = entityManager.createNativeQuery(
