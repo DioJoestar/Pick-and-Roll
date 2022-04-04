@@ -44,6 +44,10 @@ public class Order implements Serializable {
     
     @Column(name = "returned_date")
     private String returnedDate;
+    
+    @NotNull
+    @Column(name = "total_price")
+    private double totalPrice;
 
     @NotNull
     @Column(name = "user_id")

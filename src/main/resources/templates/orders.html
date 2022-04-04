@@ -10,10 +10,17 @@
         <!-- Editor del admin -->
         <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
             <form action="#" th:action="@{/saveOrder}" th:object="${order}" method="post" class="getInfo">
-<!--                <input type="hidden" id="id" th:field="*{id}"/>
+                <!-- Messages -->
+                <div class="mt-3 mb-3 w-100">
+                    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+                    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('pickedDate')}" th:errors="*{pickedDate}"/>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('returnedDate')}" th:errors="*{returnedDate}"/>
+                </div>
+                <input type="hidden" id="id" th:field="*{id}"/>
                 <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
                 <input type="hidden" id="startDate" th:field="*{startDate}"/>
-                <input type="hidden" id="userId" th:field="*{userId}"/>-->
+                <input type="hidden" id="userId" th:field="*{userId}"/>
                 <div class="container rounded border p-3 position-relative">
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Data de recollida</label>
@@ -53,10 +60,15 @@
                         <div class="firstOrderRow p-2 d-flex justify-content-between">
                             <div class="align-self-center">
                                 <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                                 <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice   , 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
                             </div>
                             <div class="me-4">
                                 <div sec:authorize="hasAuthority('admin')">
                                     <form method="post" th:action="@{/editOrder}" th:object="${order}" >
+                                        <input type="hidden" name="id" th:value="${order.id}"/>
+                                        <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
+                                        <input type="hidden" id="startDate" th:field="*{startDate}"/>
+                                        <input type="hidden" id="userId" th:field="*{userId}"/>
                                         <input type="hidden" name="pickedDate" th:value="${order.pickedDate}"/>
                                         <input type="hidden" name="returnedDate" th:value="${order.returnedDate}"/>
                                         <button type="submit" name="submit" value="value" class="bi bi-pencil-fill shadow-none btn-edit"/>
@@ -83,12 +95,12 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-top-0">
-                                    <tr th:each="vehicle : ${vehicles}">
+                                    <tr th:each="vehicle : ${order.vehicles}">
                                         <th th:text="${vehicle.id}"></th>
                                         <td th:text="${vehicle.name}"></td>
                                         <td th:text="${vehicle.type}"></td>
-                                        <td th:text="${vehicle.price}"></td>
-                                        <td>ToDo</td>
+                                        <td th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
+                                        <td th:with="days = ${order.rentDays}, price = ${vehicle.price}, totalPrice = ${days * price}" th:text="${#numbers.formatDecimal(totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
                                     </tr>
                                 </tbody>
                             </table>

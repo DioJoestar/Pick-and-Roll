@@ -129,6 +129,7 @@ public class CartController {
         Order order = new Order();
         order.setRentDays(cart.getDays());
         order.setStartDate(formatter.format(date));
+        order.setTotalPrice(cart.getTotalPrice());
         order.setUserId((int)currUser.getId());
         orderService.addOrder(order);
         
@@ -150,17 +151,16 @@ public class CartController {
         
         //Inserir valors
         for (int i = 0; i < currUser.getVehicles().size(); i++) {
-            entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id, total_price) VALUES (?,?,?)")
+            entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id) VALUES (?,?)")
                     .setParameter(1, (int)order_id)
                     .setParameter(2, currUser.getVehicles().get(i))
-                    .setParameter(3, currUser.getVehicles().get(i).getPrice())
                     .executeUpdate();
         }
 
         //Esborrar el cistell
         currUser.deleteAllVehicles();
 
-        return "redirect:/cart"; //TODO Pantalla pagar o no se
+        return "redirect:/cart";    
     }
 
 }
