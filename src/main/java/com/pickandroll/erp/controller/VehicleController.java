@@ -1,10 +1,6 @@
 package com.pickandroll.erp.controller;
 
-import com.pickandroll.erp.dao.VehicleDAO;
-import com.pickandroll.erp.model.Cart;
-import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.Vehicle;
-import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.FileUploadUtil;
 import com.pickandroll.erp.utils.Utils;

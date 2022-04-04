@@ -85,22 +85,18 @@ public class User implements Serializable {
     }
 
     public void deleteVehicle(Vehicle vehicle) {
-
-        for (int i = 0; i < vehicles.size(); i++) {
-            Vehicle v2 = vehicles.get(i);
-            if (v2.getId() == vehicle.getId()) {
-                this.vehicles.remove(i);
-            }
-        }
+        this.vehicles.remove(vehicle);
     }
 
-    public void deleteAllVehicles(){
-     this.vehicles.clear();
+    public void deleteAllVehicles() {
+        this.vehicles.clear();
     }
+
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
+    // Comprueba si el usuario tiene el rol de administrador
     public boolean isAdmin() {
         Role r = new Role();
         r.setName("admin");
