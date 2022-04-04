@@ -26,18 +26,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CartController {
 
+    //Crear variables
     private List<Vehicle> vehicles = new ArrayList<Vehicle>();
-
+    private Cart cart = new Cart();
+    
+    //Crear serveis
     @Autowired
     private VehicleService vehicleService;
 
     @Autowired
     private UserServiceInterface userService;
 
-    @Autowired
-    private OrderService orderService;
-
-    private Cart cart = new Cart();
+//    @Autowired
+//    private OrderService orderService;
 
     @GetMapping("/cart")
     public String cart(Model model, Authentication auth) {
