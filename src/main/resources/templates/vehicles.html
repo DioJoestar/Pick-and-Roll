@@ -56,7 +56,6 @@
                                 </div>
                             </select>
                         </div>
-
                         <!-- Preu del vehicle -->
                         <div class="form-group p-1 mb-2 w-50">
                             <label class="form-label" for="inlineFormInputName">Preu</label>
@@ -80,7 +79,6 @@
                         <input type="checkbox" th:field="*{enabled}" th:value="${enabled}" class="form-check-input roles greenSwitch m-2" th:checked="${vehicle.enabled}"/>  
                     </div> 
                 </div>
-
                 <!-- Guardar canvis del forumlari -->
                 <div class="d-grid gap-2 pt-2">
                     <button type="submit" class="btn btn-primary">Guardar canvis</button>
@@ -122,7 +120,7 @@
                 <!-- Tarjetes dels vehicles -->
                 <div class="d-flex flex-wrap container rounded border p-2">
                     <!-- For each para vehiculos habilitados -->
-                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container bcontent card w-50" th:if="${vehicle.enabled} == true"> <!-- TO DO: POSAR MARGIN ENTRE PRODUCTES -->
+                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == true">
 
                         <div class="row">
                             <!-- Mostrar imatge del producte -->
@@ -149,7 +147,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <!-- Id del vehicle -->
                                     <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
@@ -166,7 +164,7 @@
                     </div>
                     <div sec:authorize="hasAuthority('admin')" th:remove="tag">
                         <!-- For each para vehiculos deshabilitados para que los administradores puedan editarlos -->
-                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container bcontent card w-50 hidden" th:if="${vehicle.enabled} == false"> <!-- TO DO: POSAR MARGIN ENTRE PRODUCTES -->
+                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == false">
                             <div class="row">
                                 <div class="col-sm-4 pb-2">
                                     <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="200px" class="item-img float-right mt-3 img-thumbnail grayscale hidden"/>   
@@ -200,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
