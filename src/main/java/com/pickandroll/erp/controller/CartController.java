@@ -2,8 +2,10 @@ package com.pickandroll.erp.controller;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 import com.pickandroll.erp.model.Cart;
+import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,9 @@ public class CartController {
 
     @Autowired
     private UserServiceInterface userService;
+
+    @Autowired
+    private OrderService orderService;
 
     private Cart cart = new Cart();
 
@@ -110,7 +115,7 @@ public class CartController {
     @Transactional
     @RequestMapping(value = "/close_order")
     public String closeOrder(Authentication auth) {
-        
+
         //Agafar la data actual
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -118,7 +123,14 @@ public class CartController {
         //Obtenir l'usuari actual
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         User currUser = userService.findByEmail(userDetails.getUsername());
-
+        
+//        Order order = new Order();
+//        order.setRent_days(cart.getDays());
+//        order.setStart_date(formatter.format(date));
+//        order.setUser_id((int)currUser.getId());
+//        
+//        orderService.addOrder(order);
+        
         entityManager.joinTransaction();
 
         //Insertar valors de la comanda
@@ -130,9 +142,11 @@ public class CartController {
 
         //Obtenir l'id de l'ultima comanda
         var order_id = entityManager.createNativeQuery(
-        "SELECT MAX(id) FROM pickandroll.product_order")
-        .getResultList().get(0);
-
+                "SELECT MAX(id) FROM pickandroll.product_order")
+                .getResultList().get(0);
+        
+        //int order_id = (int)order.getId();
+        
         //Inserir valors
         for (int i = 0; i < currUser.getVehicles().size(); i++) {
             entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id, total_price) VALUES (?,?,?)")
@@ -147,5 +161,5 @@ public class CartController {
 
         return "redirect:/cart"; //TODO Pantalla pagar o no se
     }
-    
+
 }
