@@ -6,9 +6,10 @@ import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserService;
 import com.pickandroll.erp.service.VehicleService;
-import com.pickandroll.erp.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,6 +33,9 @@ public class OrderController {
 
     @Autowired
     private UserService userService;
+    
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GetMapping("/orders")
     public String orders(Order order, Model model) {
@@ -42,7 +46,8 @@ public class OrderController {
         Long userLoggedId = 0L;
         boolean isAdmin = false;
         List<User> users = userService.listUsers();
-
+        
+        // Comprova el id i el rol de l'usuari actual
         for (User u : users) {
             if (u.getEmail().equals(userLoggedEmail)) {
                 userLoggedId = u.getId();
@@ -62,8 +67,13 @@ public class OrderController {
         }
 
         model.addAttribute("orders", userOrders);
-
+        
+        //entityManager.joinTransaction();
+        
         List<Vehicle> vehicles = vehicleService.listVehicles();
+        for (Vehicle v : vehicles) {
+            //v.
+        }
         model.addAttribute("vehicles", vehicles);
 
         return "orders";
