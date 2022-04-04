@@ -31,15 +31,20 @@ public class VehicleController {
     @GetMapping("/vehicles")
     public String vehicles(Vehicle vehicle, Model model) {
 
+        //Llistar tots els vehicles
         //List<Vehicle> vehicles = vehicleDao.findAll();
         List<Vehicle> vehicles = vehicleService.listVehicles();
+
+        //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
     }
 
+    //Métode per editar vehicle
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
+
         List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
@@ -71,6 +76,7 @@ public class VehicleController {
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+
         }
 
         // Guardar los cambios en la DDBB
