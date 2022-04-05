@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -29,7 +30,7 @@ public class CartController {
     //Crear variables
     private List<Vehicle> vehicles = new ArrayList<Vehicle>();
     private Cart cart = new Cart();
-    
+
     //Crear serveis
     @Autowired
     private VehicleService vehicleService;
@@ -124,15 +125,24 @@ public class CartController {
         //Obtenir l'usuari actual
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         User currUser = userService.findByEmail(userDetails.getUsername());
-        
+
+        //Obtenir la data actual
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, cart.getDays());
+        String datePicked = sdf.format(c.getTime());
+
         //Insertar valors de la comanda
         Order order = new Order();
         order.setRentDays(cart.getDays());
         order.setStartDate(formatter.format(date));
+        order.setPickedDate(timeStamp);
+        order.setReturnedDate(datePicked);
         order.setTotalPrice(cart.getTotalPrice());
-        order.setUserId((int)currUser.getId());
+        order.setUserId((int) currUser.getId());
         orderService.addOrder(order);
-        
+
         entityManager.joinTransaction();
 
 //        //Insertar valors de la comanda
@@ -141,18 +151,16 @@ public class CartController {
 //                .setParameter(2, formatter.format(date))
 //                .setParameter(3, currUser.getId())
 //                .executeUpdate();
-
         //Obtenir l'id de l'ultima comanda
         var order_id = entityManager.createNativeQuery(
                 "SELECT MAX(id) FROM pickandroll.product_order")
                 .getResultList().get(0);
-        
+
         //int order_id = (int)order.getId();
-        
         //Inserir valors
         for (int i = 0; i < currUser.getVehicles().size(); i++) {
             entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id) VALUES (?,?)")
-                    .setParameter(1, (int)order_id)
+                    .setParameter(1, (int) order_id)
                     .setParameter(2, currUser.getVehicles().get(i))
                     .executeUpdate();
         }
@@ -162,7 +170,7 @@ public class CartController {
         //Esborrar el cistell
         currUser.deleteAllVehicles();
 
-        return "redirect:/cart";    
+        return "redirect:/cart";
     }
 
 }
