@@ -2,18 +2,12 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
-import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserService;
-import com.pickandroll.erp.service.VehicleService;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,13 +24,7 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    private VehicleService vehicleService;
-
-    @Autowired
     private UserService userService;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @GetMapping("/orders")
     public String orders(Order order, Model model, Authentication auth) {
@@ -45,7 +33,7 @@ public class OrderController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         
 
-        // Crear el objeto User a partir del email (username) de la sesión actual
+        // Crear l'objecte User a partir del email (username) de la sessió actual
         User currUser = userService.findByEmail(userDetails.getUsername());
         
         System.out.println(currUser.getOrders().get(0).getPickedDate());
@@ -61,7 +49,8 @@ public class OrderController {
 
         List<Order> orders = orderService.listOrders();
         model.addAttribute("orders", orders);
-
+        
+        // Obté l'ordre desitjada a partir de la id d'aquesta
         order = orderService.findById(order.getId());
         model.addAttribute("order", order);
 
@@ -70,12 +59,8 @@ public class OrderController {
 
     @PostMapping("/saveOrder")
     public String saveOrder(@Valid Order order, Errors errors, Model model, RedirectAttributes msg) {
-
-//        if (errors.hasErrors()) {
-//            List<Order> orders = orderService.listOrders();
-//            model.addAttribute("orders", orders);
-//            return "orders";
-//        }
+        
+        // Guarda l'ordre editada amb les dades introduides
         orderService.addOrder(order);
         return "redirect:/orders";
     }
