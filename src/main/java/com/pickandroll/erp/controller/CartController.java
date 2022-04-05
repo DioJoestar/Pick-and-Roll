@@ -157,6 +157,8 @@ public class CartController {
                     .executeUpdate();
         }
 
+        //Deshabilitar tots els vehicles reservats
+        currUser.disableAllVehicles();
         //Esborrar el cistell
         currUser.deleteAllVehicles();
 
