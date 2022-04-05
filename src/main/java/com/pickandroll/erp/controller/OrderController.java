@@ -36,7 +36,6 @@ public class OrderController {
         // Crear l'objecte User a partir del email (username) de la sessió actual
         User currUser = userService.findByEmail(userDetails.getUsername());
         
-        System.out.println(currUser.getOrders().get(0).getPickedDate());
         List<Order> userOrders = currUser.getOrders();
         
         model.addAttribute("orders", userOrders);
