@@ -10,7 +10,7 @@
         <!-- Editor del admin -->
         <div sec:authorize="hasAuthority('admin')" class="container pt-4 w-25">
             <form action="#" th:action="@{/saveOrder}" th:object="${order}" method="post" class="getInfo">
-                <!-- Messages -->
+                <!-- Missatges d'error -->
                 <div class="mt-3 mb-3 w-100">
                     <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
                     <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
@@ -22,16 +22,19 @@
                 <input type="hidden" id="startDate" th:field="*{startDate}"/>
                 <input type="hidden" id="userId" th:field="*{userId}"/>
                 <div class="container rounded border p-3 position-relative">
+                    <!-- Input de la data de recollida de la comanda -->
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Data de recollida</label>
                         <input type="text" class="form-control" id="pickedDate" th:field="*{pickedDate}" name="pickedDate">
                     </div>
+                    <!-- Input de la data de retorn de la comanda -->
                     <div class="form-group p-1 mb-2">
                         <label class="form-label" for="inlineFormInputName">Data de retorn</label>
                         <input type="text" class="form-control" id="returnedDate" th:field="*{returnedDate}" name="returnedDate">
                     </div>
                 </div>
                 <div class="d-grid gap-2 pt-2">
+                    <!-- Botó per guardar els canvis introduits en els inputs anteriors -->
                     <div th:if="${order.id}" th:remove="tag">
                         <button type="submit" class="btn btn-primary">Guardar canvis</button>
                     </div>
@@ -48,7 +51,8 @@
                     <div class="flex-grow-1">
                         <h2>Comandes</h2>
                     </div>
-                    <div class="">
+                    <div>
+                        <!-- Select per ordenar les comandes -->
                         <select class="form-select mySelect" aria-label="Default select example">
                             <option selected>Més recents</option>
                             <option value="1">Més antics</option>
@@ -56,14 +60,20 @@
                     </div>
                 </div>
                 <div class="container rounded border p-3">
+                    <!-- Contenidor que es repeteix per a cada comanda -->
                     <div class="mb-5 mt-2" th:each="order: ${orders}">
                         <div class="firstOrderRow p-2 d-flex justify-content-between">
                             <div class="align-self-center">
-                                <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
-                                 <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice   , 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
+                                <div>
+                                    <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                                </div>
+                                <div>
+                                    <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice   , 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
+                                </div>
                             </div>
                             <div class="me-4">
                                 <div sec:authorize="hasAuthority('admin')">
+                                    <!-- Formulari en el qual es passen les dades que s'han d'editar -->
                                     <form method="post" th:action="@{/editOrder}" th:object="${order}" >
                                         <input type="hidden" name="id" th:value="${order.id}"/>
                                         <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
@@ -95,6 +105,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="border-top-0">
+                                    <!-- Contenidor que es repetirà per a cada vehicle llogat en cada ordre -->
                                     <tr th:each="vehicle : ${order.vehicles}">
                                         <th th:text="${vehicle.id}"></th>
                                         <td th:text="${vehicle.name}"></td>
