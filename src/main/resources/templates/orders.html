@@ -63,7 +63,7 @@
                     <!-- Contenidor que es repeteix per a cada comanda -->
                     <div class="mb-5 mt-2" th:each="order: ${orders}">
                         <div class="firstOrderRow p-2 d-flex justify-content-between">
-                            <div class="align-self-center">
+                            <div class="d-flex flex-row align-self-center ">
                                 <div>
                                     <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
                                 </div>
