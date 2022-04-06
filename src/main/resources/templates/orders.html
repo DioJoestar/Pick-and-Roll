@@ -34,15 +34,11 @@
                         <label class="form-label" for="inlineFormInputName">Data de retorn</label>
                         <input type="text" class="form-control" id="returnedDate" th:field="*{returnedDate}" name="returnedDate">
                     </div>
-
-                    <!<!-- Marcar entregat o no -->
+                    <!-- Marcar entregat o no -->
                     <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 mb-2">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Entregat</label>
                         <input type="checkbox" class="form-check-input greenSwitch" id="returned" th:field="*{returned}" name="returned" />
                     </div>
-
-
-
                 </div>
                 <div class="d-grid gap-2 pt-2">
                     <!-- Botó per guardar els canvis introduïts en els inputs anteriors -->
@@ -74,6 +70,14 @@
                                 </div>
                                 <div>
                                     <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
+                                </div>
+                                <div>
+                                    <div th:if="${order.returned == true}">
+                                        <label class="ms-3 me-5"><b>Entregat: </b><span>Si</span></label>
+                                    </div>
+                                    <div th:if="${order.returned != true}">
+                                        <label class="ms-3 me-5"><b>Entregat: </b><span>No</span></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="me-4">
