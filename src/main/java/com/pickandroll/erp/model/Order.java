@@ -48,11 +48,13 @@ public class Order implements Serializable {
     @NotNull
     @Column(name = "total_price")
     private double totalPrice;
-
+    
+    private boolean returned;
+    
     @NotNull
     @Column(name = "user_id")
     private int userId;
-
+    
     @ManyToMany
     @JoinTable(
             name = "orders_vehicles",

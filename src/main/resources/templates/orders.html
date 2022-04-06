@@ -20,6 +20,7 @@
                 <input type="hidden" id="id" th:field="*{id}"/>
                 <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
                 <input type="hidden" id="startDate" th:field="*{startDate}"/>
+                <input type="hidden" id="returned" th:field="*{returned}"/>
                 <input type="hidden" id="userId" th:field="*{userId}"/>
                 <div class="container rounded border p-3 position-relative">
                     <!-- Input de la data de recollida de la comanda -->
@@ -32,9 +33,15 @@
                         <label class="form-label" for="inlineFormInputName">Data de retorn</label>
                         <input type="text" class="form-control" id="returnedDate" th:field="*{returnedDate}" name="returnedDate">
                     </div>
+                    <div class="form-check form-switch position-absolute bottom-0 start-0 m-2">
+                        <input class="form-check-input greenSwitch" type="checkbox" th:checked="${order.returned}">
+                        <div>
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Entregat</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-grid gap-2 pt-2">
-                    <!-- Botó per guardar els canvis introduits en els inputs anteriors -->
+                    <!-- Botó per guardar els canvis introduïts en els inputs anteriors -->
                     <div th:if="${order.id}" th:remove="tag">
                         <button type="submit" class="btn btn-primary">Guardar canvis</button>
                     </div>
@@ -62,59 +69,64 @@
                 <div class="container rounded border p-3">
                     <!-- Contenidor que es repeteix per a cada comanda -->
                     <div class="mb-5 mt-2" th:each="order: ${orders}">
-                        <div class="firstOrderRow p-2 d-flex justify-content-between">
-                            <div class="d-flex flex-row align-self-center ">
-                                <div>
-                                    <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                        <div th:each="vehicle : ${order.vehicles}">
+                            <div class="firstOrderRow p-2 d-flex justify-content-between">
+                                <div class="d-flex flex-row align-self-center ">
+                                    <div>
+                                        <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                                    </div>
+                                    <div>
+                                        <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice   
+                                                                                          , 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
+                                    </div>
                                 </div>
-                                <div>
-                                    <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice   , 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
+                                <div class="me-4">
+                                    <div sec:authorize="hasAuthority('admin')">
+                                        <!-- Formulari en el qual es passen les dades que s'han d'editar -->
+                                        <form method="post" th:action="@{/editOrder}" th:object="${order}" >
+                                            <input type="hidden" name="id" th:value="${order.id}"/>
+                                            <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
+                                            <input type="hidden" id="startDate" th:field="*{startDate}"/>
+                                            <input type="hidden" id="returned" th:field="*{returned}"/>
+                                            <input type="hidden" id="userId" th:field="*{userId}"/>
+                                            <input type="hidden" name="pickedDate" th:value="${order.pickedDate}"/>
+                                            <input type="hidden" name="returnedDate" th:value="${order.returnedDate}"/>
+                                            <button type="submit" name="submit" value="value" class="bi bi-pencil-fill shadow-none btn-edit"/>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="me-4">
-                                <div sec:authorize="hasAuthority('admin')">
-                                    <!-- Formulari en el qual es passen les dades que s'han d'editar -->
-                                    <form method="post" th:action="@{/editOrder}" th:object="${order}" >
-                                        <input type="hidden" name="id" th:value="${order.id}"/>
-                                        <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
-                                        <input type="hidden" id="startDate" th:field="*{startDate}"/>
-                                        <input type="hidden" id="userId" th:field="*{userId}"/>
-                                        <input type="hidden" name="pickedDate" th:value="${order.pickedDate}"/>
-                                        <input type="hidden" name="returnedDate" th:value="${order.returnedDate}"/>
-                                        <button type="submit" name="submit" value="value" class="bi bi-pencil-fill shadow-none btn-edit"/>
-                                    </form>
+                            <div class="secondOrderRow p-2">
+                                <div class="list-group list-group-horizontal">
+                                    <label class="ms-3 me-5"><b>Dies: </b><span th:text="${order.rentDays}"></span></label>
+                                    <label class="me-5"><b>Data recollida: </b><span th:text="${order.pickedDate}"></span></label>
+                                    <label><b>Data entrega: </b><span th:text="${order.returnedDate}"></span></label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="secondOrderRow p-2">
-                            <div class="list-group list-group-horizontal">
-                                <label class="ms-3 me-5"><b>Dies: </b><span th:text="${order.rentDays}"></span></label>
-                                <label class="me-5"><b>Data recollida: </b><span th:text="${order.pickedDate}"></span></label>
-                                <label><b>Data entrega: </b><span th:text="${order.returnedDate}"></span></label>
+                            <div>
+                                <table id="example" class="table text-center align-middle" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr class="usersDiv">
+                                            <th>ID</th>
+                                            <th>Model</th>
+                                            <th>Tipus</th>
+                                            <th>Preu producte</th>
+                                            <th>Preu total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-top-0">
+                                        <!-- Contenidor que es repetirà per a cada vehicle llogat en cada ordre -->
+                                        <tr th:each="vehicle1 : ${order.vehicles}">
+                                            <th th:text="${vehicle1.id}"></th>
+                                            <td th:text="${vehicle1.name}"></td>
+                                            <td th:text="${vehicle1.type}"></td>
+                                            <td th:text="${#numbers.formatDecimal(vehicle1.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
+                                            <td th:with="days = ${order.rentDays}, price = ${vehicle1.price}, totalPrice = ${days * price}" 
+                                                th:text="${#numbers.formatDecimal(totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        <div>
-                            <table id="example" class="table text-center align-middle" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr class="usersDiv">
-                                        <th>ID</th>
-                                        <th>Model</th>
-                                        <th>Tipus</th>
-                                        <th>Preu producte</th>
-                                        <th>Preu total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="border-top-0">
-                                    <!-- Contenidor que es repetirà per a cada vehicle llogat en cada ordre -->
-                                    <tr th:each="vehicle : ${order.vehicles}">
-                                        <th th:text="${vehicle.id}"></th>
-                                        <td th:text="${vehicle.name}"></td>
-                                        <td th:text="${vehicle.type}"></td>
-                                        <td th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
-                                        <td th:with="days = ${order.rentDays}, price = ${vehicle.price}, totalPrice = ${days * price}" th:text="${#numbers.formatDecimal(totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

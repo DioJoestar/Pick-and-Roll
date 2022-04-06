@@ -4,6 +4,7 @@ import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,16 @@ public class OrderController {
         // Coger los datos de la sessión
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         
-
         // Crear l'objecte User a partir del email (username) de la sessió actual
         User currUser = userService.findByEmail(userDetails.getUsername());
+        List<Order> userOrders = new ArrayList<>();
         
-        List<Order> userOrders = currUser.getOrders();
-        
+        // Assignar una llista de comandes diferentes depenent de l'usuari
+        if("admin".equals(currUser.getRoles().get(0).getName())) {
+            userOrders = orderService.listOrders();
+        } else {
+            userOrders = currUser.getOrders();
+        }
         model.addAttribute("orders", userOrders);
 
         return "orders";
@@ -57,7 +62,8 @@ public class OrderController {
     }
 
     @PostMapping("/saveOrder")
-    public String saveOrder(@Valid Order order, Errors errors, Model model, RedirectAttributes msg) {
+    public String saveOrder(@Valid Order order, Errors errors, Model model, 
+            RedirectAttributes msg) {
         
         // Guarda l'ordre editada amb les dades introduides
         orderService.addOrder(order);
