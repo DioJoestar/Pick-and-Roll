@@ -20,7 +20,6 @@
                 <input type="hidden" id="id" th:field="*{id}"/>
                 <input type="hidden" id="rentDays" th:field="*{rentDays}"/>
                 <input type="hidden" id="startDate" th:field="*{startDate}"/>
-                <input type="hidden" id="returned" th:field="*{returned}"/>
                 <input type="hidden" id="userId" th:field="*{userId}"/>
                 <input type="hidden" id="totalPrice" th:field="*{totalPrice}"/>
                 <input type="hidden" id="vehicles" th:field="*{vehicles}"/>
@@ -40,7 +39,7 @@
 
                     <div class="form-check form-switch position-absolute bottom-0 start-0 m-2">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Entregat</label>
-                        <input type="checkbox" name="returned" th:field="*{returned}" class="form-check-input greenSwitch"/>
+                        <input type="checkbox" class="form-check-input greenSwitch" id="returned" th:field="*{returned}" name="returned" />
                     </div>
 
 
@@ -63,13 +62,6 @@
                 <div class="list-group list-group-horizontal">
                     <div class="flex-grow-1">
                         <h2>Comandes</h2>
-                    </div>
-                    <div>
-                        <!-- Select per ordenar les comandes -->
-                        <select class="form-select mySelect" aria-label="Default select example">
-                            <option selected>Més recents</option>
-                            <option value="1">Més antics</option>
-                        </select>
                     </div>
                 </div>
                 <div class="container rounded border p-3">
