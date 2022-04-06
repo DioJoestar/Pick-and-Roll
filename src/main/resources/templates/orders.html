@@ -30,14 +30,13 @@
                         <input type="text" class="form-control" id="pickedDate" th:field="*{pickedDate}" name="pickedDate">
                     </div>
                     <!-- Input de la data de retorn de la comanda -->
-                    <div class="form-group p-1 mb-2">
+                    <div class="form-group p-1 mb-4">
                         <label class="form-label" for="inlineFormInputName">Data de retorn</label>
                         <input type="text" class="form-control" id="returnedDate" th:field="*{returnedDate}" name="returnedDate">
                     </div>
 
-
-
-                    <div class="form-check form-switch position-absolute bottom-0 start-0 m-2">
+                    <!<!-- Marcar entregat o no -->
+                    <div class="form-check form-switch position-absolute bottom-0 end-0 me-4 mb-2">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Entregat</label>
                         <input type="checkbox" class="form-check-input greenSwitch" id="returned" th:field="*{returned}" name="returned" />
                     </div>
