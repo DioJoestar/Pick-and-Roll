@@ -2,6 +2,7 @@ package com.pickandroll.erp.controller;
 
 import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
+import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserService;
 import java.util.ArrayList;
@@ -67,6 +68,11 @@ public class OrderController {
         
         // Guarda l'ordre editada amb les dades introduides
         orderService.addOrder(order);
+        
+        for(Vehicle v : order.getVehicles()){
+            v.setEnabled(order.isReturned());
+        }
+        
         return "redirect:/orders";
     }
 }
