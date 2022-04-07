@@ -92,40 +92,44 @@
             </div>
         </div>
 
-         <!-- Contenidor dels vehicles -->
+        <!-- Contenidor dels vehicles -->
         <div class="container pt-4 bg-white w-75">
             <div class="d-flex flex-column bd-highlight mb-3">
                 <h2>Cistell</h2>
-                
-                 <!-- Contenidor amb borera dels vehicles -->
+
+                <!-- Contenidor amb borera dels vehicles -->
                 <div class="container rounded border pt-4 pe-3 ps-3 pb-0">
+                    <div th:if="${vehicles.empty}">
+                        <p class="text-center mb-0">El teu cistell esta buit</p>
+                    </div>
+                    <div th:unless="${vehicles.empty}">
+                        <!-- Tarjeta de cada vehicle -->
+                        <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
 
-                     <!-- Tarjeta de cada vehicle -->
-                    <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
-
-                        <div th:fragment="item" class="card" style="width: auto;">
-                            <div class="row no-gutters">
-                                 <!-- Imatge del vehicle -->
-                                <div class="col-sm-4">
-                                    <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="240" class="item-img float-right"/>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-row">
-                                             <!-- Nom del vehicle -->
-                                            <h5 class="card-title" th:text="${vehicle.name}"></h5>
-                                             <!-- Preu del vehicle -->
-                                            <div class="position-absolute end-0 me-4 pb-2">
-                                                <p th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></p>
+                            <div th:fragment="item" class="card" style="width: auto;">
+                                <div class="row no-gutters">
+                                    <!-- Imatge del vehicle -->
+                                    <div class="col-sm-4">
+                                        <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="240" class="item-img float-right"/>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-row">
+                                                <!-- Nom del vehicle -->
+                                                <h5 class="card-title" th:text="${vehicle.name}"></h5>
+                                                <!-- Preu del vehicle -->
+                                                <div class="position-absolute end-0 me-4 pb-2">
+                                                    <p th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></p>
+                                                </div>
                                             </div>
+                                            <!-- ID del vehicle-->
+                                            <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
+                                            <hr class="m-1" />
+                                            <!-- Descripcio del vehicle -->
+                                            <p class="card-text" th:text="${vehicle.description}"></p>
+                                            <!-- Botó per esborrar vehicle -->
+                                            <a th:onclick="|window.location.href='/removeVehicle/${vehicle.id}'|" href="#" class="btn btn-danger mb-2 m-3 position-absolute bottom-0 end-0"><b>El·liminar</b></a>                
                                         </div>
-                                         <!-- ID del vehicle-->
-                                        <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
-                                        <hr class="m-1" />
-                                         <!-- Descripcio del vehicle -->
-                                        <p class="card-text" th:text="${vehicle.description}"></p>
-                                         <!-- Botó per esborrar vehicle -->
-                                        <a th:onclick="|window.location.href='/removeVehicle/${vehicle.id}'|" href="#" class="btn btn-danger mb-2 m-3 position-absolute bottom-0 end-0"><b>El·liminar</b></a>                
                                     </div>
                                 </div>
                             </div>

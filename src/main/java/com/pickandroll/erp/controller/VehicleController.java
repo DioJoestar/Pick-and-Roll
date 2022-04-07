@@ -32,7 +32,6 @@ public class VehicleController {
     public String vehicles(Vehicle vehicle, Model model) {
 
         //Llistar tots els vehicles
-        //List<Vehicle> vehicles = vehicleDao.findAll();
         List<Vehicle> vehicles = vehicleService.listVehicles();
 
         //Afegir els vehicles a l'html
@@ -49,7 +48,7 @@ public class VehicleController {
         model.addAttribute("vehicles", vehicles);
 
         // Cargar el vehiculo seleccionado en el formulario
-        vehicle = vehicleService.findbyName(vehicle.getName());
+        vehicle = vehicleService.findById(vehicle.getId());
 
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
@@ -68,7 +67,14 @@ public class VehicleController {
         
         // Subir la imagen al servidor si el input no está vacío
         if (!file.getOriginalFilename().isBlank()) {
-            String fileName = StringUtils.cleanPath(vehicle.getId() + "_thumbnail.png");   
+            long id = vehicle.getId();
+            
+            // Si se crea un nuevo vehículo, se cambiara la id de 0 al último
+            if (id == 0) {
+                id = vehicleService.listVehicles().size();
+            }
+            
+            String fileName = StringUtils.cleanPath(id + "_thumbnail.png");   
             try {
                 String uploadDir = "src/main/resources/static/img/vehicles";
                 FileUploadUtil.saveFile(uploadDir, fileName, file);
@@ -76,7 +82,6 @@ public class VehicleController {
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
-
         }
 
         // Guardar los cambios en la DDBB

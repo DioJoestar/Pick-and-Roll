@@ -96,8 +96,7 @@ public class User implements Serializable {
         for(Vehicle v : this.vehicles){
             v.setEnabled(false);
         }
-    }
-    
+    }    
     
     public void addRole(Role role) {
         this.roles.add(role);

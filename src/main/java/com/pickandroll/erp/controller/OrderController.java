@@ -40,14 +40,15 @@ public class OrderController {
 
         // Crear l'objecte User a partir del email (username) de la sessió actual
         User currUser = userService.findByEmail(userDetails.getUsername());
-        List<Order> userOrders = new ArrayList<>();
+        List<Order> userOrders;
 
         // Assignar una llista de comandes diferentes depenent de l'usuari
-        if ("admin".equals(currUser.getRoles().get(0).getName())) {
+        if (currUser.isAdmin()) {
             userOrders = orderService.listOrders();
         } else {
             userOrders = currUser.getOrders();
         }
+
         model.addAttribute("orders", userOrders);
 
         return "orders";

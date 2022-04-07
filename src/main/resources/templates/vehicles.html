@@ -39,20 +39,17 @@
 
                             <!-- Select del tipus de vehicle -->
                             <select class="form-select" th:field="*{type}">
-                                <div th:if="${vehicle.id} and ${vehicle.type} == 'bicicleta'" th:remove="tag">
-                                    <option th:value="bicicleta" selected>Bicicleta</option>
-                                    <option th:value="patinet">Patinet</option>
+                                <div th:if="${vehicle.id} and ${vehicle.type} == 'Bicicleta'" th:remove="tag">
+                                    <option th:value="Bicicleta" selected>Bicicleta</option>
+                                    <option th:value="Patinet">Patinet</option>
+                                </div>
+                                <div th:if="${vehicle.id} and ${vehicle.type} == 'Patinet'" th:remove="tag">
+                                    <option th:value="Patinet" selected>Patinet</option>
+                                    <option th:value="Bicicleta">Bicicleta</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="null" selected>Selecciona</option>
-                                    <option th:value="bicicleta">Bicicleta</option>
-                                </div>
-                                <div th:if="${vehicle.id} and ${vehicle.type} == 'patinet'" th:remove="tag">
-                                    <option th:value="patinet" selected>Patinet</option>
-                                    <option th:value="bicicleta">Bicicleta</option>
-                                </div>
-                                <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="patinet">Patinet</option>
+                                    <option th:value="Bicicleta">Bicicleta</option>
+                                    <option th:value="Patinet">Patinet</option>
                                 </div>
                             </select>
                         </div>
@@ -92,10 +89,9 @@
                     <h2>Productes</h2>
                 </div>
                 <!-- Tarjetes dels vehicles -->
-                <div class="d-flex flex-wrap container rounded border p-2">
+                <div class="container rounded border p-2">
                     <!-- For each para vehiculos habilitados -->
-                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == true">
-
+                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container rounded border position-relative float-start card-v" th:if="${vehicle.enabled} == true">
                         <div class="row">
                             <!-- Mostrar imatge del producte -->
                             <div class="col-sm-4 pb-2">
@@ -138,7 +134,7 @@
                     </div>
                     <div sec:authorize="hasAuthority('admin')" th:remove="tag">
                         <!-- For each para vehiculos deshabilitados para que los administradores puedan editarlos -->
-                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == false">
+                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container rounded border position-relative float-start card-v disabled" th:if="${vehicle.enabled} == false">
                             <div class="row">
                                 <div class="col-sm-4 pb-2">
                                     <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="200px" class="item-img float-right mt-3 img-thumbnail grayscale hidden"/>   
