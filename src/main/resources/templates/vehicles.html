@@ -136,7 +136,7 @@
                     </div>
                     <div sec:authorize="hasAuthority('admin')" th:remove="tag">
                         <!-- For each para vehiculos deshabilitados para que los administradores puedan editarlos -->
-                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card ms-1 me-1 w-50 float-left" th:if="${vehicle.enabled} == false">
+                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card ms-1 me-1 w-50 float-left disabled" th:if="${vehicle.enabled} == false">
                             <div class="row">
                                 <div class="col-sm-4 pb-2">
                                     <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="200px" class="item-img float-right mt-3 img-thumbnail grayscale hidden"/>   

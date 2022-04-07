@@ -243,7 +243,7 @@ a.disabled {
 }
 
 .paginate_button.previous.disabled, a.disabled, .paginate_button.next.disabled,
-.paginate_button.previous.disabled:hover, a.disabled:hover, .paginate_button.next.disabled:hover, button:disabled {
+.paginate_button.previous.disabled:hover, a.disabled:hover, .paginate_button.next.disabled:hover, button:disabled, .disabled {
     cursor: default !IMPORTANT;
     background: var(--disabled-color) !IMPORTANT;
     border-color: var(--disabled-color) !IMPORTANT;
