@@ -39,19 +39,17 @@
 
                             <!-- Select del tipus de vehicle -->
                             <select class="form-select" th:field="*{type}">
-                                <div th:if="${vehicle.id} and ${vehicle.type} == 'bicicleta'" th:remove="tag">
-                                    <option th:value="bicicleta" selected>Bicicleta</option>
-                                    <option th:value="patinet">Patinet</option>
+                                <div th:if="${vehicle.id} and ${vehicle.type} == 'Bicicleta'" th:remove="tag">
+                                    <option th:value="Bicicleta" selected>Bicicleta</option>
+                                    <option th:value="Patinet">Patinet</option>
+                                </div>
+                                <div th:if="${vehicle.id} and ${vehicle.type} == 'Patinet'" th:remove="tag">
+                                    <option th:value="Patinet" selected>Patinet</option>
+                                    <option th:value="Bicicleta">Bicicleta</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="bicicleta">Bicicleta</option>
-                                </div>
-                                <div th:if="${vehicle.id} and ${vehicle.type} == 'patinet'" th:remove="tag">
-                                    <option th:value="patinet" selected>Patinet</option>
-                                    <option th:value="bicicleta">Bicicleta</option>
-                                </div>
-                                <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="patinet">Patinet</option>
+                                    <option th:value="Bicicleta">Bicicleta</option>
+                                    <option th:value="Patinet">Patinet</option>
                                 </div>
                             </select>
                         </div>
