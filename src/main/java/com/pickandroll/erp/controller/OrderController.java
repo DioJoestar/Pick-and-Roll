@@ -8,12 +8,10 @@ import com.pickandroll.erp.service.UserService;
 import com.pickandroll.erp.service.VehicleService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
@@ -33,48 +31,24 @@ public class OrderController {
 
     @Autowired
     private UserService userService;
-    
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @GetMapping("/orders")
-    public String orders(Order order, Model model) {
+    public String orders(Order order, Model model, Authentication auth) {
 
-        // Obté el email de l'usuari actual.
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String userLoggedEmail = auth.getName();
-        Long userLoggedId = 0L;
-        boolean isAdmin = false;
-        List<User> users = userService.listUsers();
-        
-        // Comprova el id i el rol de l'usuari actual
-        for (User u : users) {
-            if (u.getEmail().equals(userLoggedEmail)) {
-                userLoggedId = u.getId();
-                if (u.isAdmin()) {
-                    isAdmin = true;
-                }
-            }
-        }
+        // Coger los datos de la sessión
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
 
-        List<Order> orders = orderService.listOrders();
-
+        // Crear l'objecte User a partir del email (username) de la sessió actual
+        User currUser = userService.findByEmail(userDetails.getUsername());
         List<Order> userOrders = new ArrayList<>();
-        for (Order o : orders) {
-            if (o.getUserId() == userLoggedId || isAdmin) {
-                userOrders.add(o);
-            }
-        }
 
-        model.addAttribute("orders", userOrders);
-        
-        //entityManager.joinTransaction();
-        
-        List<Vehicle> vehicles = vehicleService.listVehicles();
-        for (Vehicle v : vehicles) {
-            //v.
+        // Assignar una llista de comandes diferentes depenent de l'usuari
+        if ("admin".equals(currUser.getRoles().get(0).getName())) {
+            userOrders = orderService.listOrders();
+        } else {
+            userOrders = currUser.getOrders();
         }
-        model.addAttribute("vehicles", vehicles);
+        model.addAttribute("orders", userOrders);
 
         return "orders";
     }
@@ -85,21 +59,26 @@ public class OrderController {
         List<Order> orders = orderService.listOrders();
         model.addAttribute("orders", orders);
 
+        // Obté l'ordre desitjada a partir de la id d'aquesta
         order = orderService.findById(order.getId());
         model.addAttribute("order", order);
+
         return "orders";
     }
 
     @PostMapping("/saveOrder")
-    public String saveOrder(@Valid Order order, Errors errors, Model model, RedirectAttributes msg) {
+    public String saveOrder(@Valid Order order, Errors errors, Model model,
+            RedirectAttributes msg) {
 
-        if (errors.hasErrors()) {
-            List<Order> orders = orderService.listOrders();
-            model.addAttribute("orders", orders);
-            return "orders";
+        for (int i = 0; i < order.getVehicles().size(); i++) {
+            order.getVehicles().get(i).setEnabled(order.isReturned());
+            Vehicle v = vehicleService.findById(order.getVehicles().get(i).getId());
+            vehicleService.addVehicle(v);
         }
 
+        // Guarda l'ordre editada amb les dades introduides
         orderService.addOrder(order);
+
         return "redirect:/orders";
     }
 }

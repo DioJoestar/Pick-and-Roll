@@ -87,7 +87,8 @@
 
             <!-- Botó per finalitzar compra -->
             <div class="d-grid gap-2 pt-2">
-                <a th:onclick="|window.location.href='/close_order'|" href="#" class="btn btn-primary"><b>Finalitzar compra</b></a>                
+                <a th:onclick="|window.location.href='/close_order'|" href="#" class="btn btn-primary" th:if="${vehicles.size > 0}"><b>Finalitzar compra</b></a>   
+                <a th:onclick="|window.location.href='/close_order'|" href="#" class="btn btn-primary disabled" th:if="${vehicles.size == 0}"><b>Finalitzar compra</b></a> 
             </div>
         </div>
 

@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -30,7 +31,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotEmpty
+    @NotNull
     @Column(name = "rent_days")
     private int rentDays;
 
@@ -43,11 +44,17 @@ public class Order implements Serializable {
     
     @Column(name = "returned_date")
     private String returnedDate;
-
-    @NotEmpty
+    
+    @NotNull
+    @Column(name = "total_price")
+    private double totalPrice;
+    
+    private boolean returned;
+    
+    @NotNull
     @Column(name = "user_id")
     private int userId;
-
+    
     @ManyToMany
     @JoinTable(
             name = "orders_vehicles",

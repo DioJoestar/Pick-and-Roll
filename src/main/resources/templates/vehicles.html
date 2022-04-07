@@ -84,38 +84,12 @@
                 </div>
             </form>
         </div>
-
         <!-- Contenidor dels vehicles -->
         <div class="container pt-4 bg-white w-75">
             <div class="d-flex flex-column bd-highlight mb-4">
                 <div class="list-group list-group-horizontal">
-                    <div class="flex-grow-1">
-                        <h2>Productes</h2>
-                    </div>
-                    <!-- Desplegable per endreçar productes -->
-                    <div class="dropdown">
-                        <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ordenar
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Tots els vehicles</a>
-                            <a class="dropdown-item" href="#">Més recents</a>
-                            <a class="dropdown-item" href="#">Més antics</a>
-                        </div>
-                    </div>
-                    <!-- Desplegable per mostrar els productes filtrats -->
-                    <div class="dropdown ms-4 me-2">
-                        <button class="btn btn3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Filtrar
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Tots els vehicles</a>
-                            <a class="dropdown-item" href="#">Lliurat</a>
-                            <a class="dropdown-item" href="#">Retornat</a>
-                        </div>
-                    </div>
+                    <h2>Productes</h2>
                 </div>
-
                 <!-- Tarjetes dels vehicles -->
                 <div class="container rounded border p-2">
                     <!-- For each para vehiculos habilitados -->
@@ -152,10 +126,10 @@
                                     <!-- Linia -->
                                     <hr class="m-1" />
                                     <!-- Descripció del vehicle -->
-                                    <p class="card-text mb-5" th:text="${vehicle.description}"></p>
+                                    <p class="card-text me-5" th:text="${vehicle.description}"></p>
                                     <!-- Botó per afegir al cistell -->
-                                    <a th:onclick="|window.location.href='/addVehicle/${vehicle.id}'|" href="#" class="btn btn-primary mt-2 mb-2 m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
-                                    <a sec:authorize="hasAuthority('admin')" class="btn btn-primary mb-2 m-3 position-absolute bottom-0 end-0 button-disabled" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
+                                    <a th:onclick="|window.location.href='/addVehicle/${vehicle.id}'|" href="#" class="btn btn-primary m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
+                                    <a sec:authorize="hasAuthority('admin')" class="btn btn-primary m-3 position-absolute bottom-0 end-0 button-disabled" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                 </div>
                             </div>
                         </div>

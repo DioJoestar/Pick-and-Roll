@@ -98,6 +98,11 @@ h2 {
     background-color: var(--main-color-disabled) ;
 }
 
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 .btn-primary:hover, .btn-primary:focus {
     background-color: var(--main-color-disabled);
 }
