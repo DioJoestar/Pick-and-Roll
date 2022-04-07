@@ -44,7 +44,6 @@
                                     <option th:value="patinet">Patinet</option>
                                 </div>
                                 <div th:unless="${vehicle.id}" th:remove="tag">
-                                    <option th:value="null" selected>Selecciona</option>
                                     <option th:value="bicicleta">Bicicleta</option>
                                 </div>
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'patinet'" th:remove="tag">
@@ -118,10 +117,9 @@
                 </div>
 
                 <!-- Tarjetes dels vehicles -->
-                <div class="d-flex flex-wrap container rounded border p-2">
+                <div class="container rounded border p-2">
                     <!-- For each para vehiculos habilitados -->
-                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == true">
-
+                    <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container rounded border position-relative float-start card-v" th:if="${vehicle.enabled} == true">
                         <div class="row">
                             <!-- Mostrar imatge del producte -->
                             <div class="col-sm-4 pb-2">
@@ -164,7 +162,7 @@
                     </div>
                     <div sec:authorize="hasAuthority('admin')" th:remove="tag">
                         <!-- For each para vehiculos deshabilitados para que los administradores puedan editarlos -->
-                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card col ms-1 me-1" th:if="${vehicle.enabled} == false">
+                        <div th:each="vehicle : ${vehicles}" th:fragment="item" class="container card ms-1 me-1 w-50 float-left" th:if="${vehicle.enabled} == false">
                             <div class="row">
                                 <div class="col-sm-4 pb-2">
                                     <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="200px" class="item-img float-right mt-3 img-thumbnail grayscale hidden"/>   

@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 public class Controller {
-    
+
     @Autowired
     private UserServiceInterface userService;
 
@@ -42,7 +42,7 @@ public class Controller {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             // Crear el objeto User a partir del email (username) de la sesión actual
             User currUser = userService.findByEmail(userDetails.getUsername());
-            
+
             // Si el usuario es admin redirigir a Modules
             if (currUser.isAdmin()) {
                 return "redirect:/modules";
@@ -66,7 +66,7 @@ public class Controller {
     @GetMapping("/loginError")
     public String login(HttpServletRequest request, RedirectAttributes msg) {
         HttpSession session = request.getSession(false);
-        
+
         // Si no se ha iniciado sesión
         if (session != null) {
             AuthenticationException ex = (AuthenticationException) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);

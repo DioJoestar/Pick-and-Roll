@@ -290,6 +290,8 @@ img.hidden {
     background-color: #6c757d;
 }
 
-mySelect {
-    border: none;
+.card-v {
+    margin: 0.5em !IMPORTANT;
+    width: 48% !IMPORTANT;
+    max-height: 215px !IMPORTANT;
 }
