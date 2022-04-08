@@ -15,7 +15,7 @@ class ApplicationTests {
     private List<Vehicle> vehicles = new ArrayList();
 
     @Test
-    public void testCart() {
+    public void testCartModel() {
         //Crear vehicles i afegir-los a la llista de vehicles
         Vehicle v = new Vehicle();
         Vehicle v1 = new Vehicle();
@@ -36,13 +36,11 @@ class ApplicationTests {
         cart.setPriceU(vehicles);
         double priceU = cart.getPriceU();
 
-        
         //Provar subPrice
         //totalPrice - IVA
         cart.setSubPrice();
         double subPrice = cart.getSubPrice();
 
-        
         //Provar totalPrice
         //PriceU * days
         cart.setTotalPrice();
@@ -52,7 +50,7 @@ class ApplicationTests {
         assertEquals(8, daysCart);
         assertEquals(21d, ivaCart);
         assertEquals(30d, priceU);
-        
+
         //Provar mètodes personalitzats cistell
         assertEquals(240d, totalPrice);
         assertEquals("189,60", String.format("%,.2f", subPrice));
