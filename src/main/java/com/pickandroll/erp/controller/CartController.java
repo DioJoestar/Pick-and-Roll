@@ -145,13 +145,7 @@ public class CartController {
 
         entityManager.joinTransaction();
 
-//        //Insertar valors de la comanda
-//        entityManager.createNativeQuery("INSERT INTO pickandroll.product_order (rent_days, start_date, user_id) VALUES (?,?,?)")
-//                .setParameter(1, cart.getDays())
-//                .setParameter(2, formatter.format(date))
-//                .setParameter(3, currUser.getId())
-//                .executeUpdate();
-        //Obtenir l'id de l'ultima comanda
+        //Insertar valors de la comanda
         var order_id = entityManager.createNativeQuery(
                 "SELECT MAX(id) FROM pickandroll.product_order")
                 .getResultList().get(0);
