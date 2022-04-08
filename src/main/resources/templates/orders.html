@@ -62,12 +62,12 @@
                 <div class="container rounded border p-3">
                     <!-- Mostrar un mensaje si no hay ningún pedido -->
                     <div th:if="${orders.empty}">
-                        <p class="text-center mb-0">Encara no hi ha cap comanda.</p>
+                        <p class="text-center">Encara no hi ha cap comanda.</p>
                     </div>
                     <div th:unless="${orders.empty}">
                         <!-- Contenidor que es repeteix per a cada comanda -->
                         <div class="mb-5 mt-2" th:each="order: ${orders}">
-
+                            <!-- Primera fila de cada comanda -->
                             <div class="firstOrderRow p-2 d-flex justify-content-between">
                                 <div class="d-flex flex-row align-self-center ">
                                     <label sec:authorize="hasAuthority('admin')" class="ms-3 me-5"><b>ID Usuari: </b><span th:text="${order.userId}"></span></label>
@@ -94,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Segona fila de cada comanda -->
                             <div class="secondOrderRow p-2">
                                 <div class="list-group list-group-horizontal">
                                     <label class="ms-3 me-5"><b>Dies: </b><span th:text="${order.rentDays}"></span></label>
