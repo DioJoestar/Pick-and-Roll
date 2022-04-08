@@ -6,7 +6,6 @@ import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserService;
 import com.pickandroll.erp.service.VehicleService;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

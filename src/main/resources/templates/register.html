@@ -6,11 +6,13 @@
 </head>
 <body class="background">
     <div class="vertical-center d-flex flex-column justify-content-center">
-        <div >
+        <div>
             <div>
                 <img class="logo" th:src="@{/img/logo_h.png}" />
             </div>
-            <h2>Registrar-se</h2>
+            <div>
+                <h2>Registrar-se</h2>
+            </div>
             <div class="container flex-fill rounded border p-3 bg-white">
                 <form th:action="@{/registerUser}" method="post" th:object="${user}">
                     <input type="hidden" name="id" th:field="*{id}"/>
