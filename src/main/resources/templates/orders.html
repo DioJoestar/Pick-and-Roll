@@ -65,26 +65,16 @@
                         <p class="text-center mb-0">Encara no hi ha cap comanda.</p>
                     </div>
                     <div th:unless="${orders.empty}">
-
                         <!-- Contenidor que es repeteix per a cada comanda -->
                         <div class="mb-5 mt-2" th:each="order: ${orders}">
 
                             <div class="firstOrderRow p-2 d-flex justify-content-between">
                                 <div class="d-flex flex-row align-self-center ">
-                                    <div>
-                                        <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
+                                    <label sec:authorize="hasAuthority('admin')" class="ms-3 me-5"><b>ID Usuari: </b><span th:text="${order.userId}"></span></label>
+                                    <div th:each="user: ${users}" >
+                                        <label th:if="${order.userId == user.id}" sec:authorize="hasAuthority('admin')" class="ms-3 me-5"><b>DNI: </b><span th:text="${user.dni}"></span></label>
                                     </div>
-                                    <div>
-                                        <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
-                                    </div>
-                                    <div>
-                                        <div th:if="${order.returned == true}">
-                                            <label class="ms-3 me-5"><b>Entregat: </b><span>Si</span></label>
-                                        </div>
-                                        <div th:if="${order.returned != true}">
-                                            <label class="ms-3 me-5"><b>Entregat: </b><span>No</span></label>
-                                        </div>
-                                    </div>
+                                    <label class="ms-3 me-5"><b>Preu total: </b><span th:text="${#numbers.formatDecimal(order.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></span></label>
                                 </div>
                                 <div class="me-4">
                                     <div sec:authorize="hasAuthority('admin')">
@@ -96,7 +86,6 @@
                                             <input type="hidden" id="userId" th:field="*{userId}"/>
                                             <input type="hidden" id="vehicles" th:field="*{vehicles}"/>
                                             <input type="hidden" id="totalPrice" th:field="*{totalPrice}"/>
-
                                             <input type="hidden" name="returned" th:value="${order.returned}"/>
                                             <input type="hidden" name="pickedDate" th:value="${order.pickedDate}"/>
                                             <input type="hidden" name="returnedDate" th:value="${order.returnedDate}"/>
@@ -108,8 +97,15 @@
                             <div class="secondOrderRow p-2">
                                 <div class="list-group list-group-horizontal">
                                     <label class="ms-3 me-5"><b>Dies: </b><span th:text="${order.rentDays}"></span></label>
+                                    <label class="ms-3 me-5"><b>Realitzat: </b><span th:text="${order.startDate}"></span></label>
                                     <label class="me-5"><b>Data recollida: </b><span th:text="${order.pickedDate}"></span></label>
-                                    <label><b>Data entrega: </b><span th:text="${order.returnedDate}"></span></label>
+                                    <label class="me-5"><b>Data entrega: </b><span th:text="${order.returnedDate}"></span></label>
+                                    <div th:if="${order.returned == true}">
+                                        <label class="ms-3 me-5"><b>Entregat: </b><span>Si</span></label>
+                                    </div>
+                                    <div th:if="${order.returned != true}">
+                                        <label class="ms-3 me-5"><b>Entregat: </b><span>No</span></label>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -141,6 +137,5 @@
                 </div>
             </div>
         </div>
-    </div>
 </body>
 </html>

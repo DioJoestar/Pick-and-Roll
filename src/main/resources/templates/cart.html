@@ -99,13 +99,12 @@
 
                 <!-- Contenidor amb borera dels vehicles -->
                 <div class="container rounded border pt-4 pe-3 ps-3 pb-0">
-                    <div th:if="${vehicles.empty}">
-                        <p class="text-center mb-0">El teu cistell esta buit</p>
+                    <div th:if="${vehicles.empty}" class="mb-4">
+                        <p class="text-center mb-0">El teu cistell està buit</p>
                     </div>
                     <div th:unless="${vehicles.empty}">
                         <!-- Tarjeta de cada vehicle -->
                         <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
-
                             <div th:fragment="item" class="card" style="width: auto;">
                                 <div class="row no-gutters">
                                     <!-- Imatge del vehicle -->

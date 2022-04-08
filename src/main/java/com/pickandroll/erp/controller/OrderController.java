@@ -45,6 +45,8 @@ public class OrderController {
         // Assignar una llista de comandes diferentes depenent de l'usuari
         if (currUser.isAdmin()) {
             userOrders = orderService.listOrders();
+            List<User> users = userService.listUsers();
+            model.addAttribute("users", users);
         } else {
             userOrders = currUser.getOrders();
         }
