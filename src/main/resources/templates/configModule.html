@@ -13,14 +13,16 @@
                 <div class="row g-0">
                     <!-- Icone del mòdul -->
                     <div class="col-md-4">
+                        <div class='ms-5'>
                         <i th:class="${module.icon}"></i>
+                        </div>
                     </div>
                     <div class="col-sm-8">
                         <div class="card-body">
                             <!-- Nom del mòdul -->
                             <h5 class="card-title fw-bold" th:text="${module.name}"></h5>
                             <!-- Descripció del mòdul -->
-                            <p class="card-text text-justify" th:text="${module.description}"></p>
+                            <p class="card-text text-justify me-5" th:text="${module.description}"></p>
                             <!-- Contenidor botó activar/desactivar -->
                             <div class="form-check form-switch position-absolute bottom-0 start-0 m-2">
                                 <!-- Botó de si està activat o no (desactivat) -->
@@ -34,10 +36,8 @@
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Activat</label>
                                 </div>
                             </div>
-
                             <!-- Botó per editar el mòdul -->
                             <a class="btn btn-primary position-absolute bottom-0 end-0 m-2" th:href="@{/editar/}+${module.id}" role="button">Editar</a>
-
                         </div>
                     </div>
                 </div>
