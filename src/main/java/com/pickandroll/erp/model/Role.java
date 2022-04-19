@@ -31,6 +31,7 @@ public class Role implements Serializable {
         return hash;
     }
 
+    // Comparar los roles según su nombre
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

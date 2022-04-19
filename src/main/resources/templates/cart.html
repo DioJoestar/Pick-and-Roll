@@ -4,102 +4,129 @@
         <title>[[#{common.name}]] | Cistell</title>
     <div th:replace="layouts/meta_scripts :: meta_scripts"></div>
 </head>
-    <body>
-        <div th:replace="layouts/navbar :: navbar"></div>
-        <div class="d-flex flex-row">
-            <!-- Editor del admin -->
-            <div class="container pt-4 w-25">
-                <form method="POST" th:action="@{/login}">
-                    <div class="container rounded border p-3 position-relative">
-                        
-                        <div class="d-flex form-group p-1 mb-2">
-                            <div>
-                                <label>Preu unitats:</label>
-                            </div>
-                            <div class="ms-auto">
-                                <label th:text="${#numbers.formatDecimal(cart.priceU, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
-                            </div>
-                        </div>
-                        <div class="d-flex form-group p-1 mb-2">
+<body>
+    <div th:replace="layouts/navbar :: navbar"></div>
+    <div class="d-flex flex-row">
 
-                            <div>
-                                <label>Dies:</label>
-                            </div>
-                            <div class="ms-auto">
-                                <label th:text="${cart.days}"></label>
-                            </div>
-                        </div>
-                        <div class="d-flex form-group p-1 mb-2">
-                            <div>
-                                <label>Subtotal:</label>
-                            </div>
-                            <div class="ms-auto">
-                                <label th:text="${#numbers.formatDecimal(cart.subPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
-                            </div>
-                        </div>
-                        <div class="d-flex form-group p-1 mb-2">
-                            <div>
-                                <label>IVA:</label>
-                            </div>
-                            <div class="ms-auto">
-                                <label th:text="${cart.IVA} + '%'"></label>
-                            </div>
-                        </div>
-                        <div class="d-flex form-group p-1 mb-2">
-                            <div>
-                                <label>Preu total:</label>
-                            </div>
-                            <div class="ms-auto">
-                                <label th:text="${#numbers.formatDecimal(cart.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
-                            </div>
-                        </div>
+        <div class="container pt-4 w-25">
+
+            <div class="container rounded border p-3 position-relative">
+
+                <!-- Preu de les unitats-->
+                <div class="d-flex form-group p-1 mb-2">
+                    <div>
+                        <label>Preu unitats:</label>
                     </div>
-       
-                    
-                    <div class="d-flex gap-2 pt-2 mt-4 mb-4">
-                        <div class="pe-2">
-                            <label>Dies:</label>
-                        </div>
-                        <div class="d-flex rounded border">
-                            <div class="rounded border">
-                                <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/minus_day'|">-</button>
-                            </div>
-                            <div class="ps-2 pe-2 align-middle mt-1">
-                                <label th:text="${cart.days}"></label>
-                            </div>
-                            <div class="rounded border">
-                                <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/plus_day'|">+</button>
-                            </div>
-                        </div>
+                    <div class="ms-auto">
+                        <label th:text="${#numbers.formatDecimal(cart.priceU, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
                     </div>
-                    <div class="d-grid gap-2 pt-2">
-                        <button type="submit" class="btn btn-primary">Finalitzar compra</button>
+                </div>
+
+                <!-- Mostrar els dies -->
+                <div class="d-flex form-group p-1 mb-2">
+
+                    <div>
+                        <label>Dies:</label>
                     </div>
-                </form>
+                    <div class="ms-auto">
+                        <label th:text="${cart.days}"></label>
+                    </div>
+                </div>
+
+                <!-- Subtotal de la comanda -->
+                <div class="d-flex form-group p-1 mb-2">
+                    <div>
+                        <label>Subtotal:</label>
+                    </div>
+                    <div class="ms-auto">
+                        <label th:text="${#numbers.formatDecimal(cart.subPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
+                    </div>
+                </div>
+
+                <!-- IVA dels productes -->
+                <div class="d-flex form-group p-1 mb-2">
+                    <div>
+                        <label>IVA:</label>
+                    </div>
+                    <div class="ms-auto">
+                        <label th:text="${cart.IVA} + '%'"></label>
+                    </div>
+                </div>
+
+                <!-- Preu total -->
+                <div class="d-flex form-group p-1 mb-2">
+                    <div>
+                        <label>Preu total:</label>
+                    </div>
+                    <div class="ms-auto">
+                        <label th:text="${#numbers.formatDecimal(cart.totalPrice, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></label>
+                    </div>
+                </div>
             </div>
-            <div class="container pt-4 bg-white w-75">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <h2>Cistell</h2>
-                    <div class="container rounded border pt-4 pe-3 ps-3 pb-0">
 
+            <!-- Botó per modificar els dies -->
+            <div class="d-flex gap-2 pt-2 mt-4 mb-4">
+                <div class="pe-2">
+                    <label>Dies:</label>
+                </div>
+                <div class="d-flex rounded border">
+                    <!-- Disminuir dies -->
+                    <div class="rounded border">
+                        <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/minus_day'|">-</button>
+                    </div>
+
+                    <!-- Augmentar dies -->
+                    <div class="ps-2 pe-2 align-middle mt-1">
+                        <label th:text="${cart.days}"></label>
+                    </div>
+                    <div class="rounded border">
+                        <button type="button" class="btn btn-sm" th:onclick="|window.location.href='/plus_day'|">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botó per finalitzar compra -->
+            <div class="d-grid gap-2 pt-2">
+                <a th:onclick="|window.location.href='/close_order'|" href="#" class="btn btn-primary" th:if="${vehicles.size > 0}"><b>Finalitzar compra</b></a>   
+                <a th:onclick="|window.location.href='/close_order'|" href="#" class="btn btn-primary disabled" th:if="${vehicles.size == 0}"><b>Finalitzar compra</b></a> 
+            </div>
+        </div>
+
+        <!-- Contenidor dels vehicles -->
+        <div class="container pt-4 bg-white w-75">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <h2>Cistell</h2>
+
+                <!-- Contenidor amb borera dels vehicles -->
+                <div class="container rounded border pt-4 pe-3 ps-3 pb-0">
+                    <div th:if="${vehicles.empty}" class="mb-4">
+                        <p class="text-center mb-0">El teu cistell està buit</p>
+                    </div>
+                    <div th:unless="${vehicles.empty}">
+                        <!-- Tarjeta de cada vehicle -->
                         <div th:each="vehicle : ${vehicles}" class="container bcontent mb-4">
-
                             <div th:fragment="item" class="card" style="width: auto;">
                                 <div class="row no-gutters">
+                                    <!-- Imatge del vehicle -->
                                     <div class="col-sm-4">
-                                        <img th:src="@{${vehicle.image_path}}" height="240" class="item-img float-right"/>
+                                        <img th:src="'img/vehicles/' + @{${vehicle.id} + '_thumbnail.png'}" height="240" class="item-img float-right"/>
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="card-body">
                                             <div class="d-flex flex-row">
+                                                <!-- Nom del vehicle -->
                                                 <h5 class="card-title" th:text="${vehicle.name}"></h5>
+                                                <!-- Preu del vehicle -->
                                                 <div class="position-absolute end-0 me-4 pb-2">
                                                     <p th:text="${#numbers.formatDecimal(vehicle.price, 1, 'DEFAULT', 2, 'DEFAULT')} + €"></p>
                                                 </div>
                                             </div>
+                                            <!-- ID del vehicle-->
                                             <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
                                             <hr class="m-1" />
+                                            <!-- Descripcio del vehicle -->
                                             <p class="card-text" th:text="${vehicle.description}"></p>
+                                            <!-- Botó per esborrar vehicle -->
                                             <a th:onclick="|window.location.href='/removeVehicle/${vehicle.id}'|" href="#" class="btn btn-danger mb-2 m-3 position-absolute bottom-0 end-0"><b>El·liminar</b></a>                
                                         </div>
                                     </div>
@@ -110,5 +137,6 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

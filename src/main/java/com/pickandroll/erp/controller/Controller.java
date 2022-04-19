@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @org.springframework.stereotype.Controller
 public class Controller {
-    
+
     @Autowired
     private UserServiceInterface userService;
 
@@ -42,7 +42,7 @@ public class Controller {
             UserDetails userDetails = (UserDetails) auth.getPrincipal();
             // Crear el objeto User a partir del email (username) de la sesión actual
             User currUser = userService.findByEmail(userDetails.getUsername());
-            
+
             // Si el usuario es admin redirigir a Modules
             if (currUser.isAdmin()) {
                 return "redirect:/modules";
@@ -66,8 +66,11 @@ public class Controller {
     @GetMapping("/loginError")
     public String login(HttpServletRequest request, RedirectAttributes msg) {
         HttpSession session = request.getSession(false);
+
+        // Si no se ha iniciado sesión
         if (session != null) {
             AuthenticationException ex = (AuthenticationException) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            // Si ha ha intentado pero las credenciales no son válidas
             if (ex != null) {
                 Utils u = new Utils();
                 msg.addFlashAttribute("error", u.alert("login.error.invalidLogin"));
@@ -76,17 +79,20 @@ public class Controller {
         return "redirect:/login";
     }
 
+    // Terminos
     @GetMapping("/terms")
     public String terms(Model model) {
 
         return "terms";
     }
 
+    // Privacidad
     @GetMapping("/privacy")
     public String privacy(Model model) {
         return "privacy";
     }
 
+    // Devuelve un booleano si se ha iniciado sesión correctamente
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || AnonymousAuthenticationToken.class.

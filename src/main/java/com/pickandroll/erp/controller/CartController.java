@@ -1,32 +1,45 @@
 package com.pickandroll.erp.controller;
 
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 import com.pickandroll.erp.model.Cart;
+import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
+import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CartController {
 
+    //Crear variables
     private List<Vehicle> vehicles = new ArrayList<Vehicle>();
+    private Cart cart = new Cart();
 
+    //Crear serveis
     @Autowired
     private VehicleService vehicleService;
 
     @Autowired
     private UserServiceInterface userService;
 
-    private Cart cart = new Cart();
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/cart")
     public String cart(Model model, Authentication auth) {
@@ -97,9 +110,61 @@ public class CartController {
         return "redirect:/cart";
     }
 
-//    @RequestMapping(value = "/removeVehicle/{id}")
-//    public String removeVehicle(Vehicle v) {
-//        cart.removeVehicles(v, cart, vehicles);
-//        return "redirect:/cart";
-//    }
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    //Finalitzar la comanda
+    @Transactional
+    @RequestMapping(value = "/close_order")
+    public String closeOrder(Authentication auth) {
+
+        //Agafar la data actual
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+
+        //Obtenir l'usuari actual
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        User currUser = userService.findByEmail(userDetails.getUsername());
+
+        //Obtenir la data actual
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, cart.getDays());
+        String datePicked = sdf.format(c.getTime());
+
+        //Insertar valors de la comanda
+        Order order = new Order();
+        order.setRentDays(cart.getDays());
+        order.setStartDate(formatter.format(date));
+        order.setPickedDate(timeStamp);
+        order.setReturnedDate(datePicked);
+        order.setTotalPrice(cart.getTotalPrice());
+        order.setUserId((int) currUser.getId());
+        orderService.addOrder(order);
+
+        entityManager.joinTransaction();
+
+        //Insertar valors de la comanda
+        var order_id = entityManager.createNativeQuery(
+                "SELECT MAX(id) FROM pickandroll.product_order")
+                .getResultList().get(0);
+
+        //int order_id = (int)order.getId();
+        //Inserir valors
+        for (int i = 0; i < currUser.getVehicles().size(); i++) {
+            entityManager.createNativeQuery("INSERT INTO pickandroll.orders_vehicles (order_id, vehicle_id) VALUES (?,?)")
+                    .setParameter(1, (int) order_id)
+                    .setParameter(2, currUser.getVehicles().get(i))
+                    .executeUpdate();
+        }
+
+        //Deshabilitar tots els vehicles reservats
+        currUser.disableAllVehicles();
+        //Esborrar el cistell
+        currUser.deleteAllVehicles();
+
+        return "redirect:/cart";
+    }
+
 }

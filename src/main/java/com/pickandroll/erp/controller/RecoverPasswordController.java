@@ -76,11 +76,13 @@ public class RecoverPasswordController {
         }
         
         Utils u = new Utils();
+        // Comprobar que las dos contraseñas sean iguales
         if (!user.getPassword().equals(user.getPasswordCheck())) {
             msg.addFlashAttribute("error", u.alert("profile.error.passwdDoesNotMatch"));
             return "redirect:/changePassword?token=" + user.getResetPasswordToken();
         }
         
+        // Encriptar la contraseña, borrar el token y guardar los cambios
         currUser.setPassword(u.encrypPasswd(user.getPassword()));
         currUser.setResetPasswordToken(null);
         userService.addUser(currUser);
@@ -88,16 +90,18 @@ public class RecoverPasswordController {
         return "login";
     }
 
+    // Envia un email
     public void sendMail(String to, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
 
+        // URL para cambiar la contraseña
         String link = "http://localhost:8080/changePassword?token=" + token;
 
         String body = "Per canviar la teva contrasenya, segueix el seguent enllaç";
 
-        message.setTo(to);
-        message.setSubject("Pick & Roll | Recuperar contrasenya");
-        message.setText(body + " " + link);
+        message.setTo(to); // Destinatario
+        message.setSubject("Pick & Roll | Recuperar contrasenya"); // Asunto
+        message.setText(body + " " + link); // Contenido
         javaMailSender.send(message);
     }
 }

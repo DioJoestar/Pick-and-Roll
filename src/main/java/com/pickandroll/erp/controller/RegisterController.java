@@ -79,9 +79,4 @@ public class RegisterController {
         }
         return false;
     }
-
-    // Mètode per comporovar si el checkbox no està activat
-    /*private boolean checkIfCheckboxIsNotActive() {
-
-    }*/
 }

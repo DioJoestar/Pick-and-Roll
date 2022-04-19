@@ -3,6 +3,8 @@ package com.pickandroll.erp.model;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,16 +30,32 @@ public class Vehicle implements Serializable {
 
     @NotEmpty
     private String type;
-    
+
     @NotEmpty
     private String description;
 
     //@NotEmpty
     private Double price;
-    
+
     @Transient
     private String image;
 
     @NotNull
     private boolean enabled;
+
+    // Comparar los vehículos según su id
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehicle other = (Vehicle) obj;
+        return Objects.equals(this.id, other.id);
+    }
 }

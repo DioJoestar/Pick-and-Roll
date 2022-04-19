@@ -31,20 +31,24 @@ public class VehicleController {
     @GetMapping("/vehicles")
     public String vehicles(Vehicle vehicle, Model model) {
 
-        //List<Vehicle> vehicles = vehicleDao.findAll();
+        //Llistar tots els vehicles
         List<Vehicle> vehicles = vehicleService.listVehicles();
+
+        //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
         return "vehicles";
     }
 
+    //Métode per editar vehicle
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
+
         List<Vehicle> vehicles = vehicleService.listVehicles();
         model.addAttribute("vehicles", vehicles);
 
         // Cargar el vehiculo seleccionado en el formulario
-        vehicle = vehicleService.findbyName(vehicle.getName());
+        vehicle = vehicleService.findById(vehicle.getId());
 
         model.addAttribute("vehicle", vehicle);
         return "vehicles";
@@ -63,7 +67,14 @@ public class VehicleController {
         
         // Subir la imagen al servidor si el input no está vacío
         if (!file.getOriginalFilename().isBlank()) {
-            String fileName = StringUtils.cleanPath(vehicle.getId() + "_thumbnail.png");   
+            long id = vehicle.getId();
+            
+            // Si se crea un nuevo vehículo, se cambiara la id de 0 al último
+            if (id == 0) {
+                id = vehicleService.listVehicles().size();
+            }
+            
+            String fileName = StringUtils.cleanPath(id + "_thumbnail.png");   
             try {
                 String uploadDir = "src/main/resources/static/img/vehicles";
                 FileUploadUtil.saveFile(uploadDir, fileName, file);

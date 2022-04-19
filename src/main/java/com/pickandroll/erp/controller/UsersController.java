@@ -63,9 +63,11 @@ public class UsersController {
             msg.addFlashAttribute("error", u.alert("profile.error.dni"));
             return "redirect:/users";
         }
+        
+        User currUser = userService.findByEmail(user.getEmail());
 
         // Lo guardamos en la BBDD
-        userService.addUser(user);
+        userService.addUser(currUser);
         msg.addFlashAttribute("success", u.alert("profile.success"));
         return "redirect:/users";
     }

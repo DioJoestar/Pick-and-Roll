@@ -34,7 +34,7 @@ h2 {
 .logo {
     display: block;
     width: 500px;
-    margin: -200px auto 100px auto;
+    margin: -100px auto 50px auto;
 }
 
 .logoNavigationbar {
@@ -96,6 +96,11 @@ h2 {
 
 .button-disabled {
     background-color: var(--main-color-disabled) ;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 .btn-primary:hover, .btn-primary:focus {
@@ -238,7 +243,7 @@ h2 {
 }
 
 .paginate_button.previous.disabled, a.disabled, .paginate_button.next.disabled,
-.paginate_button.previous.disabled:hover, a.disabled:hover, .paginate_button.next.disabled:hover, button:disabled {
+.paginate_button.previous.disabled:hover, a.disabled:hover, .paginate_button.next.disabled:hover, button:disabled, .disabled {
     cursor: default !IMPORTANT;
     background: var(--disabled-color) !IMPORTANT;
     border-color: var(--disabled-color) !IMPORTANT;
@@ -288,4 +293,10 @@ table.dataTable.no-footer {
 
 img.hidden {
     background-color: #6c757d;
+}
+
+.card-v {
+    margin: 0.5em !IMPORTANT;
+    width: 48% !IMPORTANT;
+    max-height: 215px !IMPORTANT;
 }

@@ -14,11 +14,14 @@ public class ModuleController {
     @Autowired
     private ModuleServiceInterface moduleService;
 
+    //Mostrar les mòduls
     @GetMapping("/modules")
     public String modules(Model model) {
         
+        //Llistar els mòduls
         List<Module> modules = moduleService.listModules();
 
+        //Afegir els mòduls per mostrar-los a l'html
         model.addAttribute("modules", modules);
         
         return "modules";
