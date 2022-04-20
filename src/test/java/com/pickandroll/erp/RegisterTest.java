@@ -30,17 +30,17 @@ public class RegisterTest {
 
     @Test
     @Order(1)
-    public void findByEmail() throws Exception {
-        assertEquals("Raul", userService.findByEmail("jc.raul92@gmail.com").getName());
-    }
-
-    @Test
-    @Order(2)
     public void addUser() throws Exception {
         userService.addUser(testUser);
         assertEquals("12345678A", userService.findByEmail("test@test.com").getDni());
     }
-
+    
+    @Test
+    @Order(2)
+    public void findUserByEmail() throws Exception {
+        assertEquals("Test", userService.findByEmail("test@test.com").getName());
+    }
+    
     @Test
     @Order(3)
     public void deleteUser() throws Exception {
