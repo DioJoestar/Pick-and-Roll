@@ -40,7 +40,7 @@ public class VehicleController {
         return "vehicles";
     }
 
-    //Métode per editar vehicle
+    //Mètode per editar vehicle
     @PostMapping("/editVehicle")
     public String editVehicle(@ModelAttribute Vehicle vehicle, Model model) {
 
