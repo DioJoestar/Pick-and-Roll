@@ -27,6 +27,9 @@ public class ProfileController {
 
         // Crear el objeto User a partir del email (username) de la sesión actual
         User currUser = userService.findByEmail(userDetails.getUsername());
+        
+        // Mostrar la cantidad de vehiculos en el carrito
+        model.addAttribute("numOfItemsOnCart", currUser.getVehicles().size());
 
         model.addAttribute("user", currUser);
 
