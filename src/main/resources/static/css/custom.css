@@ -99,8 +99,8 @@ h2 {
 }
 
 a.disabled {
-  pointer-events: none;
-  cursor: default;
+    pointer-events: none;
+    cursor: default;
 }
 
 .btn-primary:hover, .btn-primary:focus {
@@ -178,6 +178,18 @@ a.disabled {
     display: flex;
     align-items: center;
     flex-flow: row wrap;
+}
+
+.vertical-center2 {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .mgt {

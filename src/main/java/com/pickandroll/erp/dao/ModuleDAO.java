@@ -7,6 +7,7 @@ import com.pickandroll.erp.model.Module;
  *
  * @author santialves
  */
-public interface ModuleDAO extends JpaRepository<Module, Long>{
-    
+public interface ModuleDAO extends JpaRepository<Module, Long> {
+
+    Module findByName(String name);
 }

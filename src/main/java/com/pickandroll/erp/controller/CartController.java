@@ -164,7 +164,7 @@ public class CartController {
         //Esborrar el cistell
         currUser.deleteAllVehicles();
 
-        return "redirect:/cart";
+        return "/payment";
     }
 
 }

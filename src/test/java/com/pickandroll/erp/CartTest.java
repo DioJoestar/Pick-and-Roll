@@ -8,8 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+/**
+ *
+ * @author santialves
+ */
 @SpringBootTest
-class ApplicationTests {
+public class CartTest {
 
     private Cart cart = new Cart();
     private List<Vehicle> vehicles = new ArrayList();

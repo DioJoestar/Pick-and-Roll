@@ -38,4 +38,10 @@ public class ModuleService implements ModuleServiceInterface {
         return this.module.findById(module.getId()).orElse(null);
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public Module findModuleByName(String name) {
+        return this.module.findByName(name);
+    }
+    
 }

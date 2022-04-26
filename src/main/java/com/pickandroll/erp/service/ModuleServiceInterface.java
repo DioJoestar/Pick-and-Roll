@@ -12,4 +12,6 @@ public interface ModuleServiceInterface {
     public void deleteModule(Module module);
 
     public Module findModule(Module module);
+    
+    public Module findModuleByName(String name);
 }
