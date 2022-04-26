@@ -312,3 +312,9 @@ img.hidden {
     width: 48% !IMPORTANT;
     max-height: 215px !IMPORTANT;
 }
+
+.badge {
+    background-color: var(--main-color);
+    width: 27px;
+    height: 27px;
+}

@@ -49,6 +49,9 @@ public class OrderController {
         } else {
             userOrders = currUser.getOrders();
         }
+        
+        // Mostrar la cantidad de vehiculos en el carrito
+        model.addAttribute("numOfItemsOnCart", currUser.getVehicles().size());
 
         model.addAttribute("orders", userOrders);
 

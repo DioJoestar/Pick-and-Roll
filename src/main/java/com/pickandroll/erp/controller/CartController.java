@@ -1,6 +1,5 @@
 package com.pickandroll.erp.controller;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 import com.pickandroll.erp.model.Cart;
 import com.pickandroll.erp.model.Order;
 import com.pickandroll.erp.model.User;
@@ -8,6 +7,7 @@ import com.pickandroll.erp.model.Vehicle;
 import com.pickandroll.erp.service.OrderService;
 import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
+import com.pickandroll.erp.utils.Utils;
 import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +19,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +42,9 @@ public class CartController {
 
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @GetMapping("/cart")
     public String cart(Model model, Authentication auth) {
@@ -57,8 +62,12 @@ public class CartController {
         cart.setSubPrice();
         cart.setTotalPrice();
 
+        // Mostrar la cantidad de vehiculos en el carrito
+        model.addAttribute("numOfItemsOnCart", vehicles.size());
+
         model.addAttribute("cart", cart);
         model.addAttribute("vehicles", vehicles);
+        
         return "cart";
     }
 
@@ -117,7 +126,8 @@ public class CartController {
     @Transactional
     @RequestMapping(value = "/close_order")
     public String closeOrder(Authentication auth) {
-
+        Utils u = new Utils();
+        
         //Agafar la data actual
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
@@ -163,8 +173,26 @@ public class CartController {
         currUser.disableAllVehicles();
         //Esborrar el cistell
         currUser.deleteAllVehicles();
+        
+        currUser.setResetPasswordToken(u.genToken());
+        userService.addUser(currUser);
+        sendMail(currUser.getEmail());
 
         return "/payment";
     }
+    
+    // Envia un email amb informació de la comanda
+    public void sendMail(String to) {
+        SimpleMailMessage message = new SimpleMailMessage();
 
+        //String link = "http://localhost:8080/changePassword?token=" + token;
+        
+        //Missatge informatiu
+        String body = "Missatge de prova";
+
+        message.setTo(to);
+        message.setSubject("Pick & Roll | Comanda confirmada");
+        message.setText(body);
+        javaMailSender.send(message);
+    }
 }

@@ -30,13 +30,11 @@
                         <label class="form-label" for="inlineFormInputName">Nom</label>
                         <input type="text" class="form-control" id="name" th:field="*{name}" name="name">
                     </div>
-
                     <!-- Contenidor per posar dos inputs un al costat de l'altre -->
                     <div class="d-flex flex-row">
                         <div class="form-group p-1 mb-2 w-50">
                             <!-- Modificar el tipus del vehicle -->
                             <label class="form-label" for="inlineFormInputName">Tipus</label>
-
                             <!-- Select del tipus de vehicle -->
                             <select class="form-select" th:field="*{type}">
                                 <div th:if="${vehicle.id} and ${vehicle.type} == 'Bicicleta'" th:remove="tag">
@@ -117,14 +115,13 @@
                                                 </form>
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- Id del vehicle -->
-                                    <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p>
+                                    <span class="text-muted">Identificador: <p class="d-inline-block card-subtitle text-muted" th:text="${vehicle.id}"></p></span>
                                     <!-- Linia -->
                                     <hr class="m-1" />
                                     <!-- Descripció del vehicle -->
-                                    <p class="card-text me-5" th:text="${vehicle.description}"></p>
+                                    <p class="card-text me-5" style="max-height: 80px;" th:text="${vehicle.description}"></p>
                                     <!-- Botó per afegir al cistell -->
                                     <a th:onclick="|window.location.href='/addVehicle/${vehicle.id}'|" href="#" class="btn btn-primary m-3 position-absolute bottom-0 end-0" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
                                     <a sec:authorize="hasAuthority('admin')" class="btn btn-primary m-3 position-absolute bottom-0 end-0 button-disabled" th:text="@{${vehicle.price +'€ / dia'}}"><i class="bi bi-s bi-cart-plus"></i></a>
@@ -168,7 +165,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

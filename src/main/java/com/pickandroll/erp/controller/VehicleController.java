@@ -1,6 +1,8 @@
 package com.pickandroll.erp.controller;
 
+import com.pickandroll.erp.model.User;
 import com.pickandroll.erp.model.Vehicle;
+import com.pickandroll.erp.service.UserServiceInterface;
 import com.pickandroll.erp.service.VehicleService;
 import com.pickandroll.erp.utils.FileUploadUtil;
 import com.pickandroll.erp.utils.Utils;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
@@ -24,16 +28,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class VehicleController {
 
     public List<Vehicle> vehicles = new ArrayList<Vehicle>();
+    
+    @Autowired
+    private UserServiceInterface userService;
 
     @Autowired
     private VehicleService vehicleService;
 
     @GetMapping("/vehicles")
-    public String vehicles(Vehicle vehicle, Model model) {
-
+    public String vehicles(Vehicle vehicle, Model model, Authentication auth) {
+        
         //Llistar tots els vehicles
         List<Vehicle> vehicles = vehicleService.listVehicles();
-
+        
+        // Obtener datos del usuario actual
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        User currUser = userService.findByEmail(userDetails.getUsername());
+        // Mostrar la cantidad de vehiculos en el carrito
+        model.addAttribute("numOfItemsOnCart", currUser.getVehicles().size());
+        
         //Afegir els vehicles a l'html
         model.addAttribute("vehicles", vehicles);
 
@@ -58,7 +71,7 @@ public class VehicleController {
     public String saveData(@Valid Vehicle vehicle, Errors errors, Model model, RedirectAttributes msg, @RequestParam("image") MultipartFile file) throws IOException, InterruptedException {
 
         // Control de errores
-        // MultipartFile siempre da error aunque fundione
+        // MultipartFile siempre da error aunque funcione
 //        if (errors.hasErrors()) {
 //            List<Vehicle> vehicles = vehicleService.listVehicles();
 //            model.addAttribute("vehicles", vehicles);
@@ -71,7 +84,7 @@ public class VehicleController {
             
             // Si se crea un nuevo vehículo, se cambiara la id de 0 al último
             if (id == 0) {
-                id = vehicleService.listVehicles().size();
+                id = vehicleService.listVehicles().size() + 1;
             }
             
             String fileName = StringUtils.cleanPath(id + "_thumbnail.png");   
