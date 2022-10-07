@@ -1,0 +1,13 @@
+## Dependencies
+* [Spring Boot Starter Web](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web)
+* [Spring Boot Devtools](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools)
+* [Thymeleaf](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf)
+* [Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
+* [MySQL Connector/J](https://mvnrepository.com/artifact/mysql/mysql-connector-java)
+* [Spring Boot Starter Data JPA](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa)
+* [Spring Boot Starter Validation](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation)
+* [Spring Boot Starter Security](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security)
+* [Bootstrap](https://mvnrepository.com/artifact/org.webjars/bootstrap)
+* [JQuery](https://mvnrepository.com/artifact/org.webjars.bower/jquery)
+* [DataTables](https://mvnrepository.com/artifact/org.webjars/datatables)
+* [Spring Boot Starter Mail](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail)
